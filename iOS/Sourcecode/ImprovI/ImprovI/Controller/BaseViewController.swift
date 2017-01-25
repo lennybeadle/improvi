@@ -39,7 +39,9 @@ class BaseViewController: UIViewController {
             self.titleView.layer.shadowRadius = 10
         }
         
-        self.view.backgroundColor = Constant.UI.backColor
+        if self.view.backgroundColor == UIColor.white {
+            self.view.backgroundColor = Constant.UI.backColor
+        }
     }
     
     func onBack(_ sender: Any) {        
