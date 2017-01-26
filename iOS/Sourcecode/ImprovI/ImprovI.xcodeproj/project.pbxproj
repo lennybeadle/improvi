@@ -22,6 +22,16 @@
 		9A37F7971E36498200943AF4 /* AnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A37F7961E36498200943AF4 /* AnalyticsViewController.swift */; };
 		9A37F7991E36498B00943AF4 /* TBDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A37F7981E36498B00943AF4 /* TBDViewController.swift */; };
 		9A37F79B1E3649A000943AF4 /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A37F79A1E3649A000943AF4 /* SummaryViewController.swift */; };
+		9A805F3F1E3A4E2500E49D2C /* Programme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F3E1E3A4E2500E49D2C /* Programme.swift */; };
+		9A805F411E3A4E2E00E49D2C /* DailyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F401E3A4E2E00E49D2C /* DailyTask.swift */; };
+		9A805F431E3A4E3500E49D2C /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F421E3A4E3500E49D2C /* Question.swift */; };
+		9A805F451E3A4E4F00E49D2C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F441E3A4E4F00E49D2C /* User.swift */; };
+		9A805F471E3A58E600E49D2C /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F461E3A58E600E49D2C /* APIManager.swift */; };
+		9A805F4B1E3A59A800E49D2C /* ImprovIObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F4A1E3A59A800E49D2C /* ImprovIObject.swift */; };
+		9A805F4E1E3A601900E49D2C /* ProgrammeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F4D1E3A601900E49D2C /* ProgrammeTableViewCell.swift */; };
+		9A805F561E3A6FD000E49D2C /* TableViewDragger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F531E3A6FD000E49D2C /* TableViewDragger.swift */; };
+		9A805F571E3A6FD000E49D2C /* TableViewDraggerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F541E3A6FD000E49D2C /* TableViewDraggerCell.swift */; };
+		9A805F581E3A6FD000E49D2C /* UIScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F551E3A6FD000E49D2C /* UIScrollViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +53,17 @@
 		9A37F7961E36498200943AF4 /* AnalyticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsViewController.swift; sourceTree = "<group>"; };
 		9A37F7981E36498B00943AF4 /* TBDViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBDViewController.swift; sourceTree = "<group>"; };
 		9A37F79A1E3649A000943AF4 /* SummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
+		9A805F3E1E3A4E2500E49D2C /* Programme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Programme.swift; sourceTree = "<group>"; };
+		9A805F401E3A4E2E00E49D2C /* DailyTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyTask.swift; sourceTree = "<group>"; };
+		9A805F421E3A4E3500E49D2C /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		9A805F441E3A4E4F00E49D2C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		9A805F461E3A58E600E49D2C /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		9A805F4A1E3A59A800E49D2C /* ImprovIObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImprovIObject.swift; sourceTree = "<group>"; };
+		9A805F4D1E3A601900E49D2C /* ProgrammeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgrammeTableViewCell.swift; sourceTree = "<group>"; };
+		9A805F521E3A6FD000E49D2C /* TableViewDragger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewDragger.h; sourceTree = "<group>"; };
+		9A805F531E3A6FD000E49D2C /* TableViewDragger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDragger.swift; sourceTree = "<group>"; };
+		9A805F541E3A6FD000E49D2C /* TableViewDraggerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDraggerCell.swift; sourceTree = "<group>"; };
+		9A805F551E3A6FD000E49D2C /* UIScrollViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtension.swift; sourceTree = "<group>"; };
 		9F7C18497947FEBE861A50B8 /* Pods-ImprovI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImprovI.release.xcconfig"; path = "Pods/Target Support Files/Pods-ImprovI/Pods-ImprovI.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,7 +109,8 @@
 		9A37F76F1E36206300943AF4 /* ImprovI */ = {
 			isa = PBXGroup;
 			children = (
-				9A37F78B1E36279F00943AF4 /* View */,
+				9A805F501E3A6FD000E49D2C /* Library */,
+				9A805F4C1E3A600C00E49D2C /* View */,
 				9A37F78A1E36279F00943AF4 /* Model */,
 				9A37F7891E36279F00943AF4 /* Controller */,
 				9A37F7821E3620A100943AF4 /* Support Files */,
@@ -125,17 +147,59 @@
 		9A37F78A1E36279F00943AF4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9A37F78E1E363C5000943AF4 /* Manager.swift */,
 				9A37F7901E363C5900943AF4 /* Constant.swift */,
+				9A805F491E3A58FB00E49D2C /* Manager */,
+				9A805F481E3A58EB00E49D2C /* Object */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		9A37F78B1E36279F00943AF4 /* View */ = {
+		9A805F481E3A58EB00E49D2C /* Object */ = {
 			isa = PBXGroup;
 			children = (
+				9A805F4A1E3A59A800E49D2C /* ImprovIObject.swift */,
+				9A805F3E1E3A4E2500E49D2C /* Programme.swift */,
+				9A805F401E3A4E2E00E49D2C /* DailyTask.swift */,
+				9A805F421E3A4E3500E49D2C /* Question.swift */,
+				9A805F441E3A4E4F00E49D2C /* User.swift */,
+			);
+			name = Object;
+			sourceTree = "<group>";
+		};
+		9A805F491E3A58FB00E49D2C /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				9A37F78E1E363C5000943AF4 /* Manager.swift */,
+				9A805F461E3A58E600E49D2C /* APIManager.swift */,
+			);
+			name = Manager;
+			sourceTree = "<group>";
+		};
+		9A805F4C1E3A600C00E49D2C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9A805F4D1E3A601900E49D2C /* ProgrammeTableViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		9A805F501E3A6FD000E49D2C /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				9A805F511E3A6FD000E49D2C /* TableViewDragger */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		9A805F511E3A6FD000E49D2C /* TableViewDragger */ = {
+			isa = PBXGroup;
+			children = (
+				9A805F521E3A6FD000E49D2C /* TableViewDragger.h */,
+				9A805F531E3A6FD000E49D2C /* TableViewDragger.swift */,
+				9A805F541E3A6FD000E49D2C /* TableViewDraggerCell.swift */,
+				9A805F551E3A6FD000E49D2C /* UIScrollViewExtension.swift */,
+			);
+			path = TableViewDragger;
 			sourceTree = "<group>";
 		};
 		C1E6D209CB572E20FF6297F9 /* Pods */ = {
@@ -278,17 +342,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A805F4E1E3A601900E49D2C /* ProgrammeTableViewCell.swift in Sources */,
+				9A805F471E3A58E600E49D2C /* APIManager.swift in Sources */,
+				9A805F4B1E3A59A800E49D2C /* ImprovIObject.swift in Sources */,
+				9A805F3F1E3A4E2500E49D2C /* Programme.swift in Sources */,
 				9A2C094C1E365F3A006156F3 /* SignUpViewController.swift in Sources */,
 				9A37F7931E363DF900943AF4 /* BaseViewController.swift in Sources */,
 				9A37F7711E36206300943AF4 /* AppDelegate.swift in Sources */,
 				9A37F7971E36498200943AF4 /* AnalyticsViewController.swift in Sources */,
+				9A805F431E3A4E3500E49D2C /* Question.swift in Sources */,
+				9A805F561E3A6FD000E49D2C /* TableViewDragger.swift in Sources */,
 				9A37F7991E36498B00943AF4 /* TBDViewController.swift in Sources */,
+				9A805F411E3A4E2E00E49D2C /* DailyTask.swift in Sources */,
+				9A805F571E3A6FD000E49D2C /* TableViewDraggerCell.swift in Sources */,
+				9A805F451E3A4E4F00E49D2C /* User.swift in Sources */,
 				9A37F78F1E363C5000943AF4 /* Manager.swift in Sources */,
 				9A37F78D1E36363500943AF4 /* HomeViewController.swift in Sources */,
 				9A37F7911E363C5900943AF4 /* Constant.swift in Sources */,
 				9A37F7951E36497500943AF4 /* ProgrammeViewController.swift in Sources */,
 				9A2C094A1E365F33006156F3 /* SignInViewController.swift in Sources */,
 				9A37F79B1E3649A000943AF4 /* SummaryViewController.swift in Sources */,
+				9A805F581E3A6FD000E49D2C /* UIScrollViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +483,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0DFA462EF07FD6F8B32A5A7E /* Pods-ImprovI.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ImprovI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -422,6 +497,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9F7C18497947FEBE861A50B8 /* Pods-ImprovI.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ImprovI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

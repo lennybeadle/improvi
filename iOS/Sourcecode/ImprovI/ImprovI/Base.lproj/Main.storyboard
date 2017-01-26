@@ -306,7 +306,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NVR-QH-jHu">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROGRAMME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlw-fS-oXW" customClass="SpringLabel" customModule="Spring">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROGRAMMES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlw-fS-oXW" customClass="SpringLabel" customModule="Spring">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="32"/>
                                         <color key="textColor" red="1" green="1" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -341,11 +341,64 @@
                                     <constraint firstAttribute="bottom" secondItem="xlw-fS-oXW" secondAttribute="bottom" id="tx8-2J-ij2"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="80" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ext-1e-NvN">
+                                <rect key="frame" x="0.0" y="100" width="375" height="567"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" red="1" green="1" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ProgrammeCell" rowHeight="80" id="DfF-Qk-kA7" customClass="ProgrammeTableViewCell" customModule="ImprovI" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="56" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DfF-Qk-kA7" id="sXj-li-ixd">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Improvi Fitness" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMh-h8-Su3" customClass="SpringLabel" customModule="Spring">
+                                                    <rect key="frame" x="8" y="8" width="359" height="63"/>
+                                                    <color key="backgroundColor" red="0.039215686270000001" green="0.74117647060000003" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                    <color key="textColor" red="1" green="1" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="animation" value="slideLeft"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="duration">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="delay">
+                                                            <real key="value" value="0.0"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="bMh-h8-Su3" secondAttribute="bottom" constant="8" id="2Jd-cv-lif"/>
+                                                <constraint firstItem="bMh-h8-Su3" firstAttribute="top" secondItem="sXj-li-ixd" secondAttribute="top" constant="8" id="2iE-yh-gDM"/>
+                                                <constraint firstAttribute="trailing" secondItem="bMh-h8-Su3" secondAttribute="trailing" constant="8" id="AOA-WA-kg9"/>
+                                                <constraint firstItem="bMh-h8-Su3" firstAttribute="leading" secondItem="sXj-li-ixd" secondAttribute="leading" constant="8" id="My3-m4-Ur2"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="lblName" destination="bMh-h8-Su3" id="5CD-nG-dZi"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="UEf-PM-s12" id="2eo-Yv-Re5"/>
+                                    <outlet property="delegate" destination="UEf-PM-s12" id="Xfr-UI-20t"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="NVR-QH-jHu" firstAttribute="leading" secondItem="P5e-QJ-UUC" secondAttribute="leading" id="6bF-hx-eqh"/>
                             <constraint firstAttribute="trailing" secondItem="NVR-QH-jHu" secondAttribute="trailing" id="9Kp-eX-r2G"/>
+                            <constraint firstAttribute="trailing" secondItem="ext-1e-NvN" secondAttribute="trailing" id="f63-kH-OZy"/>
+                            <constraint firstItem="ext-1e-NvN" firstAttribute="top" secondItem="NVR-QH-jHu" secondAttribute="bottom" id="hLD-Em-hON"/>
+                            <constraint firstItem="ext-1e-NvN" firstAttribute="leading" secondItem="P5e-QJ-UUC" secondAttribute="leading" id="kM2-4V-PkQ"/>
+                            <constraint firstItem="e1Z-yi-Mfq" firstAttribute="top" secondItem="ext-1e-NvN" secondAttribute="bottom" id="tbO-hR-ag7"/>
                             <constraint firstItem="NVR-QH-jHu" firstAttribute="top" secondItem="P5e-QJ-UUC" secondAttribute="top" id="wXO-WX-FUS"/>
                         </constraints>
                     </view>
@@ -354,6 +407,7 @@
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="btnBack" destination="hxV-WO-7n1" id="Smd-1v-ZaG"/>
+                        <outlet property="tblProgrammes" destination="ext-1e-NvN" id="hAZ-YD-5xk"/>
                         <outlet property="titleView" destination="NVR-QH-jHu" id="mLT-FB-9Bd"/>
                     </connections>
                 </viewController>

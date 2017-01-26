@@ -37,6 +37,7 @@ class BaseViewController: UIViewController {
             self.titleView.layer.shadowColor = UIColor.gray.cgColor
             self.titleView.layer.shadowOpacity = 0.8
             self.titleView.layer.shadowRadius = 10
+            self.view.bringSubview(toFront: self.titleView)
         }
         
         if self.view.backgroundColor == UIColor.white {

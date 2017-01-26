@@ -33,8 +33,8 @@ class SignInViewController: BaseViewController {
     }
     
     @IBAction func onSignIn(_ sender: Any) {
-        if self.checkInputData() {
+//        if self.checkInputData() {
             self.performSegue(withIdentifier: "sid_home", sender: self)
-        }
+//        }
     }
 }
