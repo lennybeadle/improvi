@@ -17,7 +17,6 @@ class ProgrammeViewController: BaseViewController {
     @IBOutlet weak var tblProgrammes: UITableView!
     var dragger: TableViewDragger!
     var availableProgrammes = [Programme]()
-    var isAnimated: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +28,6 @@ class ProgrammeViewController: BaseViewController {
         dragger.cellAlpha = 0.7
         
         initAvailableProgrammes()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        isAnimated = true
     }
     
     func initAvailableProgrammes() {
@@ -77,32 +71,23 @@ extension ProgrammeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProgrammeCell", for: indexPath)
-        if let programmeCell = cell as? ProgrammeTableViewCell {
+        if let customCell = cell as? ProgrammeTableViewCell {
             if indexPath.section == SectionType.inProgress.rawValue {
-                programmeCell.resetWithProgramme(programme: Manager.sharedInstance.currentUser.programmes[indexPath.row])
+                customCell.resetWithProgramme(programme: Manager.sharedInstance.currentUser.programmes[indexPath.row])
             }
             else {
-                programmeCell.resetWithProgramme(programme: availableProgrammes[indexPath.row])
+                customCell.resetWithProgramme(programme: availableProgrammes[indexPath.row])
             }
             if isAnimated == false {
-                programmeCell.lblName.delay = 0.05*CGFloat(Manager.sharedInstance.currentUser.programmes.count*indexPath.section) + 0.05*CGFloat(indexPath.row)
-                programmeCell.lblName.animate()
+                customCell.vwInnerView.delay = 0.05*CGFloat(Manager.sharedInstance.currentUser.programmes.count*indexPath.section) + 0.05*CGFloat(indexPath.row)
+                customCell.vwInnerView.animate()
             }
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if indexPath.section == SectionType.available.rawValue {
-//            let programme = self.availableProgrammes.remove(at: indexPath.row)
-//            Manager.sharedInstance.currentUser.addProgramme(programme)
-//            self.tblProgrammes.reloadData()
-//        }
-//        else {
-//            let programme = Manager.sharedInstance.currentUser.programmes.remove(at: indexPath.row)
-//            self.availableProgrammes.append(programme)
-//            self.tblProgrammes.reloadData()
-//        }
+
     }
 }
 
@@ -133,6 +118,16 @@ extension ProgrammeViewController: TableViewDraggerDataSource, TableViewDraggerD
             self.tblProgrammes.moveRow(at: indexPath, to: newIndexPath)
         }
         return true
+    }
+}
+
+extension ProgrammeViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let programmeCell = sender as? ProgrammeTableViewCell {
+            if let controller = segue.destination as? ProgrammeDetailViewController {
+                controller.programme = programmeCell.programme
+            }
+        }
     }
 }
 

@@ -16,5 +16,6 @@ class Programme: ImprovIObject {
     init(id: String, name: String) {
         super.init(id: id)
         self.name = name
+        self.progress = Float(arc4random_uniform(100))
     }
 }

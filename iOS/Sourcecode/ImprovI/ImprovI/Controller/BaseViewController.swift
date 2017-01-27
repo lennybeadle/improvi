@@ -12,7 +12,19 @@ class BaseViewController: UIViewController {
     @IBInspectable var showNavigationBar: Bool = false
     @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var titleView: UIView!
-    
+    var isAnimated: Bool = false
+
+    override var title: String? {
+        didSet {
+            if self.titleView.subviews.count > 1{
+                let lblTitle = self.titleView.subviews[0]
+                if lblTitle is UILabel {
+                    (lblTitle as! UILabel).text = title
+                }
+            }
+        }
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -24,6 +36,11 @@ class BaseViewController: UIViewController {
                 navigationController.isNavigationBarHidden = true
             }
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        isAnimated = true
     }
     
     override func viewDidLoad() {

@@ -32,6 +32,9 @@
 		9A805F561E3A6FD000E49D2C /* TableViewDragger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F531E3A6FD000E49D2C /* TableViewDragger.swift */; };
 		9A805F571E3A6FD000E49D2C /* TableViewDraggerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F541E3A6FD000E49D2C /* TableViewDraggerCell.swift */; };
 		9A805F581E3A6FD000E49D2C /* UIScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F551E3A6FD000E49D2C /* UIScrollViewExtension.swift */; };
+		9AD5D07A1E3BD076000C7AF9 /* ProgrammeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5D0791E3BD076000C7AF9 /* ProgrammeDetailViewController.swift */; };
+		9AD5D07D1E3BD46F000C7AF9 /* LinearProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5D07C1E3BD46F000C7AF9 /* LinearProgressView.swift */; };
+		9AD5D07F1E3BECD7000C7AF9 /* SummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5D07E1E3BECD7000C7AF9 /* SummaryTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +67,9 @@
 		9A805F531E3A6FD000E49D2C /* TableViewDragger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDragger.swift; sourceTree = "<group>"; };
 		9A805F541E3A6FD000E49D2C /* TableViewDraggerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDraggerCell.swift; sourceTree = "<group>"; };
 		9A805F551E3A6FD000E49D2C /* UIScrollViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtension.swift; sourceTree = "<group>"; };
+		9AD5D0791E3BD076000C7AF9 /* ProgrammeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgrammeDetailViewController.swift; sourceTree = "<group>"; };
+		9AD5D07C1E3BD46F000C7AF9 /* LinearProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinearProgressView.swift; sourceTree = "<group>"; };
+		9AD5D07E1E3BECD7000C7AF9 /* SummaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryTableViewCell.swift; sourceTree = "<group>"; };
 		9F7C18497947FEBE861A50B8 /* Pods-ImprovI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImprovI.release.xcconfig"; path = "Pods/Target Support Files/Pods-ImprovI/Pods-ImprovI.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +143,7 @@
 				9A37F7921E363DF900943AF4 /* BaseViewController.swift */,
 				9A37F78C1E36363500943AF4 /* HomeViewController.swift */,
 				9A37F7941E36497500943AF4 /* ProgrammeViewController.swift */,
+				9AD5D0791E3BD076000C7AF9 /* ProgrammeDetailViewController.swift */,
 				9A37F7961E36498200943AF4 /* AnalyticsViewController.swift */,
 				9A37F7981E36498B00943AF4 /* TBDViewController.swift */,
 				9A37F79A1E3649A000943AF4 /* SummaryViewController.swift */,
@@ -179,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				9A805F4D1E3A601900E49D2C /* ProgrammeTableViewCell.swift */,
+				9AD5D07E1E3BECD7000C7AF9 /* SummaryTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -186,6 +194,7 @@
 		9A805F501E3A6FD000E49D2C /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				9AD5D07B1E3BD46F000C7AF9 /* LinearProgressBar */,
 				9A805F511E3A6FD000E49D2C /* TableViewDragger */,
 			);
 			path = Library;
@@ -200,6 +209,14 @@
 				9A805F551E3A6FD000E49D2C /* UIScrollViewExtension.swift */,
 			);
 			path = TableViewDragger;
+			sourceTree = "<group>";
+		};
+		9AD5D07B1E3BD46F000C7AF9 /* LinearProgressBar */ = {
+			isa = PBXGroup;
+			children = (
+				9AD5D07C1E3BD46F000C7AF9 /* LinearProgressView.swift */,
+			);
+			path = LinearProgressBar;
 			sourceTree = "<group>";
 		};
 		C1E6D209CB572E20FF6297F9 /* Pods */ = {
@@ -343,6 +360,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A805F4E1E3A601900E49D2C /* ProgrammeTableViewCell.swift in Sources */,
+				9AD5D07D1E3BD46F000C7AF9 /* LinearProgressView.swift in Sources */,
 				9A805F471E3A58E600E49D2C /* APIManager.swift in Sources */,
 				9A805F4B1E3A59A800E49D2C /* ImprovIObject.swift in Sources */,
 				9A805F3F1E3A4E2500E49D2C /* Programme.swift in Sources */,
@@ -354,6 +372,7 @@
 				9A805F561E3A6FD000E49D2C /* TableViewDragger.swift in Sources */,
 				9A37F7991E36498B00943AF4 /* TBDViewController.swift in Sources */,
 				9A805F411E3A4E2E00E49D2C /* DailyTask.swift in Sources */,
+				9AD5D07A1E3BD076000C7AF9 /* ProgrammeDetailViewController.swift in Sources */,
 				9A805F571E3A6FD000E49D2C /* TableViewDraggerCell.swift in Sources */,
 				9A805F451E3A4E4F00E49D2C /* User.swift in Sources */,
 				9A37F78F1E363C5000943AF4 /* Manager.swift in Sources */,
@@ -362,6 +381,7 @@
 				9A37F7951E36497500943AF4 /* ProgrammeViewController.swift in Sources */,
 				9A2C094A1E365F33006156F3 /* SignInViewController.swift in Sources */,
 				9A37F79B1E3649A000943AF4 /* SummaryViewController.swift in Sources */,
+				9AD5D07F1E3BECD7000C7AF9 /* SummaryTableViewCell.swift in Sources */,
 				9A805F581E3A6FD000E49D2C /* UIScrollViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
