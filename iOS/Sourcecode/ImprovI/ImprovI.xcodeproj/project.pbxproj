@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0D6B43F2023BEB9FBDEDE805 /* Pods_ImprovI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D86375889EFBED0182BD88B /* Pods_ImprovI.framework */; };
+		9A1C35221E3D448800C88FE6 /* CheckboxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1C35211E3D448800C88FE6 /* CheckboxButton.swift */; };
+		9A1C35241E3D458C00C88FE6 /* AnswerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1C35231E3D458C00C88FE6 /* AnswerTableViewCell.swift */; };
+		9A1C35261E3D491C00C88FE6 /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1C35251E3D491C00C88FE6 /* CollapsibleTableViewHeader.swift */; };
 		9A2C094A1E365F33006156F3 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2C09491E365F33006156F3 /* SignInViewController.swift */; };
 		9A2C094C1E365F3A006156F3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2C094B1E365F3A006156F3 /* SignUpViewController.swift */; };
 		9A37F7711E36206300943AF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A37F7701E36206300943AF4 /* AppDelegate.swift */; };
@@ -40,6 +43,9 @@
 /* Begin PBXFileReference section */
 		0DFA462EF07FD6F8B32A5A7E /* Pods-ImprovI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImprovI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ImprovI/Pods-ImprovI.debug.xcconfig"; sourceTree = "<group>"; };
 		1D86375889EFBED0182BD88B /* Pods_ImprovI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImprovI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A1C35211E3D448800C88FE6 /* CheckboxButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckboxButton.swift; sourceTree = "<group>"; };
+		9A1C35231E3D458C00C88FE6 /* AnswerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerTableViewCell.swift; sourceTree = "<group>"; };
+		9A1C35251E3D491C00C88FE6 /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
 		9A2C09491E365F33006156F3 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		9A2C094B1E365F3A006156F3 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		9A37F76D1E36206300943AF4 /* ImprovI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImprovI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +91,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9A1C35201E3D448800C88FE6 /* CheckBox */ = {
+			isa = PBXGroup;
+			children = (
+				9A1C35211E3D448800C88FE6 /* CheckboxButton.swift */,
+			);
+			path = CheckBox;
+			sourceTree = "<group>";
+		};
 		9A2C09481E365F17006156F3 /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +201,8 @@
 			children = (
 				9A805F4D1E3A601900E49D2C /* ProgrammeTableViewCell.swift */,
 				9AD5D07E1E3BECD7000C7AF9 /* SummaryTableViewCell.swift */,
+				9A1C35231E3D458C00C88FE6 /* AnswerTableViewCell.swift */,
+				9A1C35251E3D491C00C88FE6 /* CollapsibleTableViewHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -194,6 +210,7 @@
 		9A805F501E3A6FD000E49D2C /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				9A1C35201E3D448800C88FE6 /* CheckBox */,
 				9AD5D07B1E3BD46F000C7AF9 /* LinearProgressBar */,
 				9A805F511E3A6FD000E49D2C /* TableViewDragger */,
 			);
@@ -360,6 +377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A805F4E1E3A601900E49D2C /* ProgrammeTableViewCell.swift in Sources */,
+				9A1C35241E3D458C00C88FE6 /* AnswerTableViewCell.swift in Sources */,
 				9AD5D07D1E3BD46F000C7AF9 /* LinearProgressView.swift in Sources */,
 				9A805F471E3A58E600E49D2C /* APIManager.swift in Sources */,
 				9A805F4B1E3A59A800E49D2C /* ImprovIObject.swift in Sources */,
@@ -379,6 +397,8 @@
 				9A37F78D1E36363500943AF4 /* HomeViewController.swift in Sources */,
 				9A37F7911E363C5900943AF4 /* Constant.swift in Sources */,
 				9A37F7951E36497500943AF4 /* ProgrammeViewController.swift in Sources */,
+				9A1C35221E3D448800C88FE6 /* CheckboxButton.swift in Sources */,
+				9A1C35261E3D491C00C88FE6 /* CollapsibleTableViewHeader.swift in Sources */,
 				9A2C094A1E365F33006156F3 /* SignInViewController.swift in Sources */,
 				9A37F79B1E3649A000943AF4 /* SummaryViewController.swift in Sources */,
 				9AD5D07F1E3BECD7000C7AF9 /* SummaryTableViewCell.swift in Sources */,

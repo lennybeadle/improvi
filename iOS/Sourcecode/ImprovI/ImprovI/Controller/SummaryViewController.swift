@@ -39,7 +39,7 @@ extension SummaryViewController: UITableViewDataSource, UITableViewDelegate {
             customCell.resetWithImage(image: UIImage(named: imageNames[indexPath.row])!, title: titles[indexPath.row], index: indexPath.row)
             
             if isAnimated == false {
-                customCell.vwInnerView.delay = 0.05*CGFloat(Manager.sharedInstance.currentUser.programmes.count*indexPath.section) + 0.05*CGFloat(indexPath.row)
+                customCell.vwInnerView.delay = 0.05*CGFloat(indexPath.row)
                 customCell.vwInnerView.animate()
             }
         }
