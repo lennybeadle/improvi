@@ -870,6 +870,12 @@
                                                         <constraint firstItem="jI1-DK-bed" firstAttribute="centerY" secondItem="jbE-qx-cuy" secondAttribute="centerY" id="esq-By-uhS"/>
                                                         <constraint firstAttribute="bottom" secondItem="49B-MA-N6k" secondAttribute="bottom" id="kw0-Bu-TGX"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="animation" value="slideLeft"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="duration">
+                                                            <real key="value" value="1.5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" red="1" green="1" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
