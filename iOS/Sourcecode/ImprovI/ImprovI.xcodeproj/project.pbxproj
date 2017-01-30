@@ -13,6 +13,10 @@
 		9A1C35261E3D491C00C88FE6 /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1C35251E3D491C00C88FE6 /* CollapsibleTableViewHeader.swift */; };
 		9A2C094A1E365F33006156F3 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2C09491E365F33006156F3 /* SignInViewController.swift */; };
 		9A2C094C1E365F3A006156F3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2C094B1E365F3A006156F3 /* SignUpViewController.swift */; };
+		9A3061821E3FEE850027FD28 /* TraitPointTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3061811E3FEE850027FD28 /* TraitPointTableViewCell.swift */; };
+		9A30618E1E3FF0BD0027FD28 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3061861E3FF0BD0027FD28 /* Date.swift */; };
+		9A30618F1E3FF0BD0027FD28 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3061871E3FF0BD0027FD28 /* Dictionary.swift */; };
+		9A3061921E3FF0BD0027FD28 /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A30618A1E3FF0BD0027FD28 /* Range.swift */; };
 		9A37F7711E36206300943AF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A37F7701E36206300943AF4 /* AppDelegate.swift */; };
 		9A37F7761E36206300943AF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A37F7741E36206300943AF4 /* Main.storyboard */; };
 		9A37F7781E36206300943AF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A37F7771E36206300943AF4 /* Assets.xcassets */; };
@@ -54,6 +58,10 @@
 		9A1C35251E3D491C00C88FE6 /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
 		9A2C09491E365F33006156F3 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		9A2C094B1E365F3A006156F3 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		9A3061811E3FEE850027FD28 /* TraitPointTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraitPointTableViewCell.swift; sourceTree = "<group>"; };
+		9A3061861E3FF0BD0027FD28 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		9A3061871E3FF0BD0027FD28 /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
+		9A30618A1E3FF0BD0027FD28 /* Range.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Range.swift; sourceTree = "<group>"; };
 		9A37F76D1E36206300943AF4 /* ImprovI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImprovI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A37F7701E36206300943AF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A37F7751E36206300943AF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -118,6 +126,16 @@
 				9A2C094B1E365F3A006156F3 /* SignUpViewController.swift */,
 			);
 			name = Welcome;
+			sourceTree = "<group>";
+		};
+		9A3061831E3FF0BD0027FD28 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				9A3061861E3FF0BD0027FD28 /* Date.swift */,
+				9A3061871E3FF0BD0027FD28 /* Dictionary.swift */,
+				9A30618A1E3FF0BD0027FD28 /* Range.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		9A37F7641E36206300943AF4 = {
@@ -229,6 +247,7 @@
 				9A1C35231E3D458C00C88FE6 /* AnswerTableViewCell.swift */,
 				9A1C35251E3D491C00C88FE6 /* CollapsibleTableViewHeader.swift */,
 				9A51A43D1E3EB5B50025F63A /* SettingsTableViewCell.swift */,
+				9A3061811E3FEE850027FD28 /* TraitPointTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -236,6 +255,7 @@
 		9A805F501E3A6FD000E49D2C /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				9A3061831E3FF0BD0027FD28 /* Extension */,
 				9A1C35201E3D448800C88FE6 /* CheckBox */,
 				9AD5D07B1E3BD46F000C7AF9 /* LinearProgressBar */,
 				9A805F511E3A6FD000E49D2C /* TableViewDragger */,
@@ -409,12 +429,16 @@
 				9A51A43A1E3E9AD90025F63A /* TraitPointsViewController.swift in Sources */,
 				9A805F4B1E3A59A800E49D2C /* ImprovIObject.swift in Sources */,
 				9A805F3F1E3A4E2500E49D2C /* Programme.swift in Sources */,
+				9A30618E1E3FF0BD0027FD28 /* Date.swift in Sources */,
 				9A2C094C1E365F3A006156F3 /* SignUpViewController.swift in Sources */,
 				9A37F7931E363DF900943AF4 /* BaseViewController.swift in Sources */,
 				9A51A4381E3E9AD00025F63A /* ProgressViewController.swift in Sources */,
+				9A30618F1E3FF0BD0027FD28 /* Dictionary.swift in Sources */,
 				9A51A43E1E3EB5B50025F63A /* SettingsTableViewCell.swift in Sources */,
 				9A37F7711E36206300943AF4 /* AppDelegate.swift in Sources */,
 				9A37F7971E36498200943AF4 /* AnalyticsViewController.swift in Sources */,
+				9A3061921E3FF0BD0027FD28 /* Range.swift in Sources */,
+				9A3061821E3FEE850027FD28 /* TraitPointTableViewCell.swift in Sources */,
 				9A805F431E3A4E3500E49D2C /* Question.swift in Sources */,
 				9A805F561E3A6FD000E49D2C /* TableViewDragger.swift in Sources */,
 				9A37F7991E36498B00943AF4 /* TBDViewController.swift in Sources */,

@@ -53,8 +53,10 @@ extension SummaryViewController: UITableViewDataSource, UITableViewDelegate {
                 self.performSegue(withIdentifier: "sid_profile", sender: self)
                 break
             case 1:
+                self.performSegue(withIdentifier: "sid_progress", sender: self)
                 break
             case 2:
+                self.performSegue(withIdentifier: "sid_traitpoints", sender: self)
                 break
             case 3:
                 self.performSegue(withIdentifier: "sid_settings", sender: self)

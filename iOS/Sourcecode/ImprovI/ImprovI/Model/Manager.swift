@@ -26,6 +26,8 @@ class Manager {
         
         self.loadProgramme()
         self.loadQuestions()
+        
+        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = Constant.UI.foreColor
     }
     
     func loadQuestions() {

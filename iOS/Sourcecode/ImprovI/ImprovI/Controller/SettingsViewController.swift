@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import iRate
 
 class SettingsViewController: BaseViewController {
 
@@ -50,6 +51,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if indexPath.row == 4 {
+            iRate.sharedInstance().promptForRating()
+        }
     }
 }

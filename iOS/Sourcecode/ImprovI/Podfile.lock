@@ -1,9 +1,11 @@
 PODS:
   - Alamofire (4.3.0)
+  - iRate (1.11.7)
   - Spring (1.0.3)
 
 DEPENDENCIES:
   - Alamofire
+  - iRate
   - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift3`)
 
 EXTERNAL SOURCES:
@@ -18,8 +20,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  iRate: adae3f183d83c925ac42d7a2e86e89e838963f57
   Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
 
-PODFILE CHECKSUM: 072df9499170a1652952358fc4f493fa43a394be
+PODFILE CHECKSUM: 9dcf8ce8f1a51a6e895e9a95c2efc6fef6f99b05
 
 COCOAPODS: 1.1.1

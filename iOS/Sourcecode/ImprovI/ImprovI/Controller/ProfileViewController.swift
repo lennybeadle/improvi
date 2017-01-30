@@ -73,6 +73,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if indexPath.row == 5 {
+            _ = self.navigationController?.popToRootViewController(animated: true)
+        }
     }
 }
