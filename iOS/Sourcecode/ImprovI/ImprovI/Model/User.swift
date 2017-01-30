@@ -11,6 +11,8 @@ import UIKit
 class User: ImprovIObject {
     var userName: String!
     var fullName: String!
+    var emailAddress: String!
+    var dateJoined: Date!
     var imageLink: String!
     
     var programmes: [Programme]! = [Programme]()

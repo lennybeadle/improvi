@@ -48,6 +48,19 @@ extension SummaryViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        switch indexPath.row {
+            case 0:
+                self.performSegue(withIdentifier: "sid_profile", sender: self)
+                break
+            case 1:
+                break
+            case 2:
+                break
+            case 3:
+                self.performSegue(withIdentifier: "sid_settings", sender: self)
+                break
+            default:
+                break
+        }
     }
 }

@@ -18,6 +18,12 @@ class Manager {
     
     init() {
         currentUser = User()
+        currentUser.fullName = "Lenny Beadle"
+        currentUser.userName = "lenny_beadle"
+        currentUser.emailAddress = "lennybeadle@gmail.com"
+        currentUser.totalIXP = 120
+        currentUser.dateJoined = Date()
+        
         self.loadProgramme()
         self.loadQuestions()
     }

@@ -7,4 +7,5 @@ target 'ImprovI' do
 
   # Pods for ImprovI
     pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
+    pod 'Alamofire'
 end
