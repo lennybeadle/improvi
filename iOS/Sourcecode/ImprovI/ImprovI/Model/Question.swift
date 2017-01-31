@@ -12,13 +12,13 @@ class Question: ImprovIObject {
     var question: String!
     var answers:[String]!
     var selectedAnswerIndex: Int = -1
-    var collapsed: Bool!
     
     override init(id: String) {
         super.init(id: id)
     }
     
     init(question: String, answers: [String]? = nil) {
+        super.init()
         self.question = question
         self.answers = answers
         self.collapsed = false

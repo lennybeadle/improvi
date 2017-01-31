@@ -20,7 +20,7 @@ class User: ImprovIObject {
     var tasksCompleted: Int!
     var programmesCompleted: Int!
     var traitPoints = [Int]()
-    
+        
 //Working Properties
     var image: UIImage!
     

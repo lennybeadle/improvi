@@ -15,6 +15,7 @@ struct Constant {
         }
         
         static let foreColor = RGB(r: 10, g: 189, b: 160)
+        static let foreColorHighlight = RGB(r: 245, g: 66, b: 95)
         static let backColor = RGB(r: 255, g: 255, b: 250)
     }
 }
@@ -53,5 +54,10 @@ extension UIView {
         
         self.layer.add(animation, forKey: nil)
     }
-    
+}
+
+extension String {
+    var boolValue: Bool {
+        return NSString(string: self).boolValue
+    }
 }

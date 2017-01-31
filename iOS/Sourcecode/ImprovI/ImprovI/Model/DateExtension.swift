@@ -8,6 +8,26 @@
 import Foundation
 
 public extension Date {
+    static func from(year: Int, month: Int, day: Int) -> Date {
+        let gregorianCalendar = Calendar(identifier: Calendar.Identifier.gregorian)
+
+        var dateComponents = DateComponents()
+        dateComponents.year = year
+        dateComponents.month = month
+        dateComponents.day = day
+        
+        let date = gregorianCalendar.date(from: dateComponents)!
+        return date
+    }
+    
+    static func parse(_ string: String, format: String = "yyyy-MM-dd HH:mm") -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = NSTimeZone.default
+        dateFormatter.dateFormat = format
+        
+        let date = dateFormatter.date(from: string)!
+        return date
+    }
     
     public func plus(seconds s: UInt) -> Date {
         return self.addComponentsToDate(seconds: Int(s), minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
@@ -120,6 +140,14 @@ public extension Date {
     public static func yearsBetween(date1 d1: Date, date2 d2: Date) -> Int {
         let dc = Calendar.current.dateComponents([.year], from: d1, to: d2)
         return dc.year!
+    }
+    
+    public static func dateBetween(date1 d1: Date, date2 d2: Date) -> (day: Int, hour: Int, min: Int) {
+        let day = Date.daysBetween(date1: d1, date2: d2)
+        let min = Date.minutesBetween(date1: d1, date2: d2)
+        let hour = Date.hoursBetween(date1: d1, date2: d2)
+
+        return (day: day, hour: (hour % 24), min: (min % 60))
     }
     
     //MARK- Comparison Methods

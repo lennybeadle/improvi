@@ -25,6 +25,6 @@ class TraitPointTableViewCell: UITableViewCell {
     func resetWithTitle(title: String, progress: CGFloat) {
         self.lblTitle.text = title
         self.progressView.progressValue = progress
-        self.lblTraitPoints.text = "\(Int(progress))"
+        self.lblTraitPoints.text = "\(Int(progress))%"
     }
 }

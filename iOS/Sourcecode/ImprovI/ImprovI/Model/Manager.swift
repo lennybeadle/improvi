@@ -39,11 +39,6 @@ class Manager {
     }
     
     func loadProgramme() {
-        //        currentUser.addProgramme(Programme(id: "1", name: "Improvi Fitness"))
-        //        currentUser.addProgramme(Programme(id: "2", name: "Improvi Health"))
-        //        currentUser.addProgramme(Programme(id: "3", name: "Improvi Body"))
-        //        currentUser.addProgramme(Programme(id: "4", name: "Improvi Leg"))
-        //        currentUser.addProgramme(Programme(id: "0", name: "Improvi Test"))
         self.allProgrammes.append(Programme(id: "1", name: "Improvi Fitness"))
         self.allProgrammes.append(Programme(id: "2", name: "Improvi Health"))
         self.allProgrammes.append(Programme(id: "3", name: "Improvi Body"))

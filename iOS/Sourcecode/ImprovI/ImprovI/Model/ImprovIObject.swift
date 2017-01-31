@@ -12,6 +12,8 @@ class ImprovIObject{
     var id: String! = ""
     var userData: String!
     
+    var collapsed: Bool = false
+    
     init(id: String = "0") {
         self.id = id
     }

@@ -41,7 +41,7 @@ extension AnalyticsViewController: UITableViewDataSource, UITableViewDelegate {
 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if questions[indexPath.section].collapsed! {
+        if questions[indexPath.section].collapsed {
             return 0
         }
         else {
@@ -86,8 +86,8 @@ extension AnalyticsViewController: CollapsibleTableViewHeaderDelegate {
         let collapsed = questions[section].collapsed
         
         // Toggle collapse
-        questions[section].collapsed = !collapsed!
-        header.setCollapsed(collapsed: !collapsed!)
+        questions[section].collapsed = !collapsed
+        header.setCollapsed(collapsed: !collapsed)
         
         // Adjust the height of the rows inside the section
         tblQuestions.beginUpdates()

@@ -7,29 +7,58 @@
 //
 
 import UIKit
+import SpriteKit
+import LTMorphingLabel
 
 class TBDViewController: BaseViewController {
-
+    var vwEmitter: SKView!
+    @IBOutlet weak var lblIXPPoints: LTMorphingLabel!
+    @IBOutlet weak var lblTraitPoints: LTMorphingLabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        self.lblIXPPoints.morphingEffect = .fall
+        self.lblTraitPoints.morphingEffect = .evaporate
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupEmitter()
+        self.showPoints(show: true)
     }
-    */
-
+    
+    func setupEmitter() {
+        vwEmitter = SKView(frame: self.view.bounds)
+        vwEmitter.allowsTransparency = true
+        self.view.insertSubview(vwEmitter, at: 0)
+        
+        let scene = SKScene(size: vwEmitter.frame.size)
+        scene.scaleMode = .aspectFill
+        scene.backgroundColor = UIColor.clear
+        vwEmitter.presentScene(scene)
+        
+        if let path = Bundle.main.path(forResource: "starParticle", ofType: "sks") {
+            if let emitter = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? SKEmitterNode{
+                emitter.targetNode = scene
+                emitter.zPosition = 5
+                emitter.position = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height - 100)
+                scene.addChild(emitter)
+            }
+        }
+    }
+    
+    func showPoints(show: Bool) {
+        if show {
+            self.lblIXPPoints.text = "300"
+            self.lblTraitPoints.text = "200"
+        }
+        else {
+            self.lblIXPPoints.text = "Awesome"
+            self.lblTraitPoints.text = "Great"
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+            self.showPoints(show: !show)
+        }
+    }
 }

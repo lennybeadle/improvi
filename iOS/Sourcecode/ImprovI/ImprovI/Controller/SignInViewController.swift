@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import LTMorphingLabel
 
 class SignInViewController: BaseViewController {
     @IBOutlet weak var txtUsername: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
+    @IBOutlet weak var lblTitle: LTMorphingLabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        lblTitle.text = "IMPROVI"
         // Do any additional setup after loading the view.
     }
 
