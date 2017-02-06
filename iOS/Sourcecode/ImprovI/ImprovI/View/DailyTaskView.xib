@@ -15,8 +15,8 @@
             <rect key="frame" x="0.0" y="0.0" width="394" height="504"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PROGRAMME INFORMATION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jvs-lo-hjp">
-                    <rect key="frame" x="-25" y="58" width="248" height="30"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROGRAMME INFORMATION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jvs-lo-hjp">
+                    <rect key="frame" x="-25" y="18" width="223" height="30"/>
                     <color key="backgroundColor" red="0.039215686270000001" green="0.74117647060000003" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" priority="250" constant="248" id="0hL-eA-Fwj"/>
@@ -33,18 +33,18 @@
                         <constraint firstAttribute="height" constant="30" id="Wdl-Dx-c6F"/>
                         <constraint firstAttribute="width" constant="297" id="csG-9M-hDd"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="17"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="15"/>
                     <color key="textColor" red="0.039215686270000001" green="0.74117647060000003" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description of daily task, may contain up to 40 words." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Mre-kj-wBe">
-                    <rect key="frame" x="20" y="113" width="354" height="333"/>
+                    <rect key="frame" x="20" y="84" width="354" height="362"/>
                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                     <color key="textColor" red="1" green="0.81877188369999998" blue="0.3105408569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017/1/30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eN-b3-3GT">
-                    <rect key="frame" x="-25" y="20" width="110" height="21"/>
+                    <rect key="frame" x="-25" y="55" width="110" height="21"/>
                     <color key="backgroundColor" red="1" green="0.81877188369999998" blue="0.3105408569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="5Ur-ZE-vYe"/>
@@ -59,16 +59,22 @@
             <constraints>
                 <constraint firstItem="Mre-kj-wBe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="1F9-gy-mfd"/>
                 <constraint firstItem="se8-wk-3vI" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="32B-JF-ml1"/>
-                <constraint firstItem="6eN-b3-3GT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="5Zj-JR-gc9"/>
+                <constraint firstItem="6eN-b3-3GT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="55" id="5Zj-JR-gc9"/>
                 <constraint firstAttribute="trailing" secondItem="Mre-kj-wBe" secondAttribute="trailing" constant="20" id="9jr-zD-rfe"/>
-                <constraint firstItem="Jvs-lo-hjp" firstAttribute="top" secondItem="6eN-b3-3GT" secondAttribute="bottom" constant="17" id="Cch-PL-ZkF"/>
-                <constraint firstItem="Mre-kj-wBe" firstAttribute="top" secondItem="Jvs-lo-hjp" secondAttribute="bottom" constant="25" id="IVk-c1-36P"/>
+                <constraint firstItem="Jvs-lo-hjp" firstAttribute="top" secondItem="6eN-b3-3GT" secondAttribute="bottom" constant="-68" id="Cch-PL-ZkF"/>
+                <constraint firstItem="Mre-kj-wBe" firstAttribute="top" secondItem="Jvs-lo-hjp" secondAttribute="bottom" constant="36" id="IVk-c1-36P"/>
                 <constraint firstItem="6eN-b3-3GT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-25" id="S45-Vj-LfP"/>
                 <constraint firstItem="se8-wk-3vI" firstAttribute="top" secondItem="Mre-kj-wBe" secondAttribute="bottom" constant="8" id="YnY-ih-JJE"/>
                 <constraint firstItem="Jvs-lo-hjp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-25" id="eER-YP-Yum"/>
                 <constraint firstAttribute="bottom" secondItem="se8-wk-3vI" secondAttribute="bottom" constant="20" id="gUU-EF-wiH"/>
+                <constraint firstItem="Jvs-lo-hjp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="18" id="yf1-aK-Dpk"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="Cch-PL-ZkF"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="lblDate" destination="6eN-b3-3GT" id="4aG-GX-8KL"/>
                 <outlet property="lblDescription" destination="Mre-kj-wBe" id="whV-YU-DmS"/>
