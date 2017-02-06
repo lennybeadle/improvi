@@ -94,8 +94,8 @@ class ProgrammeDetailViewController: BaseViewController {
                                                 overlayGenerator: overlayGenerator)
         swipeView.delegate = self
         self.vwDailyTask.addSubview(swipeView)
-        
-        self.swipeView.addCards(self.programme.tasks, onTop: true)
+//        swipeView.bufferSize = self.programme.tasks.count
+        self.swipeView.addCards(self.programme.tasks, onTop: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -106,13 +106,11 @@ class ProgrammeDetailViewController: BaseViewController {
 
 extension ProgrammeDetailViewController: DMSwipeCardsViewDelegate {
     func swipedLeft(_ object: Any) {
-        self.swipeView.addCards([object as! DailyTask], onTop: false)
         print("Swiped left: \(object)")
     }
     
     func swipedRight(_ object: Any) {
         print("Swiped right: \(object)")
-        self.swipeView.addCards([object as! DailyTask], onTop: false)
     }
     
     func cardTapped(_ object: Any) {
@@ -120,6 +118,7 @@ extension ProgrammeDetailViewController: DMSwipeCardsViewDelegate {
     }
     
     func reachedEndOfStack() {
+        self.swipeView.addCards(self.programme.tasks, onTop: false)
         print("Reached end of stack")
     }
 }

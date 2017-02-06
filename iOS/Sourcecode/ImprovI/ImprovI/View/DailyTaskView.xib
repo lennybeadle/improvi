@@ -43,6 +43,19 @@
                     <color key="textColor" red="1" green="0.81877188369999998" blue="0.3105408569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IK2-ZV-4NJ">
+                    <rect key="frame" x="298" y="20" width="96" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="iuv-T6-qET"/>
+                        <constraint firstAttribute="width" constant="96" id="rfV-gK-myE"/>
+                    </constraints>
+                    <state key="normal" title="Complete">
+                        <color key="titleColor" red="0.039215686270000001" green="0.74117647060000003" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="onComplete:" destination="iN0-l3-epB" eventType="touchUpInside" id="z5b-mm-MW2"/>
+                    </connections>
+                </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017/1/30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eN-b3-3GT">
                     <rect key="frame" x="-25" y="55" width="110" height="21"/>
                     <color key="backgroundColor" red="1" green="0.81877188369999998" blue="0.3105408569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -65,7 +78,9 @@
                 <constraint firstItem="Mre-kj-wBe" firstAttribute="top" secondItem="Jvs-lo-hjp" secondAttribute="bottom" constant="36" id="IVk-c1-36P"/>
                 <constraint firstItem="6eN-b3-3GT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-25" id="S45-Vj-LfP"/>
                 <constraint firstItem="se8-wk-3vI" firstAttribute="top" secondItem="Mre-kj-wBe" secondAttribute="bottom" constant="8" id="YnY-ih-JJE"/>
+                <constraint firstAttribute="trailing" secondItem="IK2-ZV-4NJ" secondAttribute="trailing" id="amF-p6-gto"/>
                 <constraint firstItem="Jvs-lo-hjp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-25" id="eER-YP-Yum"/>
+                <constraint firstItem="IK2-ZV-4NJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="fAu-tJ-QRf"/>
                 <constraint firstAttribute="bottom" secondItem="se8-wk-3vI" secondAttribute="bottom" constant="20" id="gUU-EF-wiH"/>
                 <constraint firstItem="Jvs-lo-hjp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="18" id="yf1-aK-Dpk"/>
             </constraints>
@@ -76,6 +91,7 @@
                 </mask>
             </variation>
             <connections>
+                <outlet property="btnStatus" destination="IK2-ZV-4NJ" id="mCL-Xo-cSV"/>
                 <outlet property="lblDate" destination="6eN-b3-3GT" id="4aG-GX-8KL"/>
                 <outlet property="lblDescription" destination="Mre-kj-wBe" id="whV-YU-DmS"/>
                 <outlet property="lblTitle" destination="Jvs-lo-hjp" id="XnG-9T-xV1"/>

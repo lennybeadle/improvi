@@ -8,6 +8,13 @@
 
 import UIKit
 
+public enum Status: Int {
+    case normal = -1
+    case ongoing = 0
+    case timeover = 1
+    case completed = 2
+}
+
 class DailyTask: ImprovIObject {
 //Initial Properties
     var name: String!
@@ -18,6 +25,7 @@ class DailyTask: ImprovIObject {
     var dependency: Bool!
     var traitPoints = [Int]()
     var boostPoint: Int!
+    var status: Status = .ongoing
     
 //Working Properties
     var traitPointsArchived = [Int]()
