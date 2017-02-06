@@ -16,7 +16,9 @@ struct Constant {
         
         static let foreColor = RGB(r: 10, g: 189, b: 160)
         static let foreColorHighlight = RGB(r: 245, g: 66, b: 95)
+        static let foreColorLight = RGB(r: 255, g: 209, b: 79)
         static let backColor = RGB(r: 255, g: 255, b: 250)
+        static let backColorLight = RGB(r: 235, g: 242, b: 234)
     }
 }
 

@@ -187,6 +187,6 @@ public extension Date {
     }
     
     public var dateString: String {
-        return "\(self.month)-\(self.day)-\(self.year)"
+        return "\(self.year)/\(self.month)/\(self.day)"
     }
 }

@@ -10,4 +10,7 @@ target 'ImprovI' do
     pod 'Alamofire'
     pod 'iRate'
     pod 'LTMorphingLabel'
+    pod 'SVProgressHUD'
+    pod 'IQKeyboardManagerSwift'
+    pod 'DMSwipeCards'
 end

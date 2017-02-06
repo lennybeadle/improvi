@@ -41,7 +41,6 @@ extension TraitPointsViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TraitPointCell", for: indexPath)
         if let customCell = cell as? TraitPointTableViewCell {
-//            customCell.resetWithTitle(title: traitPoints[indexPath.row].key, progress: traitPoints[indexPath.row].value)
             customCell.resetWithTitle(title: "Trait \(indexPath.row+1)", progress: traitPoints["Trait \(indexPath.row+1)"]!)
             
             if isAnimated == false {

@@ -10,14 +10,17 @@ import UIKit
 
 class Programme: ImprovIObject {
     var name: String!
-    var progress: Float! = 0
+    var progress: CGFloat! = 0
     var tasks = [DailyTask]()
-    
+    var startTime: Date!
+
     init(id: String, name: String) {
         super.init(id: id)
         self.name = name
-        self.progress = Float(arc4random_uniform(100))
-        
+        self.progress = CGFloat(arc4random_uniform(100))
+        let date = Date().minus(days: 1)
+        self.startTime = Date.parse("2017-\(String(format: "%.2d", date.month))-\(String(format: "%.2d", date.day)) \(arc4random_uniform(13)+10):00")
+
 //This is a template code
 //        task.name = dict["name"]
 //        task.shortName = dict["shortName"]
@@ -26,19 +29,19 @@ class Programme: ImprovIObject {
 //        task.difficultRate = Int(dict["difficultRate"]!)
 //        task.dependency = dict["dependency"]!.boolValue
         self.tasks.append(
-        DailyTask.fromDict(dict: ["name": "Electronics Ban", "shortName":"elec_ban", "longDescription": "Don't let anyone in the household use electronics for at least 30 minutes", "advice": "30 minutes can fly by when you are on your phone.", "difficultRate": "6", "dependency": "true"]))
+        DailyTask.fromDict(dict: ["name": "Electronics Ban", "shortName":"elec_ban", "longDescription": "Don't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutes", "advice": "30 minutes can fly by when you are on your phone.", "difficultRate": "6", "dependency": "true"]))
         
         self.tasks.append(
         DailyTask.fromDict(dict: ["name": "Loving Yourself", "shortName":"elec_ban", "longDescription": "Don't let anyone in the household use electronics for at least 30 minutes", "advice": "30 minutes can fly by when you are on your phone.", "difficultRate": "6", "dependency": "true"]))
         
         self.tasks.append(
-        DailyTask.fromDict(dict: ["name": "Be grateful", "shortName":"elec_ban", "longDescription": "Don't let anyone in the household use electronics for at least 30 minutes", "advice": "30 minutes can fly by when you are on your phone.", "difficultRate": "6", "dependency": "true"]))
+        DailyTask.fromDict(dict: ["name": "Be grateful", "shortName":"elec_ban", "longDescription": "Don't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutes", "advice": "30 minutes can fly by when you are on your phone.", "difficultRate": "6", "dependency": "true"]))
        
         self.tasks.append(
         DailyTask.fromDict(dict: ["name": "Todays plan", "shortName":"elec_ban", "longDescription": "Don't let anyone in the household use electronics for at least 30 minutes", "advice": "30 minutes can fly by when you are on your phone.", "difficultRate": "6", "dependency": "true"]))
         
         self.tasks.append(
-        DailyTask.fromDict(dict: ["name": "Think why", "shortName":"elec_ban", "longDescription": "Don't let anyone in the household use electronics for at least 30 minutes", "advice": "30 minutes can fly by when you are on your phone.", "difficultRate": "6", "dependency": "true"]))
+        DailyTask.fromDict(dict: ["name": "Think why", "shortName":"elec_ban", "longDescription": "Don't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutes", "advice": "30 minutes can fly by when you are on your phone.", "difficultRate": "6", "dependency": "true"]))
         
         self.tasks.append(
         DailyTask.fromDict(dict: ["name": "Show your love", "shortName":"elec_ban", "longDescription": "Don't let anyone in the household use electronics for at least 30 minutes", "advice": "30 minutes can fly by when you are on your phone.", "difficultRate": "6", "dependency": "true"]))

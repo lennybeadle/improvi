@@ -16,10 +16,24 @@ class SettingsViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        items.append(SettingItem(title: "Reminder", detail: "", isAccessary: true))
-        items.append(SettingItem(title: "Privacy", detail: "", isAccessary: true))
-        items.append(SettingItem(title: "About", detail: "", isAccessary: true))
+        self.reload()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.reload()
+    }
+    
+    func reload() {
+        items.removeAll()
+        
+        var reminderContent = ""
+        if let notification = NotificationManager.sharedInstance.getNotification(name: "GENERAL") {
+            reminderContent = "\(notification.time.hour):\(notification.time.minute)"
+        }
+        
+        items.append(SettingItem(title: "Reminder", detail: reminderContent, isAccessary: true))
+        items.append(SettingItem(title: "Privacy Policy", detail: "", isAccessary: true))
         items.append(SettingItem(title: "Contact Us", detail: "", isAccessary: true))
         items.append(SettingItem(title: "Rate Improvi", detail: "", isAccessary: true))
         
@@ -51,7 +65,16 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 4 {
+        if indexPath.row == 0 {
+            self.performSegue(withIdentifier: "sid_reminder", sender: self)
+        }
+        else if indexPath.row == 1 {
+            self.performSegue(withIdentifier: "sid_privacypolicy", sender: self)
+        }
+        else if indexPath.row == 2 {
+            self.performSegue(withIdentifier: "sid_contactus", sender: self)
+        }
+        else if indexPath.row == 3 {
             iRate.sharedInstance().promptForRating()
         }
     }

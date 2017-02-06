@@ -12,6 +12,7 @@ class User: ImprovIObject {
     var userName: String!
     var fullName: String!
     var emailAddress: String!
+    var password: String = "123"
     var dateJoined: Date!
     var imageLink: String!
     

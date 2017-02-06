@@ -16,6 +16,14 @@ class ProgressViewController: BaseViewController {
         super.viewDidLoad()
 
         self.programmes = Manager.sharedInstance.allProgrammes
+        
+        tblProgress.estimatedRowHeight = 70
+        tblProgress.rowHeight = UITableViewAutomaticDimension
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tblProgress.reloadData()
     }
 }
 
@@ -26,10 +34,9 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? CollapsibleTableViewHeader ?? CollapsibleTableViewHeader(reuseIdentifier: "header")
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? ProgressHeaderView ?? ProgressHeaderView(reuseIdentifier: "header")
         
-        header.titleLabel.text = programmes[section].name
-        header.arrowLabel.text = ">"
+        header.resetWithProgramme(programme: programmes[section])
         header.setCollapsed(collapsed: programmes[section].collapsed)
         header.section = section
         header.delegate = self
@@ -38,21 +45,16 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
-    }
-    
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if programmes[indexPath.section].collapsed {
-            return 0
-        }
-        else {
-            return ProgressTableViewCell.height
-        }
+        return 130
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.programmes[section].tasks.count
+        if programmes[section].collapsed {
+            return 0
+        }
+        else {
+            return self.programmes[section].tasks.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -63,8 +65,8 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
             customCell.resetWithDailyTask(task: programme.tasks[indexPath.row])
             
             if isAnimated == false {
-                customCell.vwInnerView.delay = 0.05*CGFloat(indexPath.row)
-                customCell.vwInnerView.animate()
+//                customCell.vwInnerView.delay = 0.05*CGFloat(indexPath.row)
+//                customCell.vwInnerView.animate()
             }
         }
         
@@ -80,19 +82,14 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension ProgressViewController: CollapsibleTableViewHeaderDelegate {
-    func toggleSection(header: CollapsibleTableViewHeader, section: Int) {
+extension ProgressViewController: ProgressHeaderViewDelegate {
+    func toggleSection(header: ProgressHeaderView, section: Int) {
         let collapsed = programmes[section].collapsed
         
         // Toggle collapse
         programmes[section].collapsed = !collapsed
         header.setCollapsed(collapsed: !collapsed)
         
-        // Adjust the height of the rows inside the section
-        tblProgress.beginUpdates()
-        for i in 0 ..< programmes[section].tasks.count {
-            tblProgress.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
-        }
-        tblProgress.endUpdates()
+        self.tblProgress.reloadSections([section], with: .automatic)
     }
 }

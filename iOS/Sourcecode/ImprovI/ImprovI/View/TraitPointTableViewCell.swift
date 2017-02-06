@@ -13,7 +13,6 @@ class TraitPointTableViewCell: UITableViewCell {
     static let height: CGFloat = 60
 
     @IBOutlet weak var vwInnerView: SpringView!
-    @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var progressView: LinearProgressView!
     @IBOutlet weak var lblTraitPoints: UILabel!
     
@@ -23,8 +22,7 @@ class TraitPointTableViewCell: UITableViewCell {
     }
     
     func resetWithTitle(title: String, progress: CGFloat) {
-        self.lblTitle.text = title
         self.progressView.progressValue = progress
-        self.lblTraitPoints.text = "\(Int(progress))%"
+        self.lblTraitPoints.text = title + ": \(Int(progress))%"
     }
 }

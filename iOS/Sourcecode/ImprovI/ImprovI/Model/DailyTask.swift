@@ -20,7 +20,6 @@ class DailyTask: ImprovIObject {
     var boostPoint: Int!
     
 //Working Properties
-    var startTime: Date!
     var traitPointsArchived = [Int]()
     
     func progress() -> CGFloat {
@@ -51,8 +50,6 @@ class DailyTask: ImprovIObject {
         task.dependency = dict["dependency"]!.boolValue
         task.traitPoints = [2,5,4,3,1,2,3]
         task.traitPointsArchived = [1,2,1,0,1,1,1]
-        let date = Date().minus(days: 1)
-        task.startTime = Date.parse("2017-\(String(format: "%.2d", date.month))-\(String(format: "%.2d", date.day)) \(arc4random_uniform(13)+10):00")
         return task
     }
 }

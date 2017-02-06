@@ -16,6 +16,8 @@
 		9A3061821E3FEE850027FD28 /* TraitPointTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3061811E3FEE850027FD28 /* TraitPointTableViewCell.swift */; };
 		9A30618F1E3FF0BD0027FD28 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3061871E3FF0BD0027FD28 /* Dictionary.swift */; };
 		9A3061921E3FF0BD0027FD28 /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A30618A1E3FF0BD0027FD28 /* Range.swift */; };
+		9A35B3381E450657001BEDA1 /* TextInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A35B3371E450657001BEDA1 /* TextInputViewController.swift */; };
+		9A35B33A1E450BA3001BEDA1 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A35B3391E450BA3001BEDA1 /* ChangePasswordViewController.swift */; };
 		9A36AD411E413DE500B949A0 /* starParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9A36AD401E413DE500B949A0 /* starParticle.sks */; };
 		9A37F7711E36206300943AF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A37F7701E36206300943AF4 /* AppDelegate.swift */; };
 		9A37F7761E36206300943AF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A37F7741E36206300943AF4 /* Main.storyboard */; };
@@ -35,6 +37,7 @@
 		9A51A43C1E3E9AE00025F63A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A51A43B1E3E9AE00025F63A /* SettingsViewController.swift */; };
 		9A51A43E1E3EB5B50025F63A /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A51A43D1E3EB5B50025F63A /* SettingsTableViewCell.swift */; };
 		9A51A4401E3EBC1A0025F63A /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A51A43F1E3EBC1A0025F63A /* DateExtension.swift */; };
+		9A579DF71E41A29600385EAF /* ProgressHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A579DF61E41A29600385EAF /* ProgressHeaderView.swift */; };
 		9A5FA89F1E403C6300F7F866 /* ProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5FA89E1E403C6300F7F866 /* ProgressTableViewCell.swift */; };
 		9A805F3F1E3A4E2500E49D2C /* Programme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F3E1E3A4E2500E49D2C /* Programme.swift */; };
 		9A805F411E3A4E2E00E49D2C /* DailyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F401E3A4E2E00E49D2C /* DailyTask.swift */; };
@@ -46,6 +49,13 @@
 		9A805F561E3A6FD000E49D2C /* TableViewDragger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F531E3A6FD000E49D2C /* TableViewDragger.swift */; };
 		9A805F571E3A6FD000E49D2C /* TableViewDraggerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F541E3A6FD000E49D2C /* TableViewDraggerCell.swift */; };
 		9A805F581E3A6FD000E49D2C /* UIScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F551E3A6FD000E49D2C /* UIScrollViewExtension.swift */; };
+		9A93C78D1E47EC1200810D3A /* DailyTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A93C78C1E47EC1200810D3A /* DailyTaskView.swift */; };
+		9A93C78F1E47EC1B00810D3A /* DailyTaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A93C78E1E47EC1B00810D3A /* DailyTaskView.xib */; };
+		9A95F3881E46811800F3228F /* privacypolicy.html in Resources */ = {isa = PBXBuildFile; fileRef = 9A95F3871E46811800F3228F /* privacypolicy.html */; };
+		9A95F38B1E46816700F3228F /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A95F38A1E46816700F3228F /* PrivacyPolicyViewController.swift */; };
+		9A95F38D1E4684EE00F3228F /* ContactUSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A95F38C1E4684EE00F3228F /* ContactUSViewController.swift */; };
+		9A95F38F1E468A6800F3228F /* ReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A95F38E1E468A6800F3228F /* ReminderViewController.swift */; };
+		9A95F3911E468CDB00F3228F /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A95F3901E468CDA00F3228F /* NotificationManager.swift */; };
 		9AD5D07A1E3BD076000C7AF9 /* ProgrammeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5D0791E3BD076000C7AF9 /* ProgrammeDetailViewController.swift */; };
 		9AD5D07D1E3BD46F000C7AF9 /* LinearProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5D07C1E3BD46F000C7AF9 /* LinearProgressView.swift */; };
 		9AD5D07F1E3BECD7000C7AF9 /* SummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5D07E1E3BECD7000C7AF9 /* SummaryTableViewCell.swift */; };
@@ -62,6 +72,8 @@
 		9A3061811E3FEE850027FD28 /* TraitPointTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraitPointTableViewCell.swift; sourceTree = "<group>"; };
 		9A3061871E3FF0BD0027FD28 /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		9A30618A1E3FF0BD0027FD28 /* Range.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Range.swift; sourceTree = "<group>"; };
+		9A35B3371E450657001BEDA1 /* TextInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputViewController.swift; sourceTree = "<group>"; };
+		9A35B3391E450BA3001BEDA1 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		9A36AD401E413DE500B949A0 /* starParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = starParticle.sks; sourceTree = "<group>"; };
 		9A37F76D1E36206300943AF4 /* ImprovI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImprovI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A37F7701E36206300943AF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +95,7 @@
 		9A51A43B1E3E9AE00025F63A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		9A51A43D1E3EB5B50025F63A /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		9A51A43F1E3EBC1A0025F63A /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		9A579DF61E41A29600385EAF /* ProgressHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHeaderView.swift; sourceTree = "<group>"; };
 		9A5FA89E1E403C6300F7F866 /* ProgressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressTableViewCell.swift; sourceTree = "<group>"; };
 		9A805F3E1E3A4E2500E49D2C /* Programme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Programme.swift; sourceTree = "<group>"; };
 		9A805F401E3A4E2E00E49D2C /* DailyTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyTask.swift; sourceTree = "<group>"; };
@@ -95,6 +108,13 @@
 		9A805F531E3A6FD000E49D2C /* TableViewDragger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDragger.swift; sourceTree = "<group>"; };
 		9A805F541E3A6FD000E49D2C /* TableViewDraggerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDraggerCell.swift; sourceTree = "<group>"; };
 		9A805F551E3A6FD000E49D2C /* UIScrollViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtension.swift; sourceTree = "<group>"; };
+		9A93C78C1E47EC1200810D3A /* DailyTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyTaskView.swift; sourceTree = "<group>"; };
+		9A93C78E1E47EC1B00810D3A /* DailyTaskView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DailyTaskView.xib; sourceTree = "<group>"; };
+		9A95F3871E46811800F3228F /* privacypolicy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = privacypolicy.html; sourceTree = "<group>"; };
+		9A95F38A1E46816700F3228F /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		9A95F38C1E4684EE00F3228F /* ContactUSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUSViewController.swift; sourceTree = "<group>"; };
+		9A95F38E1E468A6800F3228F /* ReminderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderViewController.swift; sourceTree = "<group>"; };
+		9A95F3901E468CDA00F3228F /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		9AD5D0791E3BD076000C7AF9 /* ProgrammeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgrammeDetailViewController.swift; sourceTree = "<group>"; };
 		9AD5D07C1E3BD46F000C7AF9 /* LinearProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinearProgressView.swift; sourceTree = "<group>"; };
 		9AD5D07E1E3BECD7000C7AF9 /* SummaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryTableViewCell.swift; sourceTree = "<group>"; };
@@ -142,6 +162,7 @@
 		9A36AD3F1E413DE500B949A0 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				9A95F3871E46811800F3228F /* privacypolicy.html */,
 				9A36AD401E413DE500B949A0 /* starParticle.sks */,
 			);
 			path = Resource;
@@ -193,6 +214,7 @@
 		9A37F7891E36279F00943AF4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9A95F3891E46815900F3228F /* Settings */,
 				9A2C09481E365F17006156F3 /* Welcome */,
 				9A51A4341E3E9AAE0025F63A /* Summary */,
 				9A37F7921E363DF900943AF4 /* BaseViewController.swift */,
@@ -202,6 +224,7 @@
 				9A37F7961E36498200943AF4 /* AnalyticsViewController.swift */,
 				9A37F7981E36498B00943AF4 /* TBDViewController.swift */,
 				9A37F79A1E3649A000943AF4 /* SummaryViewController.swift */,
+				9A35B3371E450657001BEDA1 /* TextInputViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -224,6 +247,7 @@
 				9A51A4371E3E9AD00025F63A /* ProgressViewController.swift */,
 				9A51A4391E3E9AD90025F63A /* TraitPointsViewController.swift */,
 				9A51A43B1E3E9AE00025F63A /* SettingsViewController.swift */,
+				9A35B3391E450BA3001BEDA1 /* ChangePasswordViewController.swift */,
 			);
 			name = Summary;
 			sourceTree = "<group>";
@@ -245,6 +269,7 @@
 			children = (
 				9A37F78E1E363C5000943AF4 /* Manager.swift */,
 				9A805F461E3A58E600E49D2C /* APIManager.swift */,
+				9A95F3901E468CDA00F3228F /* NotificationManager.swift */,
 			);
 			name = Manager;
 			sourceTree = "<group>";
@@ -252,10 +277,12 @@
 		9A805F4C1E3A600C00E49D2C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9A93C78B1E47EBF100810D3A /* DailyTaskView */,
 				9A805F4D1E3A601900E49D2C /* ProgrammeTableViewCell.swift */,
 				9AD5D07E1E3BECD7000C7AF9 /* SummaryTableViewCell.swift */,
 				9A1C35231E3D458C00C88FE6 /* AnswerTableViewCell.swift */,
 				9A1C35251E3D491C00C88FE6 /* CollapsibleTableViewHeader.swift */,
+				9A579DF61E41A29600385EAF /* ProgressHeaderView.swift */,
 				9A51A43D1E3EB5B50025F63A /* SettingsTableViewCell.swift */,
 				9A3061811E3FEE850027FD28 /* TraitPointTableViewCell.swift */,
 				9A5FA89E1E403C6300F7F866 /* ProgressTableViewCell.swift */,
@@ -283,6 +310,25 @@
 				9A805F551E3A6FD000E49D2C /* UIScrollViewExtension.swift */,
 			);
 			path = TableViewDragger;
+			sourceTree = "<group>";
+		};
+		9A93C78B1E47EBF100810D3A /* DailyTaskView */ = {
+			isa = PBXGroup;
+			children = (
+				9A93C78C1E47EC1200810D3A /* DailyTaskView.swift */,
+				9A93C78E1E47EC1B00810D3A /* DailyTaskView.xib */,
+			);
+			name = DailyTaskView;
+			sourceTree = "<group>";
+		};
+		9A95F3891E46815900F3228F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				9A95F38A1E46816700F3228F /* PrivacyPolicyViewController.swift */,
+				9A95F38C1E4684EE00F3228F /* ContactUSViewController.swift */,
+				9A95F38E1E468A6800F3228F /* ReminderViewController.swift */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		9AD5D07B1E3BD46F000C7AF9 /* LinearProgressBar */ = {
@@ -373,7 +419,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A37F77B1E36206300943AF4 /* LaunchScreen.storyboard in Resources */,
+				9A93C78F1E47EC1B00810D3A /* DailyTaskView.xib in Resources */,
 				9A36AD411E413DE500B949A0 /* starParticle.sks in Resources */,
+				9A95F3881E46811800F3228F /* privacypolicy.html in Resources */,
 				9A37F7781E36206300943AF4 /* Assets.xcassets in Resources */,
 				9A37F7761E36206300943AF4 /* Main.storyboard in Resources */,
 			);
@@ -437,6 +485,7 @@
 				9A805F4E1E3A601900E49D2C /* ProgrammeTableViewCell.swift in Sources */,
 				9A1C35241E3D458C00C88FE6 /* AnswerTableViewCell.swift in Sources */,
 				9AD5D07D1E3BD46F000C7AF9 /* LinearProgressView.swift in Sources */,
+				9A95F38F1E468A6800F3228F /* ReminderViewController.swift in Sources */,
 				9A805F471E3A58E600E49D2C /* APIManager.swift in Sources */,
 				9A51A43A1E3E9AD90025F63A /* TraitPointsViewController.swift in Sources */,
 				9A805F4B1E3A59A800E49D2C /* ImprovIObject.swift in Sources */,
@@ -447,7 +496,10 @@
 				9A30618F1E3FF0BD0027FD28 /* Dictionary.swift in Sources */,
 				9A5FA89F1E403C6300F7F866 /* ProgressTableViewCell.swift in Sources */,
 				9A51A43E1E3EB5B50025F63A /* SettingsTableViewCell.swift in Sources */,
+				9A35B3381E450657001BEDA1 /* TextInputViewController.swift in Sources */,
 				9A37F7711E36206300943AF4 /* AppDelegate.swift in Sources */,
+				9A93C78D1E47EC1200810D3A /* DailyTaskView.swift in Sources */,
+				9A95F38D1E4684EE00F3228F /* ContactUSViewController.swift in Sources */,
 				9A37F7971E36498200943AF4 /* AnalyticsViewController.swift in Sources */,
 				9A3061921E3FF0BD0027FD28 /* Range.swift in Sources */,
 				9A3061821E3FEE850027FD28 /* TraitPointTableViewCell.swift in Sources */,
@@ -457,7 +509,9 @@
 				9A805F411E3A4E2E00E49D2C /* DailyTask.swift in Sources */,
 				9AD5D07A1E3BD076000C7AF9 /* ProgrammeDetailViewController.swift in Sources */,
 				9A805F571E3A6FD000E49D2C /* TableViewDraggerCell.swift in Sources */,
+				9A95F3911E468CDB00F3228F /* NotificationManager.swift in Sources */,
 				9A805F451E3A4E4F00E49D2C /* User.swift in Sources */,
+				9A579DF71E41A29600385EAF /* ProgressHeaderView.swift in Sources */,
 				9A37F78F1E363C5000943AF4 /* Manager.swift in Sources */,
 				9A51A43C1E3E9AE00025F63A /* SettingsViewController.swift in Sources */,
 				9A51A4361E3E9ABF0025F63A /* ProfileViewController.swift in Sources */,
@@ -465,6 +519,8 @@
 				9A37F7911E363C5900943AF4 /* Constant.swift in Sources */,
 				9A37F7951E36497500943AF4 /* ProgrammeViewController.swift in Sources */,
 				9A1C35221E3D448800C88FE6 /* CheckboxButton.swift in Sources */,
+				9A35B33A1E450BA3001BEDA1 /* ChangePasswordViewController.swift in Sources */,
+				9A95F38B1E46816700F3228F /* PrivacyPolicyViewController.swift in Sources */,
 				9A1C35261E3D491C00C88FE6 /* CollapsibleTableViewHeader.swift in Sources */,
 				9A51A4401E3EBC1A0025F63A /* DateExtension.swift in Sources */,
 				9A2C094A1E365F33006156F3 /* SignInViewController.swift in Sources */,

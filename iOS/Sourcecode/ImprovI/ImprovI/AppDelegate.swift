@@ -8,6 +8,7 @@
 
 import UIKit
 import iRate
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Manager.sharedInstance.initUISettings()
         iRate.sharedInstance().appStoreID = 10289384
         iRate.sharedInstance().onlyPromptIfLatestVersion = true
+        
+        IQKeyboardManager.sharedManager().enable = true
         return true
     }
 

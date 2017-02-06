@@ -9,12 +9,27 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>DMSwipeCards.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>IQKeyboardManagerSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>LTMorphingLabel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-ImprovI.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SVProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -32,7 +47,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>33D154E8BF61FD220AF8E7F6771D5960</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>4C69BF3EF4CE81852226B9442B0C2DF4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4DC059E04CBA98AEDDB5C34E02D551E9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -42,17 +67,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7EBC09227680100215CEDF68525DA6F5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E1D88C3B1DD9E3D2C67B008121CEF14B</key>
+		<key>C72389CBAB898CF0CA2B421DDE079634</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CC52DB25250F59525939897FB3F3897F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FA0071A399690B9A95DB23C23FC8F072</key>
 		<dict>
 			<key>primary</key>
 			<true/>
