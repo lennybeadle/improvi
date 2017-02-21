@@ -89,6 +89,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/LTMorphingLabel/LTMorphingLabel.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SVProgressHUD/SVProgressHUD.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/ScrollableGraphView/ScrollableGraphView.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Spring/Spring.framework"
   install_framework "$BUILT_PRODUCTS_DIR/iRate/iRate.framework"
 fi
@@ -98,6 +99,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/LTMorphingLabel/LTMorphingLabel.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SVProgressHUD/SVProgressHUD.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/ScrollableGraphView/ScrollableGraphView.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Spring/Spring.framework"
   install_framework "$BUILT_PRODUCTS_DIR/iRate/iRate.framework"
 fi

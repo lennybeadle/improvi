@@ -27,6 +27,7 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
         arrowLabel.widthAnchor.constraint(equalToConstant: 12).isActive = true
         arrowLabel.heightAnchor.constraint(equalToConstant: 12).isActive = true
         
+        titleLabel.numberOfLines = -1
         titleLabel.textColor = Constant.UI.backColor
         arrowLabel.textColor = Constant.UI.backColor
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

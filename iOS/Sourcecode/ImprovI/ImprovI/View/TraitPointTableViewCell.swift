@@ -10,7 +10,7 @@ import UIKit
 import Spring
 
 class TraitPointTableViewCell: UITableViewCell {
-    static let height: CGFloat = 60
+    static let height: CGFloat = 44
 
     @IBOutlet weak var vwInnerView: SpringView!
     @IBOutlet weak var progressView: LinearProgressView!

@@ -30,7 +30,7 @@ class ProgressHeaderView: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         
-        contentView.backgroundColor = Constant.UI.foreColor
+        contentView.backgroundColor = Constant.UI.foreColor.withAlphaComponent(0.9)
         
         contentView.addSubview(titleLabel)
         contentView.addSubview(arrowLabel)
@@ -95,27 +95,27 @@ class ProgressHeaderView: UITableViewHeaderFooterView {
     func resetWithProgramme(programme: Programme) {
         self.titleLabel.text = programme.name
         self.arrowLabel.text = ">"
+
+        if programme.status == .normal {
+            contentView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+        }
+        else {
+            contentView.backgroundColor = Constant.UI.foreColor.withAlphaComponent(0.9)
+        }
         
-        let distance = Date.dateBetween(date1: programme.startTime, date2: Date())
-        if distance.day >= 1 {
+
+        if programme.status == .timeover {
             progressTime.barColor = UIColor.darkGray
-            timeLabel.text = "Time over!"
         }
         else {
             progressTime.barColor = Constant.UI.foreColorLight
-            if distance.day == 0 {
-                timeLabel.text = "Time remaining: \(distance.hour) hour(s) \(distance.min) min(s)"
-            }
-            else {
-                timeLabel.text = "Time remaining: \(distance.day) day(s) \(distance.hour) hour(s) \(distance.min) min(s)"
-            }
         }
         
+        timeLabel.text = programme.timeString
         progressLabel.text = "Progress: \(Int(programme.progress))%"
         progressProgress.progressValue = programme.progress
+        progressTime.progressValue = programme.timeProgress
         
-        let minutes: CGFloat = ( Date.daysBetween(date1: programme.startTime, date2: Date()) > 0 ? 0.0: CGFloat(Date.minutesBetween(date1: programme.startTime, date2: Date())) )
-        progressTime.progressValue = CGFloat(100 - minutes/1440.0*100.0)
     }
     
     override func layoutSubviews() {

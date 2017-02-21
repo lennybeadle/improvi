@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		0D6B43F2023BEB9FBDEDE805 /* Pods_ImprovI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D86375889EFBED0182BD88B /* Pods_ImprovI.framework */; };
+		9A1191EA1E5B393F00598AD0 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1191E91E5B393F00598AD0 /* NotificationScheduler.swift */; };
 		9A1C35221E3D448800C88FE6 /* CheckboxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1C35211E3D448800C88FE6 /* CheckboxButton.swift */; };
 		9A1C35241E3D458C00C88FE6 /* AnswerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1C35231E3D458C00C88FE6 /* AnswerTableViewCell.swift */; };
 		9A1C35261E3D491C00C88FE6 /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1C35251E3D491C00C88FE6 /* CollapsibleTableViewHeader.swift */; };
+		9A1E71BE1E4A9FDD00732CEB /* TraitPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1E71BD1E4A9FDD00732CEB /* TraitPoint.swift */; };
 		9A2C094A1E365F33006156F3 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2C09491E365F33006156F3 /* SignInViewController.swift */; };
 		9A2C094C1E365F3A006156F3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2C094B1E365F3A006156F3 /* SignUpViewController.swift */; };
 		9A3061821E3FEE850027FD28 /* TraitPointTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3061811E3FEE850027FD28 /* TraitPointTableViewCell.swift */; };
@@ -39,6 +41,7 @@
 		9A51A4401E3EBC1A0025F63A /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A51A43F1E3EBC1A0025F63A /* DateExtension.swift */; };
 		9A579DF71E41A29600385EAF /* ProgressHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A579DF61E41A29600385EAF /* ProgressHeaderView.swift */; };
 		9A5FA89F1E403C6300F7F866 /* ProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5FA89E1E403C6300F7F866 /* ProgressTableViewCell.swift */; };
+		9A70F6461E5687C90007832F /* CongratsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70F6451E5687C90007832F /* CongratsTableViewCell.swift */; };
 		9A805F3F1E3A4E2500E49D2C /* Programme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F3E1E3A4E2500E49D2C /* Programme.swift */; };
 		9A805F411E3A4E2E00E49D2C /* DailyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F401E3A4E2E00E49D2C /* DailyTask.swift */; };
 		9A805F431E3A4E3500E49D2C /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F421E3A4E3500E49D2C /* Question.swift */; };
@@ -56,6 +59,8 @@
 		9A95F38D1E4684EE00F3228F /* ContactUSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A95F38C1E4684EE00F3228F /* ContactUSViewController.swift */; };
 		9A95F38F1E468A6800F3228F /* ReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A95F38E1E468A6800F3228F /* ReminderViewController.swift */; };
 		9A95F3911E468CDB00F3228F /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A95F3901E468CDA00F3228F /* NotificationManager.swift */; };
+		9A981A6E1E546F7900E097D5 /* congratulation.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9A981A6D1E546F7900E097D5 /* congratulation.sks */; };
+		9A981A701E54711F00E097D5 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A981A6F1E54711F00E097D5 /* CongratulationViewController.swift */; };
 		9AD5D07A1E3BD076000C7AF9 /* ProgrammeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5D0791E3BD076000C7AF9 /* ProgrammeDetailViewController.swift */; };
 		9AD5D07D1E3BD46F000C7AF9 /* LinearProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5D07C1E3BD46F000C7AF9 /* LinearProgressView.swift */; };
 		9AD5D07F1E3BECD7000C7AF9 /* SummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5D07E1E3BECD7000C7AF9 /* SummaryTableViewCell.swift */; };
@@ -64,9 +69,11 @@
 /* Begin PBXFileReference section */
 		0DFA462EF07FD6F8B32A5A7E /* Pods-ImprovI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImprovI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ImprovI/Pods-ImprovI.debug.xcconfig"; sourceTree = "<group>"; };
 		1D86375889EFBED0182BD88B /* Pods_ImprovI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImprovI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A1191E91E5B393F00598AD0 /* NotificationScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
 		9A1C35211E3D448800C88FE6 /* CheckboxButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckboxButton.swift; sourceTree = "<group>"; };
 		9A1C35231E3D458C00C88FE6 /* AnswerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerTableViewCell.swift; sourceTree = "<group>"; };
 		9A1C35251E3D491C00C88FE6 /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
+		9A1E71BD1E4A9FDD00732CEB /* TraitPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraitPoint.swift; sourceTree = "<group>"; };
 		9A2C09491E365F33006156F3 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		9A2C094B1E365F3A006156F3 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		9A3061811E3FEE850027FD28 /* TraitPointTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraitPointTableViewCell.swift; sourceTree = "<group>"; };
@@ -97,6 +104,7 @@
 		9A51A43F1E3EBC1A0025F63A /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		9A579DF61E41A29600385EAF /* ProgressHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHeaderView.swift; sourceTree = "<group>"; };
 		9A5FA89E1E403C6300F7F866 /* ProgressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressTableViewCell.swift; sourceTree = "<group>"; };
+		9A70F6451E5687C90007832F /* CongratsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratsTableViewCell.swift; sourceTree = "<group>"; };
 		9A805F3E1E3A4E2500E49D2C /* Programme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Programme.swift; sourceTree = "<group>"; };
 		9A805F401E3A4E2E00E49D2C /* DailyTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyTask.swift; sourceTree = "<group>"; };
 		9A805F421E3A4E3500E49D2C /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
@@ -115,6 +123,8 @@
 		9A95F38C1E4684EE00F3228F /* ContactUSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUSViewController.swift; sourceTree = "<group>"; };
 		9A95F38E1E468A6800F3228F /* ReminderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderViewController.swift; sourceTree = "<group>"; };
 		9A95F3901E468CDA00F3228F /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		9A981A6D1E546F7900E097D5 /* congratulation.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = congratulation.sks; sourceTree = "<group>"; };
+		9A981A6F1E54711F00E097D5 /* CongratulationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratulationViewController.swift; sourceTree = "<group>"; };
 		9AD5D0791E3BD076000C7AF9 /* ProgrammeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgrammeDetailViewController.swift; sourceTree = "<group>"; };
 		9AD5D07C1E3BD46F000C7AF9 /* LinearProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinearProgressView.swift; sourceTree = "<group>"; };
 		9AD5D07E1E3BECD7000C7AF9 /* SummaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryTableViewCell.swift; sourceTree = "<group>"; };
@@ -133,6 +143,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9A1191E61E5B387400598AD0 /* LocalNotification */ = {
+			isa = PBXGroup;
+			children = (
+				9A1191E91E5B393F00598AD0 /* NotificationScheduler.swift */,
+			);
+			path = LocalNotification;
+			sourceTree = "<group>";
+		};
 		9A1C35201E3D448800C88FE6 /* CheckBox */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				9A95F3871E46811800F3228F /* privacypolicy.html */,
+				9A981A6D1E546F7900E097D5 /* congratulation.sks */,
 				9A36AD401E413DE500B949A0 /* starParticle.sks */,
 			);
 			path = Resource;
@@ -225,6 +244,7 @@
 				9A37F7981E36498B00943AF4 /* TBDViewController.swift */,
 				9A37F79A1E3649A000943AF4 /* SummaryViewController.swift */,
 				9A35B3371E450657001BEDA1 /* TextInputViewController.swift */,
+				9A981A6F1E54711F00E097D5 /* CongratulationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -260,6 +280,7 @@
 				9A805F401E3A4E2E00E49D2C /* DailyTask.swift */,
 				9A805F421E3A4E3500E49D2C /* Question.swift */,
 				9A805F441E3A4E4F00E49D2C /* User.swift */,
+				9A1E71BD1E4A9FDD00732CEB /* TraitPoint.swift */,
 			);
 			name = Object;
 			sourceTree = "<group>";
@@ -286,6 +307,7 @@
 				9A51A43D1E3EB5B50025F63A /* SettingsTableViewCell.swift */,
 				9A3061811E3FEE850027FD28 /* TraitPointTableViewCell.swift */,
 				9A5FA89E1E403C6300F7F866 /* ProgressTableViewCell.swift */,
+				9A70F6451E5687C90007832F /* CongratsTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -293,6 +315,7 @@
 		9A805F501E3A6FD000E49D2C /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				9A1191E61E5B387400598AD0 /* LocalNotification */,
 				9A3061831E3FF0BD0027FD28 /* Extension */,
 				9A1C35201E3D448800C88FE6 /* CheckBox */,
 				9AD5D07B1E3BD46F000C7AF9 /* LinearProgressBar */,
@@ -421,6 +444,7 @@
 				9A37F77B1E36206300943AF4 /* LaunchScreen.storyboard in Resources */,
 				9A93C78F1E47EC1B00810D3A /* DailyTaskView.xib in Resources */,
 				9A36AD411E413DE500B949A0 /* starParticle.sks in Resources */,
+				9A981A6E1E546F7900E097D5 /* congratulation.sks in Resources */,
 				9A95F3881E46811800F3228F /* privacypolicy.html in Resources */,
 				9A37F7781E36206300943AF4 /* Assets.xcassets in Resources */,
 				9A37F7761E36206300943AF4 /* Main.storyboard in Resources */,
@@ -489,6 +513,7 @@
 				9A805F471E3A58E600E49D2C /* APIManager.swift in Sources */,
 				9A51A43A1E3E9AD90025F63A /* TraitPointsViewController.swift in Sources */,
 				9A805F4B1E3A59A800E49D2C /* ImprovIObject.swift in Sources */,
+				9A1E71BE1E4A9FDD00732CEB /* TraitPoint.swift in Sources */,
 				9A805F3F1E3A4E2500E49D2C /* Programme.swift in Sources */,
 				9A2C094C1E365F3A006156F3 /* SignUpViewController.swift in Sources */,
 				9A37F7931E363DF900943AF4 /* BaseViewController.swift in Sources */,
@@ -523,7 +548,10 @@
 				9A95F38B1E46816700F3228F /* PrivacyPolicyViewController.swift in Sources */,
 				9A1C35261E3D491C00C88FE6 /* CollapsibleTableViewHeader.swift in Sources */,
 				9A51A4401E3EBC1A0025F63A /* DateExtension.swift in Sources */,
+				9A70F6461E5687C90007832F /* CongratsTableViewCell.swift in Sources */,
 				9A2C094A1E365F33006156F3 /* SignInViewController.swift in Sources */,
+				9A1191EA1E5B393F00598AD0 /* NotificationScheduler.swift in Sources */,
+				9A981A701E54711F00E097D5 /* CongratulationViewController.swift in Sources */,
 				9A37F79B1E3649A000943AF4 /* SummaryViewController.swift in Sources */,
 				9AD5D07F1E3BECD7000C7AF9 /* SummaryTableViewCell.swift in Sources */,
 				9A805F581E3A6FD000E49D2C /* UIScrollViewExtension.swift in Sources */,

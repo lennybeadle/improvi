@@ -15,6 +15,7 @@ class ProgressViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        Manager.sharedInstance.sortProgrammes()
         self.programmes = Manager.sharedInstance.allProgrammes
         
         tblProgress.estimatedRowHeight = 70
@@ -53,7 +54,7 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
             return 0
         }
         else {
-            return self.programmes[section].tasks.count
+            return self.programmes[section].availableTasks.count
         }
     }
     
@@ -62,7 +63,7 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
         
         if let customCell = cell as? ProgressTableViewCell {
             let programme = programmes[indexPath.section]
-            customCell.resetWithDailyTask(task: programme.tasks[indexPath.row])
+            customCell.resetWithDailyTask(task: programme.availableTasks[indexPath.row])
             
             if isAnimated == false {
 //                customCell.vwInnerView.delay = 0.05*CGFloat(indexPath.row)
@@ -75,7 +76,7 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tblProgress.beginUpdates()
-        for i in 0 ..< programmes[indexPath.section].tasks.count {
+        for i in 0 ..< programmes[indexPath.section].availableTasks.count {
             tblProgress.reloadRows(at: [IndexPath(row: i, section: indexPath.section)], with: .automatic)
         }
         tblProgress.endUpdates()

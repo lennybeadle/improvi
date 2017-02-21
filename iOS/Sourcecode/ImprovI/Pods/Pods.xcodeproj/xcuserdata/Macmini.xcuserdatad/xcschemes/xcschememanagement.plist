@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ScrollableGraphView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Spring.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,7 +52,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>33D154E8BF61FD220AF8E7F6771D5960</key>
+		<key>442CC716996C5583ECB65723A3B74BC9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,6 +67,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>51282DB14DDB79634407E33E5B250987</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>60597499BD50B775B4083962053582BD</key>
 		<dict>
 			<key>primary</key>
@@ -72,12 +82,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C72389CBAB898CF0CA2B421DDE079634</key>
+		<key>D1E28B7A9FD42A95837509B163F51239</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CC52DB25250F59525939897FB3F3897F</key>
+		<key>D4DAE2DBD18CD6A52FDE6F8D9002ACFF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

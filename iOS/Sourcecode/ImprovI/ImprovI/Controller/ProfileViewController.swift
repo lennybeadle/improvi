@@ -37,7 +37,10 @@ class ProfileViewController: BaseViewController {
         imgUser.layer.masksToBounds = true
         
         lblUsername.text = Manager.sharedInstance.currentUser.fullName
-                // Do any additional setup after loading the view.
+        if let image = Manager.sharedInstance.currentUser.image {
+            self.imgUser.image = image
+        }
+        
         self.reload()
     }
     
@@ -47,7 +50,11 @@ class ProfileViewController: BaseViewController {
         items.append(SettingItem(title: "Email Address", detail: Manager.sharedInstance.currentUser.emailAddress, isAccessary: true))
         items.append(SettingItem(title: "Change Password", detail: "", isAccessary: true))
         items.append(SettingItem(title: "Date joined", detail: Manager.sharedInstance.currentUser.dateJoined.dateString, isAccessary: false))
-        items.append(SettingItem(title: "Total IXP", detail: "\(Manager.sharedInstance.currentUser.totalIXP)", isAccessary: false))
+        var ixp = Manager.sharedInstance.currentUser.totalIXP
+        if ixp == -1 {
+            ixp = 0
+        }
+        items.append(SettingItem(title: "Total IXP", detail: "\(ixp)", isAccessary: false))
         items.append(SettingItem(title: "Sign Out", detail: "", isAccessary: false))
         self.tblContents.reloadData()
     }
@@ -82,7 +89,9 @@ class ProfileViewController: BaseViewController {
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let selectedImage = info[UIImagePickerControllerEditedImage] as! UIImage
-        self.imgUser.image = selectedImage
+        self.imgUser.image = selectedImage.resizeImage(newWidth: 200)
+        Manager.sharedInstance.currentUser.image = self.imgUser.image
+        
         dismiss(animated: true, completion: nil)
     }
     

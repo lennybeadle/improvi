@@ -4,6 +4,7 @@ PODS:
   - IQKeyboardManagerSwift (4.0.8)
   - iRate (1.11.7)
   - LTMorphingLabel (0.4.0)
+  - ScrollableGraphView (3.1.0)
   - Spring (1.0.3)
   - SVProgressHUD (2.1.2)
 
@@ -13,6 +14,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - iRate
   - LTMorphingLabel
+  - ScrollableGraphView
   - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift3`)
   - SVProgressHUD
 
@@ -32,9 +34,10 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: c04bc9f68473823f825eb44d958fce98d921bead
   iRate: adae3f183d83c925ac42d7a2e86e89e838963f57
   LTMorphingLabel: d9a85f16ac306f0e07321d6819964deb2dc69638
+  ScrollableGraphView: e2c8bedc7bbb643e8ac57b9456070d68355c4e4c
   Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
 
-PODFILE CHECKSUM: 15cdb72480369216ffca2b143a8a89b195cdc7a8
+PODFILE CHECKSUM: f2ef91715efe47400b62f9b7c1a836197c0fb638
 
 COCOAPODS: 1.1.1

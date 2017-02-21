@@ -13,4 +13,5 @@ target 'ImprovI' do
     pod 'SVProgressHUD'
     pod 'IQKeyboardManagerSwift'
     pod 'DMSwipeCards'
+    pod 'ScrollableGraphView'
 end

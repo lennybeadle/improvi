@@ -60,6 +60,68 @@ extension UIView {
 
 extension String {
     var boolValue: Bool {
-        return NSString(string: self).boolValue
+        if self == "Y" {
+            return true
+        }
+        else {
+            return NSString(string: self).boolValue
+        }
+    }
+    
+    var intValue: Int {
+        return Int(self.floatValue)
+    }
+    
+    var doubleValue: Double {
+        guard let doubleValue = Double(self) else {
+            return 0
+        }
+        return doubleValue
+    }
+    
+    var floatValue: CGFloat {
+        guard let doubleValue = Double(self) else {
+            return 0
+        }
+        return CGFloat(doubleValue)
+    }
+    
+    func isValidEmail() -> Bool {
+        let emailRegEx = "^(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?(?:(?:(?:[-A-Za-z0-9!#$%&’*+/=?^_'{|}~]+(?:\\.[-A-Za-z0-9!#$%&’*+/=?^_'{|}~]+)*)|(?:\"(?:(?:(?:(?: )*(?:(?:[!#-Z^-~]|\\[|\\])|(?:\\\\(?:\\t|[ -~]))))+(?: )*)|(?: )+)\"))(?:@)(?:(?:(?:[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)(?:\\.[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)*)|(?:\\[(?:(?:(?:(?:(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))\\.){3}(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))))|(?:(?:(?: )*[!-Z^-~])*(?: )*)|(?:[Vv][0-9A-Fa-f]+\\.[-A-Za-z0-9._~!$&'()*+,;=:]+))\\])))(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?$"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        let result = emailTest.evaluate(with: self)
+        return result
+    }
+    
+    func isValidPhone() -> Bool {
+        let PHONE_REGEX = "^\\d{3}-\\d{3}-\\d{4}$"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
+        let result =  phoneTest.evaluate(with: self)
+        return result
+    }
+}
+
+extension NSObject {
+    func callAfter(second: Double, inBackground mode: Bool, execute closure: @escaping () -> Void) {
+        if mode == true {
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: DispatchTime.now() + second, execute: closure)
+        }
+        else {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + second, execute: closure)
+        }
+    }
+}
+
+extension UIImage {
+    func resizeImage(newWidth: CGFloat) -> UIImage {
+        
+        let scale = newWidth / self.size.width
+        let newHeight = self.size.height * scale
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+        self.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
     }
 }

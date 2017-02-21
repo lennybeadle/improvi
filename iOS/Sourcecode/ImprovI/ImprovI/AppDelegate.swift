@@ -9,6 +9,7 @@
 import UIKit
 import iRate
 import IQKeyboardManagerSwift
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         iRate.sharedInstance().onlyPromptIfLatestVersion = true
         
         IQKeyboardManager.sharedManager().enable = true
+        
+        LJNotificationScheduler.requestAuthrization()
+        UNUserNotificationCenter.current().delegate = NotificationManager.sharedInstance
+        
         return true
     }
 

@@ -8,6 +8,8 @@
 
 import UIKit
 import LTMorphingLabel
+import SVProgressHUD
+import IQKeyboardManagerSwift
 
 class SignInViewController: BaseViewController {
     @IBOutlet weak var txtUsername: UITextField!
@@ -36,8 +38,33 @@ class SignInViewController: BaseViewController {
     }
     
     @IBAction func onSignIn(_ sender: Any) {
-//        if self.checkInputData() {
-            self.performSegue(withIdentifier: "sid_home", sender: self)
-//        }
+        self.view.resignFirstResponder()
+        if self.checkInputData() {
+            SVProgressHUD.show(withStatus: "A sec, please")
+            if self.txtUsername.text!.isValidEmail() {
+                APIManager.login(with: nil, email: txtUsername.text, password: txtPassword.text!, completion: { (user, programmes) in
+                    SVProgressHUD.dismiss()
+                    if user == nil {
+                        return
+                    }
+                    Manager.sharedInstance.currentUser = user
+                    Manager.sharedInstance.approachProgrammes(programmes: programmes)
+                    IQKeyboardManager.sharedManager().resignFirstResponder()
+                    self.performSegue(withIdentifier: "sid_home", sender: self)
+                })
+            }
+            else {
+                APIManager.login(with: txtUsername.text, email: nil, password: txtPassword.text!, completion: { (user, programmes) in
+                    SVProgressHUD.dismiss()
+                    if user == nil {
+                        return
+                    }
+                    Manager.sharedInstance.currentUser = user
+                    Manager.sharedInstance.approachProgrammes(programmes: programmes)
+                    IQKeyboardManager.sharedManager().resignFirstResponder()
+                    self.performSegue(withIdentifier: "sid_home", sender: self)
+                })
+            }
+        }
     }
 }

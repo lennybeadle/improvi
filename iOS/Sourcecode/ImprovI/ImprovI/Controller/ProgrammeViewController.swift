@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 enum SectionType: Int {
     case inProgress = 0
@@ -18,6 +19,8 @@ class ProgrammeViewController: BaseViewController {
     var dragger: TableViewDragger!
     var availableProgrammes = [Programme]()
     
+    var originalUserProgrammes: Int = -1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,6 +31,25 @@ class ProgrammeViewController: BaseViewController {
         dragger.cellAlpha = 0.7
         
         initAvailableProgrammes()
+    }
+    
+    func checkNewTasks() {
+        if let programme = Manager.sharedInstance.currentUser.programmeRequireNewTask() {
+            let alert = UIAlertController(title: "News", message: "Will you get new tasks for \(programme.name)", preferredStyle: .alert)
+            let actionYes = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                Manager.sharedInstance.loadNewTasks(for: programme.id)
+            })
+            let actionCancel = UIAlertAction(title: "No", style: .cancel, handler: nil)
+            alert.addAction(actionYes)
+            alert.addAction(actionCancel)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        originalUserProgrammes = Manager.sharedInstance.currentUser.programmes.count
+        self.checkNewTasks()
     }
     
     func initAvailableProgrammes() {
@@ -93,6 +115,7 @@ extension ProgrammeViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension ProgrammeViewController: TableViewDraggerDataSource, TableViewDraggerDelegate {
     func dragger(_ dragger: TableViewDragger, shouldDragAtIndexPath indexPath: IndexPath) -> Bool {
+        originalUserProgrammes = Manager.sharedInstance.currentUser.programmes.count
         return true
     }
 
@@ -107,17 +130,61 @@ extension ProgrammeViewController: TableViewDraggerDataSource, TableViewDraggerD
             self.tblProgrammes.moveRow(at: indexPath, to: newIndexPath)
         }
         else {
-            if newIndexPath.section == SectionType.available.rawValue {
-                let programme = Manager.sharedInstance.currentUser.programmes!.remove(at: indexPath.row)
-                self.availableProgrammes.insert(programme, at: newIndexPath.row)
+            if indexPath != newIndexPath {
+
+                if newIndexPath.section == SectionType.available.rawValue {
+                    let programme = Manager.sharedInstance.currentUser.programmes!.remove(at: indexPath.row)
+                    self.availableProgrammes.insert(programme, at: newIndexPath.row)
+                }
+                else {
+                    let programme = self.availableProgrammes.remove(at: indexPath.row)
+                    
+                    if let currentUser = Manager.sharedInstance.currentUser {
+                        currentUser.programmes.insert(programme, at: newIndexPath.row)
+                    }
+                }
+                self.tblProgrammes.moveRow(at: indexPath, to: newIndexPath)
             }
-            else {
-                let programme = self.availableProgrammes.remove(at: indexPath.row)
-                Manager.sharedInstance.currentUser.programmes.insert(programme, at: newIndexPath.row)
-            }
-            self.tblProgrammes.moveRow(at: indexPath, to: newIndexPath)
         }
         return true
+    }
+    
+    func dragger(_ dragger: TableViewDragger, didEndDraggingAtIndexPath indexPath: IndexPath) {
+        if let currentUser = Manager.sharedInstance.currentUser {
+            let userProgrammes = currentUser.programmes.count
+            
+            if userProgrammes > originalUserProgrammes {
+                SVProgressHUD.show(withStatus: "A sec, please")
+                self.tblProgrammes.isUserInteractionEnabled = false
+                let programme = currentUser.programmes[indexPath.row]
+                APIManager.addProgramme(userId: currentUser.id, programmeId: programme.id, completion: { (newprogramme) in
+                    SVProgressHUD.dismiss()
+                    self.tblProgrammes.isUserInteractionEnabled = true
+                    self.tblProgrammes.reloadData()
+                    if let newprogramme = newprogramme {
+                        programme.startTime = newprogramme.startTime
+                        programme.status = newprogramme.status
+                        programme.progress = newprogramme.progress
+                        programme.approachTasks(dailyTasks: newprogramme.tasks)
+                        Manager.sharedInstance.takeProgramme(programme: programme)
+                    }
+                })
+            }
+            else if userProgrammes < originalUserProgrammes {
+                SVProgressHUD.show(withStatus: "A sec, please")
+                self.tblProgrammes.isUserInteractionEnabled = false
+                let programme = self.availableProgrammes[indexPath.row]
+                APIManager.removeProgramme(userId: currentUser.id, programmeId: programme.id, completion: { (result) in
+                    SVProgressHUD.dismiss()
+                    self.tblProgrammes.isUserInteractionEnabled = true
+                    self.tblProgrammes.reloadData()
+                    if result == true {
+                        Manager.sharedInstance.untakeProgramme(programme: programme)
+                        print("Task has been removed from User's Programme List")
+                    }
+                })
+            }
+        }
     }
 }
 

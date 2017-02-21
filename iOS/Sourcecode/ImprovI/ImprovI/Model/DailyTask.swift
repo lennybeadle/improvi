@@ -8,13 +8,6 @@
 
 import UIKit
 
-public enum Status: Int {
-    case normal = -1
-    case ongoing = 0
-    case timeover = 1
-    case completed = 2
-}
-
 class DailyTask: ImprovIObject {
 //Initial Properties
     var name: String!
@@ -23,41 +16,57 @@ class DailyTask: ImprovIObject {
     var advice: String!
     var difficultRate: Int!
     var dependency: Bool!
-    var traitPoints = [Int]()
+    var traitPoints = [TraitPoint]()
     var boostPoint: Int!
-    var status: Status = .ongoing
+    var status: Status = .normal
     
-//Working Properties
-    var traitPointsArchived = [Int]()
-    
-    func progress() -> CGFloat {
-        var tpSum: CGFloat = 0
-        for i in self.traitPoints {
-            tpSum += CGFloat(i)
+    static func from(dict: [String: Any]) -> DailyTask {
+        let task = DailyTask()
+        
+        task.id = "\(dict["id"]!)"
+        
+        if dict["name"] != nil {
+            task.name = "\(dict["name"]!)"
+        }
+        task.longDescription = "\(dict["description"]!)"
+        task.advice = "\(dict["advice"])"
+        task.difficultRate = "\(dict["rate"]!)".intValue
+        
+        task.dependency = "\(dict["dependent"]!)".boolValue
+        if dict["ixp"] != nil {
+            task.boostPoint = "\(dict["ixp"]!)".intValue
         }
         
-        if tpSum == 0 {
-            return 0
+        if let completion = dict["completed"] as? String, completion.boolValue == true{
+            task.status = .completed
         }
         
-        var tpArchived: CGFloat = 0
-        for i in self.traitPointsArchived {
-            tpArchived += CGFloat(i)
+        if let status = dict["status"] as? String {
+            if status == "ongoing" {
+                task.status = .ongoing
+            }
+            else if status == "normal" {
+                task.status = .normal
+            }
+            else if status == "completed" {
+                task.status = .completed
+            }
+            else if status == "timeover" {
+                task.status = .timeover
+            }
         }
         
-        return tpArchived/tpSum * 100
+        if let traits = dict["trait"] as? [Any] {
+            task.traitPoints = traits.map{TraitPoint.from(dict: ($0 as! [String: Any]))}
+        }
+        return task
     }
     
-    static func fromDict(dict: [String: String]) -> DailyTask {
-        let task = DailyTask()
-        task.name = dict["name"]
-        task.shortName = dict["shortName"]
-        task.longDescription = dict["longDescription"]
-        task.advice = dict["advice"]
-        task.difficultRate = Int(dict["difficultRate"]!)
-        task.dependency = dict["dependency"]!.boolValue
-        task.traitPoints = [2,5,4,3,1,2,3]
-        task.traitPointsArchived = [1,2,1,0,1,1,1]
-        return task
+    var totalTrait: CGFloat {
+        var sum: CGFloat = 0
+        for trait in self.traitPoints {
+            sum += trait.value
+        }
+        return sum
     }
 }

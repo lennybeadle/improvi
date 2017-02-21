@@ -8,6 +8,7 @@
 
 import UIKit
 import DMSwipeCards
+import SVProgressHUD
 
 class ProgrammeDetailViewController: BaseViewController {
     var programme: Programme!
@@ -17,7 +18,12 @@ class ProgrammeDetailViewController: BaseViewController {
     
     @IBOutlet weak var vwDailyTask: UIView!
     @IBOutlet weak var progressBar: LinearProgressView!
+    @IBOutlet weak var progressTime: LinearProgressView!
+    @IBOutlet weak var lblProgress: UILabel!
+    @IBOutlet weak var lblTimeRemaining: UILabel!
 
+    weak var selectedTask: DailyTask! = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,9 +35,17 @@ class ProgrammeDetailViewController: BaseViewController {
         self.vwInfo.layer.shadowRadius = 2
         self.vwInfo.layer.shadowOffset = CGSize(width: 0, height: 2)
 
+        self.resetWithProgramme()
+    }
+    
+    func resetWithProgramme() {
         if self.programme != nil {
+            self.programme.update()
             self.title = programme.name
             progressBar.progressValue = CGFloat(self.programme.progress)
+            
+            self.lblTimeRemaining.text = self.programme.timeString
+            self.progressTime.progressValue = self.programme.timeProgress
         }
     }
     
@@ -41,7 +55,10 @@ class ProgrammeDetailViewController: BaseViewController {
             
             if let taskView = Bundle.main.loadNibNamed("DailyTaskView", owner: nil, options: nil)?.first as? DailyTaskView {
                 taskView.updateWithDailyTask(task: element)
-                taskView.updateDate(date: self.programme.startTime)
+                taskView.delegate = self
+                if self.programme.startTime != nil {
+                    taskView.updateDate(date: self.programme.startTime)
+                }
                 container.addSubview(taskView)
                 
                 taskView.frame = container.bounds
@@ -95,12 +112,47 @@ class ProgrammeDetailViewController: BaseViewController {
         swipeView.delegate = self
         self.vwDailyTask.addSubview(swipeView)
 //        swipeView.bufferSize = self.programme.tasks.count
-        self.swipeView.addCards(self.programme.tasks, onTop: false)
+        self.swipeView.addCards(self.programme.availableTasks, onTop: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         initSwipeView()
+    }
+    
+    func showCongratulation() {
+        self.performSegue(withIdentifier: "sid_congratulation", sender: nil)
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "sid_congratulation" {
+            if self.selectedTask == nil {
+                return false
+            }
+        }
+        return true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sid_congratulation" {
+            let controller = segue.destination as! CongratulationViewController
+            controller.task = self.selectedTask
+        }
+    }
+}
+
+extension ProgrammeDetailViewController: DailyTaskViewDelegate {
+    func taskStatusChanged(_ task: DailyTask) {
+        if task.status == .completed {
+            SVProgressHUD.show(withStatus: "A sec, please")
+            APIManager.completeTask(userId: Manager.sharedInstance.currentUser.id, programmeId: self.programme.id, taskId: task.id, completion: { (result) in
+                SVProgressHUD.dismiss()
+                self.selectedTask = task
+                Manager.sharedInstance.currentUser.totalIXP += task.boostPoint
+                self.showCongratulation()
+                self.resetWithProgramme()
+            })
+        }
     }
 }
 
@@ -118,7 +170,9 @@ extension ProgrammeDetailViewController: DMSwipeCardsViewDelegate {
     }
     
     func reachedEndOfStack() {
-        self.swipeView.addCards(self.programme.tasks, onTop: false)
+        self.callAfter(second: 0.5, inBackground: false) {
+            self.swipeView.addCards(self.programme.tasks, onTop: false)
+        }
         print("Reached end of stack")
     }
 }

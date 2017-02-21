@@ -8,19 +8,46 @@
 
 import UIKit
 
+class Answer: ImprovIObject {
+    var content: String!
+    var isCorrect: Bool!
+    
+    static func from(dict: [String: Any]) -> Answer {
+        let answer = Answer()
+        
+        answer.id = "\(dict["id"]!)"
+        answer.content = "\(dict["name"]!)"
+        answer.isCorrect = false
+        if let correctness = dict["correct"] as? String, correctness.boolValue == true {
+            answer.isCorrect = true
+        }
+        return answer
+    }
+}
+
 class Question: ImprovIObject {
     var question: String!
-    var answers:[String]!
-    var selectedAnswerIndex: Int = -1
+    var answers:[Answer]!
+    var selectedAnswerIndex = -1
     
     override init(id: String) {
         super.init(id: id)
     }
     
-    init(question: String, answers: [String]? = nil) {
+    init() {
         super.init()
-        self.question = question
-        self.answers = answers
-        self.collapsed = false
+    }
+    
+    static func from(dict: [String: Any]) -> Question {
+        let question = Question()
+        
+        question.id = "\(dict["id"]!)"
+        question.question = "\(dict["name"]!)"
+        question.collapsed = false
+
+        if let answers = dict["answer"] as? [Any] {
+            question.answers = answers.map{Answer.from(dict: ($0 as! [String: Any]))}
+        }
+        return question
     }
 }

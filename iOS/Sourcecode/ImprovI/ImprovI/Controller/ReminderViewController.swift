@@ -15,14 +15,20 @@ class ReminderViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if let notification = NotificationManager.sharedInstance.getNotification(name: "GENERAL") {
-            datePicker.date = notification.time
+        NotificationManager.sharedInstance.getNotificationInfo(with: "GENERAL") { (date, title, body) in
+            if let date = date {
+                self.datePicker.date = date
+                self.txtReminder.text = body
+            }
         }
     }
 
     @IBAction func onSave(_ sender: Any) {
-        NotificationManager.sharedInstance.setNotification(with: "GENERAL", time: datePicker.date, content: txtReminder.text!, isRepeat: true)
+        var content = txtReminder.text!
+        if content.characters.count == 0 {
+            content = "Please check your task progress"
+        }
+        NotificationManager.sharedInstance.setNotification(with: "GENERAL", name: "Reminder", time: datePicker.date, content: content, isRepeat: true)
         _  = self.navigationController?.popViewController(animated: true)
     }
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "HomeViewController.loadProgrammes() -&gt; ():HomeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Manager.sharedInstance">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TraitPointsViewController.(showTraits() -&gt; ()).(closure #2):TraitPointsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "user">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TraitPointsViewController.showTraits() -&gt; ():TraitPointsViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "static APIManager.(login(with : String?, email : String?, password : String, completion : (User?, [Programme]?) -&gt; ()?) -&gt; ()).(closure #1):APIManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.result.value">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TBDViewController.(reloadTraits() -&gt; ()).(closure #1):TBDViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Manager.sharedInstance">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

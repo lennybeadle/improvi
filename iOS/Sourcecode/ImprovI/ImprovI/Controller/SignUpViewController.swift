@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SVProgressHUD
+import IQKeyboardManagerSwift
 
 class SignUpViewController: BaseViewController {
     @IBOutlet weak var txtUsername: UITextField!
@@ -45,7 +47,15 @@ class SignUpViewController: BaseViewController {
 
     @IBAction func onSignUp(_ sender: Any) {
         if checkInputData() {
-            self.performSegue(withIdentifier: "sid_home", sender: self)
+            SVProgressHUD.show(withStatus: "A sec, please")
+            APIManager.register(with: txtUsername.text!, fullName: txtUsername.text!, email: txtEmail.text!, password: txtPassword.text!, photo: nil, completion: { (user) in
+                SVProgressHUD.dismiss()
+                if user != nil {
+                    Manager.sharedInstance.currentUser = user
+                    IQKeyboardManager.sharedManager().resignFirstResponder()
+                    self.performSegue(withIdentifier: "sid_home", sender: self)
+                }
+            })
         }
     }
 }

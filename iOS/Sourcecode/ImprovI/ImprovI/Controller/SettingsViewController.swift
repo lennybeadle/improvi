@@ -19,25 +19,31 @@ class SettingsViewController: BaseViewController {
         self.reload()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.reload()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if isAnimated {
+           self.reload()
+        }
     }
     
     func reload() {
-        items.removeAll()
-        
-        var reminderContent = ""
-        if let notification = NotificationManager.sharedInstance.getNotification(name: "GENERAL") {
-            reminderContent = "\(notification.time.hour):\(notification.time.minute)"
+        NotificationManager.sharedInstance.getNotificationInfo(with: "GENERAL") { (date, title, body) in
+            self.items.removeAll()
+            var reminderContent = ""
+            if let date = date {
+                reminderContent = "\(date.hour):\(date.minute)"
+            }
+            
+            self.items.append(SettingItem(title: "Reminder", detail: reminderContent, isAccessary: true))
+            self.items.append(SettingItem(title: "Privacy Policy", detail: "", isAccessary: true))
+            self.items.append(SettingItem(title: "Contact Us", detail: "", isAccessary: true))
+            self.items.append(SettingItem(title: "Rate Improvi", detail: "", isAccessary: true))
+            self.items.append(SettingItem(title: "Sign Out", detail: "", isAccessary: false))
+            
+            DispatchQueue.main.async {
+                self.tblSettings.reloadData()
+            }
         }
-        
-        items.append(SettingItem(title: "Reminder", detail: reminderContent, isAccessary: true))
-        items.append(SettingItem(title: "Privacy Policy", detail: "", isAccessary: true))
-        items.append(SettingItem(title: "Contact Us", detail: "", isAccessary: true))
-        items.append(SettingItem(title: "Rate Improvi", detail: "", isAccessary: true))
-        
-        self.tblSettings.reloadData()
     }
 }
 
@@ -76,6 +82,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         }
         else if indexPath.row == 3 {
             iRate.sharedInstance().promptForRating()
+        }
+        else if indexPath.row == 4 {
+            let _ = self.navigationController?.popToRootViewController(animated: true)
         }
     }
 }

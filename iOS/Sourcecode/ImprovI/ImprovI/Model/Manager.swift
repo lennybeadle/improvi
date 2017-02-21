@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class Manager {
     static let sharedInstance: Manager = Manager()
@@ -17,39 +18,100 @@ class Manager {
     var questions = [Question]()
     
     init() {
-        currentUser = User()
-        currentUser.fullName = "Lenny Beadle"
-        currentUser.userName = "lenny_beadle"
-        currentUser.emailAddress = "lennybeadle@gmail.com"
-        currentUser.totalIXP = 120
-        currentUser.dateJoined = Date()
-        
-        self.loadProgramme()
-        self.loadQuestions()
-        
         UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = Constant.UI.foreColor
     }
     
-    func loadQuestions() {
-        self.questions.append(Question(question: "WHAT DO YOU DO", answers: ["I’m a student.", "I work in a bank.", "I’m unemployed at the moment.", "I run my own business."]))
-        self.questions.append(Question(question: "ARE YOU MARRIED?", answers: ["Yes", "I’m divorced.", "I’m engaged.", "No, but I’m in a relationship.", "Nope, I’m single."]))
-        self.questions.append(Question(question: "WHY ARE YOU STUDYING ENGLISH?", answers: ["For work.", "So I can communicate when I travel.", "I love learning new languages.", "I’m thinking of studying in England.", "Because I’d like to immigrate to the U.S."]))
-        self.questions.append(Question(question: "WHERE/HOW DID YOU LEARN ENGLISH?", answers: ["I took classes for three years.", "I did an intensive course.", "I’ve been studying on my own."]))
-        self.questions.append(Question(question: "WHAT DO YOU DO IN YOUR FREE TIME?", answers: ["I don’t have any free time!", "I usually hang out with friends.", "I go running a lot.", "I do volunteer work.", "I like reading and relaxing at home."]))
+    func approachProgrammes(programmes: [Programme]?) {
+        self.allProgrammes.removeAll()
+        if let programmes = programmes {
+            for programme in programmes {
+                self.allProgrammes.append(programme)
+                if programme.status != .normal {
+                    currentUser.addProgramme(programme)
+                }
+            }
+        }
     }
     
-    func loadProgramme() {
-        self.allProgrammes.append(Programme(id: "1", name: "Improvi Fitness"))
-        self.allProgrammes.append(Programme(id: "2", name: "Improvi Health"))
-        self.allProgrammes.append(Programme(id: "3", name: "Improvi Body"))
-        self.allProgrammes.append(Programme(id: "4", name: "Improvi Leg"))
-        self.allProgrammes.append(Programme(id: "5", name: "Improvi Arms"))
+    func sortProgrammes() {
+        self.allProgrammes.sort { (programme1, programme2) -> Bool in
+            return programme1.status.rawValue > programme2.status.rawValue
+        }
     }
     
+    func takeProgramme(programme: Programme) {
+        NotificationManager.sharedInstance.setNotification(with: programme.id, name: programme.name, time: Date(), content: "Will you take new tasks in this programme?", isRepeat: true)
+        programme.update()
+    }
+    
+    func untakeProgramme(programme: Programme) {
+        NotificationManager.sharedInstance.removeNotification(with: programme.id)
+        programme.reset()
+    }
+
     func initUISettings() {
         UINavigationBar.appearance().barTintColor = Constant.UI.foreColor
         UINavigationBar.appearance().tintColor = Constant.UI.backColor
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: Constant.UI.backColor]
         UIApplication.shared.statusBarStyle = .lightContent
+    }
+
+    func loadQuizState() {
+        let standard = UserDefaults.standard
+        if let state = standard.dictionary(forKey: "quiz_state") {
+            for question in self.questions {
+                if let selectedIndex = state[question.id!] as? Int {
+                    question.selectedAnswerIndex = selectedIndex
+                }
+            }
+        }
+    }
+    
+    func saveQuizState() {
+        let standard = UserDefaults.standard
+        var state = standard.dictionary(forKey: "quiz_state") ?? [String: Int]()
+        for question in self.questions {
+            if question.selectedAnswerIndex != -1 {
+                state[question.id!] = question.selectedAnswerIndex
+            }
+        }
+        standard.set(state, forKey: "quiz_state")
+        standard.synchronize()
+    }
+    
+    func loadNewTasks(for programmeId: String) {
+        SVProgressHUD.show()
+        APIManager.getNewTask(userId: self.currentUser.id, programmeId: programmeId) { (newProgramme) in
+            SVProgressHUD.dismiss()
+            if let programme = self.currentUser.programme(with: programmeId), let newProgramme = newProgramme {
+                programme.approachTasks(dailyTasks: newProgramme.tasks)
+                programme.status = newProgramme.status
+                programme.startTime = newProgramme.startTime
+                DispatchQueue.main.async {
+                    self.showProgrammeDetail(programme: programme)
+                }
+            }
+        }
+    }
+    
+    func showProgrammeDetail(programme: Programme) {
+        if let navigationController = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController {
+            if let storyboard = navigationController.storyboard {
+                if let detailController = storyboard.instantiateViewController(withIdentifier: "sid_programme_detail") as? ProgrammeDetailViewController {
+                    detailController.programme = programme
+                    navigationController.pushViewController(detailController, animated: true)
+                }
+            }
+        }
+    }
+    
+    func showProgrammeList() {
+        if let navigationController = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController {
+            if let storyboard = navigationController.storyboard {
+                if let listController = storyboard.instantiateViewController(withIdentifier: "sid_programme_list") as? ProgrammeViewController {
+                    navigationController.pushViewController(listController, animated: true)
+                }
+            }
+        }
     }
 }

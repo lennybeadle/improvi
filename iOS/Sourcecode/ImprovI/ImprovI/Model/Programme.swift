@@ -8,45 +8,173 @@
 
 import UIKit
 
+public enum Status: Int {
+    case normal = -1
+    case ongoing = 0
+    case timeover = 1
+    case completed = 2
+}
+
 class Programme: ImprovIObject {
     var name: String!
     var progress: CGFloat! = 0
     var tasks = [DailyTask]()
     var startTime: Date!
-
+    var status: Status = .normal
+    var availableTasks = [DailyTask]()
+    
     init(id: String, name: String) {
         super.init(id: id)
         self.name = name
-        self.progress = CGFloat(arc4random_uniform(100))
-        let date = Date().minus(days: 1)
-        self.startTime = Date.parse("2017-\(String(format: "%.2d", date.month))-\(String(format: "%.2d", date.day)) \(arc4random_uniform(13)+10):00")
+    }
+    
+    init() {
+        super.init()
+        self.name = ""
+    }
+    
+    static func from(dict: [String: Any]) -> Programme {
+        let programme = Programme()
 
-//This is a template code
-//        task.name = dict["name"]
-//        task.shortName = dict["shortName"]
-//        task.longDescription = dict["longDescription"]
-//        task.advice = dict["advice"]
-//        task.difficultRate = Int(dict["difficultRate"]!)
-//        task.dependency = dict["dependency"]!.boolValue
-        self.tasks.append(
-        DailyTask.fromDict(dict: ["name": "Electronics Ban", "shortName":"elec_ban", "longDescription": "Don't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutes", "advice": "30 minutes can fly by when you are on your phone.", "difficultRate": "6", "dependency": "true"]))
+        programme.id = "\(dict["id"]!)"
+        programme.name = "\(dict["name"]!)"
+
+        if dict["progress"] != nil {
+            programme.progress = "\(dict["progress"]!)".floatValue
+        }
         
-        self.tasks.append(
-        DailyTask.fromDict(dict: ["name": "Loving Yourself", "shortName":"elec_ban", "longDescription": "Don't let anyone in the household use electronics for at least 30 minutes", "advice": "30 minutes can fly by when you are on your phone.", "difficultRate": "6", "dependency": "true"]))
+        if let date = dict["start_time"] as? Double {
+            programme.startTime = Date(timeIntervalSince1970: date)// Date.parse(date, format: "yyyy-MM-dd HH:mm:ss")
+        }
         
-        self.tasks.append(
-        DailyTask.fromDict(dict: ["name": "Be grateful", "shortName":"elec_ban", "longDescription": "Don't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutes", "advice": "30 minutes can fly by when you are on your phone.", "difficultRate": "6", "dependency": "true"]))
-       
-        self.tasks.append(
-        DailyTask.fromDict(dict: ["name": "Todays plan", "shortName":"elec_ban", "longDescription": "Don't let anyone in the household use electronics for at least 30 minutes", "advice": "30 minutes can fly by when you are on your phone.", "difficultRate": "6", "dependency": "true"]))
+        if let status = dict["status"] as? String {
+            if status == "registered" {
+                programme.status = .ongoing
+            }
+            else if status == "unregistered" {
+                programme.status = .normal
+            }
+        }
         
-        self.tasks.append(
-        DailyTask.fromDict(dict: ["name": "Think why", "shortName":"elec_ban", "longDescription": "Don't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutesDon't let anyone in the household use electronics for at least 30 minutes", "advice": "30 minutes can fly by when you are on your phone.", "difficultRate": "6", "dependency": "true"]))
+        if let tasks = dict["tasks"] as? [Any] {
+            programme.tasks = tasks.map{DailyTask.from(dict: ($0 as! [String: Any]))}
+        }
         
-        self.tasks.append(
-        DailyTask.fromDict(dict: ["name": "Show your love", "shortName":"elec_ban", "longDescription": "Don't let anyone in the household use electronics for at least 30 minutes", "advice": "30 minutes can fly by when you are on your phone.", "difficultRate": "6", "dependency": "true"]))
+        programme.update()
+        return programme
+    }
+    
+    func approachTasks(dailyTasks: [DailyTask]) {
+        for task in dailyTasks {
+            self.approachTask(dailyTask: task)
+        }
+    }
+    
+    func approachTask(dailyTask: DailyTask) {
+        for task in self.tasks{
+            if dailyTask.id == task.id
+            {
+                task.status = dailyTask.status
+            }
+        }
+    }
+    
+    func reset() {
+        self.resetTaskStatus()
+        self.update()
+    }
+    
+    func update() {
+        var totalPoints: CGFloat = 0
+        var currentPoints: CGFloat = 0
+        for task in self.tasks {
+            totalPoints += task.totalTrait
+            if task.status == .completed {
+                currentPoints += task.totalTrait
+            }
+        }
         
-        self.tasks.append(
-        DailyTask.fromDict(dict: ["name": "Learn something new", "shortName":"elec_ban", "longDescription": "Don't let anyone in the household use electronics for at least 30 minutes", "advice": "30 minutes can fly by when you are on your phone.", "difficultRate": "6", "dependency": "true"]))
+        self.progress = (totalPoints == 0.0 ? 0 : currentPoints / totalPoints * 100)
+        if self.progress == 100 {
+            self.status = .completed
+        }
+        else {
+            if self.startTime != nil {
+                let distance = Date.dateBetween(date1: self.startTime, date2: Date())
+                if distance.day >= 1 {
+                    self.status = .timeover
+                }
+            }
+        }
+        
+        self.availableTasks.removeAll()
+        if self.status == .normal {
+            self.availableTasks.append(contentsOf: self.tasks)
+        }
+        else {
+            for task in self.tasks {
+                if task.status == .normal {
+                    continue
+                }
+                availableTasks.append(task)
+            }
+        }
+    }
+    
+    func resetTaskStatus() {
+        self.status = .normal
+        self.startTime = nil
+        for task in self.tasks {
+            task.status = .normal
+        }
+    }
+    
+    var timeString: String {
+        if self.startTime == nil {
+            return "Not yet started"
+        }
+        else {
+            var distance = Date.minutesBetween(date1: self.startTime, date2: Date())
+            
+            if distance >= 1440 {
+                if self.progress >= 100 {
+                    return "Completed"
+                }
+                else {
+                    return "Time over!"
+                }
+            }
+            else {
+                distance = 1440 - distance
+                return "Time remaining: \(distance/60) hour(s) \(distance%60) min(s)"
+            }
+        }
+    }
+    
+    var timeProgress: CGFloat {
+        if self.startTime == nil {
+            return 0
+        }
+        else {
+            let distance = Date.minutesBetween(date1: self.startTime, date2: Date())
+            if distance >= 1440 {
+                return 100
+            }
+            else {
+                return CGFloat(CGFloat(distance)/1440.0*100.0)
+            }
+        }
+    }
+    
+    var newTasksAvailable: Bool {
+        if self.startTime == nil {
+            return false
+        }
+        
+        let minutes = Date.minutesBetween(date1: self.startTime, date2: Date())
+        if minutes > 1440 {
+            return true
+        }
+        return false
     }
 }

@@ -27,8 +27,8 @@ class AnswerTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func resetWithAnswer(answer: String, selected: Bool) {
-        lblAnswer.text = answer
+    func resetWithAnswer(answer: Answer, selected: Bool) {
+        lblAnswer.text = answer.content
         checkBox.on = selected
     }
 }

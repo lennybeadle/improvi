@@ -9,6 +9,10 @@
 import UIKit
 import Spring
 
+protocol DailyTaskViewDelegate {
+    func taskStatusChanged(_ task: DailyTask)
+}
+
 class DailyTaskView: SpringView {
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var lblTitle: UILabel!
@@ -16,6 +20,7 @@ class DailyTaskView: SpringView {
     @IBOutlet weak var titleWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var btnStatus: UIButton!
     
+    var delegate: DailyTaskViewDelegate!
     weak var dailyTask: DailyTask!
     
     override func awakeFromNib() {
@@ -36,7 +41,7 @@ class DailyTaskView: SpringView {
     }
     
     func updateWithStatus() {
-        self.btnStatus.isEnabled = true
+        self.btnStatus.isEnabled = false
         if self.dailyTask.status == .ongoing {
             self.btnStatus.isEnabled = true
             self.btnStatus.setTitleColor(Constant.UI.foreColor, for: .normal)
@@ -46,9 +51,8 @@ class DailyTaskView: SpringView {
             self.btnStatus.setTitle("", for: .normal)
         }
         else if self.dailyTask.status == .timeover {
-            self.btnStatus.isEnabled = true
             self.btnStatus.setTitleColor(Constant.UI.foreColorHighlight, for: .normal)
-            self.btnStatus.setTitle("Complete", for: .normal)
+            self.btnStatus.setTitle("TimeOver", for: .normal)
         }
         else if self.dailyTask.status == .completed {
             self.btnStatus.setTitleColor(Constant.UI.foreColorLight, for: .normal)
@@ -61,6 +65,9 @@ class DailyTaskView: SpringView {
             //Complete the task
             self.dailyTask.status = .completed
             self.updateWithStatus()
+            if self.delegate != nil {
+                self.delegate.taskStatusChanged(self.dailyTask)
+            }
         }
     }
 }

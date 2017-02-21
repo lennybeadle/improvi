@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class AnalyticsViewController: BaseViewController {
     @IBOutlet weak var tblQuestions: UITableView!
@@ -15,6 +16,31 @@ class AnalyticsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.questions = Manager.sharedInstance.questions
+        self.loadQuestions()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    func loadQuestions() {
+        if questions.count == 0 {
+            SVProgressHUD.show(withStatus: "A sec, please")
+            APIManager.loadQuestion(completion: { (questions) in
+                SVProgressHUD.dismiss()
+                if let newquiz = questions {
+                    Manager.sharedInstance.questions.removeAll()
+                    Manager.sharedInstance.questions.append(contentsOf: newquiz)
+                    Manager.sharedInstance.loadQuizState()
+                    self.questions = Manager.sharedInstance.questions
+                    self.isAnimated = false
+                    self.tblQuestions.reloadData()
+                    self.callAfter(second: 2, inBackground: true, execute: {
+                        self.isAnimated = true
+                    })
+                }
+            })
+        }
     }
 }
 
@@ -60,7 +86,7 @@ extension AnalyticsViewController: UITableViewDataSource, UITableViewDelegate {
             let question = questions[indexPath.section]
             customCell.resetWithAnswer(answer: question.answers[indexPath.row], selected: question.selectedAnswerIndex == indexPath.row)
             
-            if isAnimated == false {
+            if self.isAnimated == false{
                 customCell.vwInnerView.delay = 0.05*CGFloat(indexPath.row)
                 customCell.vwInnerView.animate()
             }
@@ -72,6 +98,7 @@ extension AnalyticsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let question = questions[indexPath.section]
         question.selectedAnswerIndex = indexPath.row
+        Manager.sharedInstance.saveQuizState()
         
         tblQuestions.beginUpdates()
         for i in 0 ..< questions[indexPath.section].answers.count {

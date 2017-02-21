@@ -7,17 +7,25 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class HomeViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        if Manager.sharedInstance.allProgrammes.isEmpty {
+            self.loadProgrammes()
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func loadProgrammes() {
+        SVProgressHUD.show(withStatus: "A sec, please")
+        APIManager.getProgramme(userId: Manager.sharedInstance.currentUser.id) { (programmes) in
+            SVProgressHUD.dismiss()
+            Manager.sharedInstance.approachProgrammes(programmes: programmes)
+        }
     }
+    
+    
 }

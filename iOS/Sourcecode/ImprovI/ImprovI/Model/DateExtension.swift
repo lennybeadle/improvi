@@ -20,13 +20,12 @@ public extension Date {
         return date
     }
     
-    static func parse(_ string: String, format: String = "yyyy-MM-dd HH:mm") -> Date {
+    static func parse(_ string: String, format: String = "yyyy-MM-dd HH:mm") -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = NSTimeZone.default
         dateFormatter.dateFormat = format
         
-        let date = dateFormatter.date(from: string)!
-        return date
+        return dateFormatter.date(from: string)
     }
     
     public func plus(seconds s: UInt) -> Date {
