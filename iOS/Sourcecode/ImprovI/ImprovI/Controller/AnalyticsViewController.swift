@@ -25,7 +25,7 @@ class AnalyticsViewController: BaseViewController {
     
     func loadQuestions() {
         if questions.count == 0 {
-            SVProgressHUD.show(withStatus: "A sec, please")
+            SVProgressHUD.show(withStatus: Constant.Keyword.loading)
             APIManager.loadQuestion(completion: { (questions) in
                 SVProgressHUD.dismiss()
                 if let newquiz = questions {

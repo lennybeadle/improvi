@@ -59,7 +59,7 @@ class TBDViewController: BaseViewController {
     func reloadTraits() {
         if let user = Manager.sharedInstance.currentUser {
             if user.traitPoints.count == 0 {
-                SVProgressHUD.show(withStatus: "A sec, please")
+                SVProgressHUD.show(withStatus: Constant.Keyword.loading)
                 APIManager.loadTraits(userId: user.id, completion: { (traits, ixpval) in
                     SVProgressHUD.dismiss()
                     if let traits = traits {

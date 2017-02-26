@@ -47,7 +47,7 @@ class SignUpViewController: BaseViewController {
 
     @IBAction func onSignUp(_ sender: Any) {
         if checkInputData() {
-            SVProgressHUD.show(withStatus: "A sec, please")
+            SVProgressHUD.show(withStatus: Constant.Keyword.loading)
             APIManager.register(with: txtUsername.text!, fullName: txtUsername.text!, email: txtEmail.text!, password: txtPassword.text!, photo: nil, completion: { (user) in
                 SVProgressHUD.dismiss()
                 if user != nil {

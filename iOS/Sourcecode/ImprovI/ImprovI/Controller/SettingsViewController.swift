@@ -37,7 +37,7 @@ class SettingsViewController: BaseViewController {
             self.items.append(SettingItem(title: "Reminder", detail: reminderContent, isAccessary: true))
             self.items.append(SettingItem(title: "Privacy Policy", detail: "", isAccessary: true))
             self.items.append(SettingItem(title: "Contact Us", detail: "", isAccessary: true))
-            self.items.append(SettingItem(title: "Rate Improvi", detail: "", isAccessary: true))
+            self.items.append(SettingItem(title: "Rate improvi", detail: "", isAccessary: true))
             self.items.append(SettingItem(title: "Sign Out", detail: "", isAccessary: false))
             
             DispatchQueue.main.async {

@@ -20,7 +20,7 @@ class HomeViewController: BaseViewController {
     }
     
     func loadProgrammes() {
-        SVProgressHUD.show(withStatus: "A sec, please")
+        SVProgressHUD.show(withStatus: Constant.Keyword.loading)
         APIManager.getProgramme(userId: Manager.sharedInstance.currentUser.id) { (programmes) in
             SVProgressHUD.dismiss()
             Manager.sharedInstance.approachProgrammes(programmes: programmes)

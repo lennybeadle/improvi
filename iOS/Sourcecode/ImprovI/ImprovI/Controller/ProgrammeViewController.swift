@@ -115,6 +115,10 @@ extension ProgrammeViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension ProgrammeViewController: TableViewDraggerDataSource, TableViewDraggerDelegate {
     func dragger(_ dragger: TableViewDragger, shouldDragAtIndexPath indexPath: IndexPath) -> Bool {
+        if indexPath.section == SectionType.inProgress.rawValue{
+            return false
+        }
+        
         originalUserProgrammes = Manager.sharedInstance.currentUser.programmes.count
         return true
     }
@@ -154,7 +158,7 @@ extension ProgrammeViewController: TableViewDraggerDataSource, TableViewDraggerD
             let userProgrammes = currentUser.programmes.count
             
             if userProgrammes > originalUserProgrammes {
-                SVProgressHUD.show(withStatus: "A sec, please")
+                SVProgressHUD.show(withStatus: Constant.Keyword.loading)
                 self.tblProgrammes.isUserInteractionEnabled = false
                 let programme = currentUser.programmes[indexPath.row]
                 APIManager.addProgramme(userId: currentUser.id, programmeId: programme.id, completion: { (newprogramme) in
@@ -171,7 +175,7 @@ extension ProgrammeViewController: TableViewDraggerDataSource, TableViewDraggerD
                 })
             }
             else if userProgrammes < originalUserProgrammes {
-                SVProgressHUD.show(withStatus: "A sec, please")
+                SVProgressHUD.show(withStatus: Constant.Keyword.loading)
                 self.tblProgrammes.isUserInteractionEnabled = false
                 let programme = self.availableProgrammes[indexPath.row]
                 APIManager.removeProgramme(userId: currentUser.id, programmeId: programme.id, completion: { (result) in

@@ -10,9 +10,9 @@ import UIKit
 
 class SummaryViewController: BaseViewController {
     @IBOutlet weak var tblList: UITableView!
-    let titles = ["Profile", "Progress", "Trait Points", "Settings"]
-    let imageNames = ["icon_profile", "icon_progress", "icon_traitpoints", "icon_settings"]
-    let itemCount = 4
+    let titles = ["Profile", "Progress", "TBD"]
+    let imageNames = ["icon_profile", "icon_progress", "icon_traitpoints"]
+    let itemCount = 3
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,10 +56,7 @@ extension SummaryViewController: UITableViewDataSource, UITableViewDelegate {
                 self.performSegue(withIdentifier: "sid_progress", sender: self)
                 break
             case 2:
-                self.performSegue(withIdentifier: "sid_traitpoints", sender: self)
-                break
-            case 3:
-                self.performSegue(withIdentifier: "sid_settings", sender: self)
+                self.performSegue(withIdentifier: "sid_tbd", sender: self)
                 break
             default:
                 break

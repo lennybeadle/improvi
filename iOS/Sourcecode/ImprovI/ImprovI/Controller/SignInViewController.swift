@@ -15,14 +15,27 @@ class SignInViewController: BaseViewController {
     @IBOutlet weak var txtUsername: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var lblTitle: LTMorphingLabel!
+    @IBOutlet weak var btnSelected: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        lblTitle.text = "IMPROVI"
         // Do any additional setup after loading the view.
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        btnSelected.isSelected = Manager.sharedInstance.keepUserSignedIn
+        print("Selected - \(btnSelected.isSelected)")
+        if Manager.sharedInstance.keepUserSignedIn {
+            let standard = UserDefaults.standard
+            let username = standard.string(forKey: "username")
+            let email = standard.string(forKey: "email")
+            let password = standard.string(forKey: "password") ?? ""
+            let un = username ?? email ?? ""
+            self.txtUsername.text = un
+            self.txtPassword.text = password
+        }
+    }
     
     func checkInputData() -> Bool {
         guard let username = txtUsername.text, username.characters.count > 0 else {
@@ -37,10 +50,15 @@ class SignInViewController: BaseViewController {
         return true
     }
     
+    @IBAction func onKeepMeSignedIn(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        Manager.sharedInstance.keepUserSignedIn = sender.isSelected
+    }
+    
     @IBAction func onSignIn(_ sender: Any) {
         self.view.resignFirstResponder()
         if self.checkInputData() {
-            SVProgressHUD.show(withStatus: "A sec, please")
+            SVProgressHUD.show(withStatus: Constant.Keyword.loading)
             if self.txtUsername.text!.isValidEmail() {
                 APIManager.login(with: nil, email: txtUsername.text, password: txtPassword.text!, completion: { (user, programmes) in
                     SVProgressHUD.dismiss()

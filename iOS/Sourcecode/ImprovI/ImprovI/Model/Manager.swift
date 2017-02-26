@@ -13,7 +13,33 @@ class Manager {
     static let sharedInstance: Manager = Manager()
     
     var allProgrammes = [Programme]()
-    var currentUser: User!
+    var currentUser: User! {
+        didSet {
+            let standard = UserDefaults.standard
+            if currentUser.userName != nil {
+                standard.set(currentUser.userName, forKey: "username")
+            }
+            if currentUser.emailAddress != nil {
+                standard.set(currentUser.emailAddress, forKey: "email")
+            }
+            if currentUser.password != nil {
+                standard.set(currentUser.password, forKey: "password")
+            }
+            standard.synchronize()
+        }
+    }
+    
+    var keepUserSignedIn: Bool {
+        get {
+            let standard = UserDefaults.standard
+            return standard.bool(forKey: "KeepUserSignedIn")
+        }
+        set {
+            let standard = UserDefaults.standard
+            standard.set(newValue, forKey: "KeepUserSignedIn")
+            standard.synchronize()
+        }
+    }
     
     var questions = [Question]()
     

@@ -30,6 +30,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "SignInViewController.viewDidLoad() -&gt; ():SignInViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "btnSelected.isSelected">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "TBDViewController.(reloadTraits() -&gt; ()).(closure #1):TBDViewController.swift">
          <PersistentStrings>
             <PersistentString

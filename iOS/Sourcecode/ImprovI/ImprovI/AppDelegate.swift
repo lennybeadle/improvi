@@ -10,6 +10,7 @@ import UIKit
 import iRate
 import IQKeyboardManagerSwift
 import UserNotifications
+import SVProgressHUD
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,7 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        Manager.sharedInstance.initUISettings()
+        initSettings()
+        initUI()
+
+        return true
+    }
+    
+    func initSettings() {
+        UIManager.shared.appDelegate = self
+        UIManager.shared.initSettings()
         iRate.sharedInstance().appStoreID = 10289384
         iRate.sharedInstance().onlyPromptIfLatestVersion = true
         
@@ -26,8 +35,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         LJNotificationScheduler.requestAuthrization()
         UNUserNotificationCenter.current().delegate = NotificationManager.sharedInstance
-        
-        return true
+    }
+
+    func initUI() {
+        if Manager.sharedInstance.keepUserSignedIn {
+            let standard = UserDefaults.standard
+            let username = standard.string(forKey: "username")
+            let email = standard.string(forKey: "email")
+            let password = standard.string(forKey: "password") ?? ""
+            if username != nil || email != nil {
+                SVProgressHUD.show(withStatus: Constant.Keyword.loading)
+                APIManager.login(with: username, email: email, password: password, completion: { (user, programmes) in
+                    SVProgressHUD.dismiss()
+                    if user != nil {
+                        Manager.sharedInstance.currentUser = user
+                        Manager.sharedInstance.approachProgrammes(programmes: programmes)
+                        UIManager.shared.showMain()
+                    }
+                    else {
+                        UIManager.shared.showLogin()
+                    }
+                })
+                return
+            }
+        }
+        UIManager.shared.showLogin()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

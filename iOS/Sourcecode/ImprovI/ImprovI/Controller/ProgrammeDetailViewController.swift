@@ -144,7 +144,7 @@ class ProgrammeDetailViewController: BaseViewController {
 extension ProgrammeDetailViewController: DailyTaskViewDelegate {
     func taskStatusChanged(_ task: DailyTask) {
         if task.status == .completed {
-            SVProgressHUD.show(withStatus: "A sec, please")
+            SVProgressHUD.show(withStatus: Constant.Keyword.loading)
             APIManager.completeTask(userId: Manager.sharedInstance.currentUser.id, programmeId: self.programme.id, taskId: task.id, completion: { (result) in
                 SVProgressHUD.dismiss()
                 self.selectedTask = task

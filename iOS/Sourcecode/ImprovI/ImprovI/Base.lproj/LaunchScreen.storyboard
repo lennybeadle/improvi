@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -21,21 +21,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="improvi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xyb-W6-Uy5">
-                                <rect key="frame" x="0.0" y="271" width="375" height="125"/>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo128" translatesAutoresizingMaskIntoConstraints="NO" id="UP0-NA-lWo">
+                                <rect key="frame" x="75" y="230.5" width="224" height="206"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="125" id="F1F-lH-tAJ"/>
+                                    <constraint firstAttribute="height" constant="206" id="0gp-aG-JNh"/>
+                                    <constraint firstAttribute="width" constant="224" id="PcU-u5-IEf"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="SavoyeLetPlain" family="Savoye LET" pointSize="80"/>
-                                <color key="textColor" red="1" green="1" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.039215686270000001" green="0.74117647060000003" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Xyb-W6-Uy5" secondAttribute="trailing" id="Rnb-rn-UUJ"/>
-                            <constraint firstItem="Xyb-W6-Uy5" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="WKZ-1M-DuC"/>
-                            <constraint firstItem="Xyb-W6-Uy5" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="gMs-aW-UXR"/>
+                            <constraint firstItem="UP0-NA-lWo" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="RnU-GD-Pz7"/>
+                            <constraint firstItem="UP0-NA-lWo" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="aJ9-sl-DnT"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -44,4 +41,7 @@
             <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo128" width="128" height="128"/>
+    </resources>
 </document>

@@ -23,16 +23,30 @@ class DailyTask: ImprovIObject {
     static func from(dict: [String: Any]) -> DailyTask {
         let task = DailyTask()
         
-        task.id = "\(dict["id"]!)"
+        if dict["id"] != nil {
+            task.id = "\(dict["id"]!)"
+        }
         
         if dict["name"] != nil {
             task.name = "\(dict["name"]!)"
         }
-        task.longDescription = "\(dict["description"]!)"
-        task.advice = "\(dict["advice"])"
-        task.difficultRate = "\(dict["rate"]!)".intValue
         
-        task.dependency = "\(dict["dependent"]!)".boolValue
+        if dict["description"] != nil {
+            task.longDescription = "\(dict["description"]!)"
+        }
+        
+        if dict["advice"] != nil {
+            task.advice = "\(dict["advice"])"
+        }
+        
+        if dict["rate"] != nil {
+            task.difficultRate = "\(dict["rate"]!)".intValue
+        }
+        
+        if dict["dependent"] != nil {
+            task.dependency = "\(dict["dependent"]!)".boolValue
+        }
+        
         if dict["ixp"] != nil {
             task.boostPoint = "\(dict["ixp"]!)".intValue
         }

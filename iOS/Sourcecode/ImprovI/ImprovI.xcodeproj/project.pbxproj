@@ -61,6 +61,12 @@
 		9A95F3911E468CDB00F3228F /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A95F3901E468CDA00F3228F /* NotificationManager.swift */; };
 		9A981A6E1E546F7900E097D5 /* congratulation.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9A981A6D1E546F7900E097D5 /* congratulation.sks */; };
 		9A981A701E54711F00E097D5 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A981A6F1E54711F00E097D5 /* CongratulationViewController.swift */; };
+		9AAEA7DC1E6365C100628B0D /* UIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAEA7DB1E6365C100628B0D /* UIManager.swift */; };
+		9AAEA7DE1E63775000628B0D /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAEA7DD1E63775000628B0D /* WelcomeViewController.swift */; };
+		9AAEA7E41E637D9C00628B0D /* intro1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AAEA7E01E637D9C00628B0D /* intro1.png */; };
+		9AAEA7E51E637D9C00628B0D /* intro2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AAEA7E11E637D9C00628B0D /* intro2.png */; };
+		9AAEA7E61E637D9C00628B0D /* intro3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AAEA7E21E637D9C00628B0D /* intro3.png */; };
+		9AAEA7E71E637D9C00628B0D /* intro4.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AAEA7E31E637D9C00628B0D /* intro4.png */; };
 		9AD5D07A1E3BD076000C7AF9 /* ProgrammeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5D0791E3BD076000C7AF9 /* ProgrammeDetailViewController.swift */; };
 		9AD5D07D1E3BD46F000C7AF9 /* LinearProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5D07C1E3BD46F000C7AF9 /* LinearProgressView.swift */; };
 		9AD5D07F1E3BECD7000C7AF9 /* SummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5D07E1E3BECD7000C7AF9 /* SummaryTableViewCell.swift */; };
@@ -125,6 +131,12 @@
 		9A95F3901E468CDA00F3228F /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		9A981A6D1E546F7900E097D5 /* congratulation.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = congratulation.sks; sourceTree = "<group>"; };
 		9A981A6F1E54711F00E097D5 /* CongratulationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratulationViewController.swift; sourceTree = "<group>"; };
+		9AAEA7DB1E6365C100628B0D /* UIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIManager.swift; sourceTree = "<group>"; };
+		9AAEA7DD1E63775000628B0D /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		9AAEA7E01E637D9C00628B0D /* intro1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro1.png; sourceTree = "<group>"; };
+		9AAEA7E11E637D9C00628B0D /* intro2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro2.png; sourceTree = "<group>"; };
+		9AAEA7E21E637D9C00628B0D /* intro3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro3.png; sourceTree = "<group>"; };
+		9AAEA7E31E637D9C00628B0D /* intro4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro4.png; sourceTree = "<group>"; };
 		9AD5D0791E3BD076000C7AF9 /* ProgrammeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgrammeDetailViewController.swift; sourceTree = "<group>"; };
 		9AD5D07C1E3BD46F000C7AF9 /* LinearProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinearProgressView.swift; sourceTree = "<group>"; };
 		9AD5D07E1E3BECD7000C7AF9 /* SummaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryTableViewCell.swift; sourceTree = "<group>"; };
@@ -164,6 +176,7 @@
 			children = (
 				9A2C09491E365F33006156F3 /* SignInViewController.swift */,
 				9A2C094B1E365F3A006156F3 /* SignUpViewController.swift */,
+				9AAEA7DD1E63775000628B0D /* WelcomeViewController.swift */,
 			);
 			name = Welcome;
 			sourceTree = "<group>";
@@ -180,6 +193,7 @@
 		9A36AD3F1E413DE500B949A0 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				9AAEA7DF1E637D9C00628B0D /* intro */,
 				9A95F3871E46811800F3228F /* privacypolicy.html */,
 				9A981A6D1E546F7900E097D5 /* congratulation.sks */,
 				9A36AD401E413DE500B949A0 /* starParticle.sks */,
@@ -288,6 +302,7 @@
 		9A805F491E3A58FB00E49D2C /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				9AAEA7DB1E6365C100628B0D /* UIManager.swift */,
 				9A37F78E1E363C5000943AF4 /* Manager.swift */,
 				9A805F461E3A58E600E49D2C /* APIManager.swift */,
 				9A95F3901E468CDA00F3228F /* NotificationManager.swift */,
@@ -352,6 +367,17 @@
 				9A95F38E1E468A6800F3228F /* ReminderViewController.swift */,
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		9AAEA7DF1E637D9C00628B0D /* intro */ = {
+			isa = PBXGroup;
+			children = (
+				9AAEA7E01E637D9C00628B0D /* intro1.png */,
+				9AAEA7E11E637D9C00628B0D /* intro2.png */,
+				9AAEA7E21E637D9C00628B0D /* intro3.png */,
+				9AAEA7E31E637D9C00628B0D /* intro4.png */,
+			);
+			path = intro;
 			sourceTree = "<group>";
 		};
 		9AD5D07B1E3BD46F000C7AF9 /* LinearProgressBar */ = {
@@ -443,7 +469,11 @@
 			files = (
 				9A37F77B1E36206300943AF4 /* LaunchScreen.storyboard in Resources */,
 				9A93C78F1E47EC1B00810D3A /* DailyTaskView.xib in Resources */,
+				9AAEA7E41E637D9C00628B0D /* intro1.png in Resources */,
 				9A36AD411E413DE500B949A0 /* starParticle.sks in Resources */,
+				9AAEA7E61E637D9C00628B0D /* intro3.png in Resources */,
+				9AAEA7E51E637D9C00628B0D /* intro2.png in Resources */,
+				9AAEA7E71E637D9C00628B0D /* intro4.png in Resources */,
 				9A981A6E1E546F7900E097D5 /* congratulation.sks in Resources */,
 				9A95F3881E46811800F3228F /* privacypolicy.html in Resources */,
 				9A37F7781E36206300943AF4 /* Assets.xcassets in Resources */,
@@ -545,12 +575,14 @@
 				9A37F7951E36497500943AF4 /* ProgrammeViewController.swift in Sources */,
 				9A1C35221E3D448800C88FE6 /* CheckboxButton.swift in Sources */,
 				9A35B33A1E450BA3001BEDA1 /* ChangePasswordViewController.swift in Sources */,
+				9AAEA7DE1E63775000628B0D /* WelcomeViewController.swift in Sources */,
 				9A95F38B1E46816700F3228F /* PrivacyPolicyViewController.swift in Sources */,
 				9A1C35261E3D491C00C88FE6 /* CollapsibleTableViewHeader.swift in Sources */,
 				9A51A4401E3EBC1A0025F63A /* DateExtension.swift in Sources */,
 				9A70F6461E5687C90007832F /* CongratsTableViewCell.swift in Sources */,
 				9A2C094A1E365F33006156F3 /* SignInViewController.swift in Sources */,
 				9A1191EA1E5B393F00598AD0 /* NotificationScheduler.swift in Sources */,
+				9AAEA7DC1E6365C100628B0D /* UIManager.swift in Sources */,
 				9A981A701E54711F00E097D5 /* CongratulationViewController.swift in Sources */,
 				9A37F79B1E3649A000943AF4 /* SummaryViewController.swift in Sources */,
 				9AD5D07F1E3BECD7000C7AF9 /* SummaryTableViewCell.swift in Sources */,
