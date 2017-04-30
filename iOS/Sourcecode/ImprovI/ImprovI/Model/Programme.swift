@@ -23,6 +23,23 @@ class Programme: ImprovIObject {
     var status: Status = .normal
     var availableTasks = [DailyTask]()
     
+    var type: String {
+        if self.name != nil {
+            let components = self.name.components(separatedBy: "-")
+            if components.count > 1 {
+                let trait = components[1]
+                if trait == "Fitness" {
+                    return "Health"
+                }
+                else if trait == "Self" {
+                    return "Concienseness"
+                }
+                return trait
+            }
+        }
+        return ""
+    }
+    
     init(id: String, name: String) {
         super.init(id: id)
         self.name = name
@@ -178,3 +195,4 @@ class Programme: ImprovIObject {
         return false
     }
 }
+ 

@@ -32,6 +32,11 @@ class SignUpViewController: BaseViewController {
             return false
         }
         
+        guard let email = txtEmail.text, email.characters.count > 0, email.isValidEmail() else {
+            self.showError(text: "Please check the Email Address")
+            return false
+        }
+        
         guard let confirm = txtConfirm.text, confirm.characters.count > 0 else {
             self.showError(text: "Please check the confirm")
             return false

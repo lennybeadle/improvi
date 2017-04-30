@@ -43,6 +43,7 @@ class ProgrammeDetailViewController: BaseViewController {
             self.programme.update()
             self.title = programme.name
             progressBar.progressValue = CGFloat(self.programme.progress)
+            self.lblProgress.text = "\(programme.type): \(Int(self.programme.progress!))%"
             
             self.lblTimeRemaining.text = self.programme.timeString
             self.progressTime.progressValue = self.programme.timeProgress

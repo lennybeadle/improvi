@@ -35,7 +35,7 @@ class ProgrammeViewController: BaseViewController {
     
     func checkNewTasks() {
         if let programme = Manager.sharedInstance.currentUser.programmeRequireNewTask() {
-            let alert = UIAlertController(title: "News", message: "Will you get new tasks for \(programme.name)", preferredStyle: .alert)
+            let alert = UIAlertController(title: "News", message: "Will you get new tasks for \(programme.name!)", preferredStyle: .alert)
             let actionYes = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
                 Manager.sharedInstance.loadNewTasks(for: programme.id)
             })
@@ -49,7 +49,7 @@ class ProgrammeViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         originalUserProgrammes = Manager.sharedInstance.currentUser.programmes.count
-        self.checkNewTasks()
+//        self.checkNewTasks()
     }
     
     func initAvailableProgrammes() {
@@ -115,9 +115,9 @@ extension ProgrammeViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension ProgrammeViewController: TableViewDraggerDataSource, TableViewDraggerDelegate {
     func dragger(_ dragger: TableViewDragger, shouldDragAtIndexPath indexPath: IndexPath) -> Bool {
-        if indexPath.section == SectionType.inProgress.rawValue{
-            return false
-        }
+//        if indexPath.section == SectionType.inProgress.rawValue{
+//            return false
+//        }
         
         originalUserProgrammes = Manager.sharedInstance.currentUser.programmes.count
         return true
