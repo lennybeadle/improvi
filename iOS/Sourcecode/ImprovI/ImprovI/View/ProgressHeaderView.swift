@@ -89,7 +89,7 @@ class ProgressHeaderView: UITableViewHeaderFooterView {
     }
     
     func setCollapsed(collapsed: Bool) {
-        arrowLabel.rotate(toValue: collapsed ? 0.0 : CGFloat(M_PI_2))
+        arrowLabel.rotate(toValue: collapsed ? 0.0 : CGFloat(Double.pi/2))
     }
     
     func resetWithProgramme(programme: Programme) {

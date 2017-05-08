@@ -30,7 +30,7 @@ class DailyTaskView: SpringView {
     
     func updateWithDailyTask(task: DailyTask) {
         self.dailyTask = task
-        self.lblTitle.text = "      " + task.name + "          "
+        self.lblTitle.text = "      " + (task.name ?? "") + "          "
         self.lblTitle.sizeToFit()
         self.lblDescription.text = task.longDescription
         self.updateWithStatus()
@@ -38,6 +38,10 @@ class DailyTaskView: SpringView {
     
     func updateDate(date: Date) {
         self.lblDate.text = "    " + date.dateString
+    }
+    
+    func updateIndex(index: Int, count: Int) {
+        self.lblDate.text = "    " + "\(index+1) out of \(count)"//"    " + date.dateString
     }
     
     func updateWithStatus() {

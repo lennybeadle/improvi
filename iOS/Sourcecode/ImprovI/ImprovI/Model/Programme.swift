@@ -138,6 +138,16 @@ class Programme: ImprovIObject {
         }
     }
     
+    func index(of task: DailyTask) -> Int {
+        let count = self.tasks.count
+        for i in 0..<count {
+            if self.tasks[i].id == task.id {
+                return i
+            }
+        }
+        return -1
+    }
+    
     func resetTaskStatus() {
         self.status = .normal
         self.startTime = nil

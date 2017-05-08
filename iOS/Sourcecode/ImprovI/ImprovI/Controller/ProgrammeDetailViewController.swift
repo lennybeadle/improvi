@@ -60,6 +60,9 @@ class ProgrammeDetailViewController: BaseViewController {
                 if self.programme.startTime != nil {
                     taskView.updateDate(date: self.programme.startTime)
                 }
+                
+                taskView.updateIndex(index: self.programme.index(of: element), count: self.programme.tasks.count)
+                
                 container.addSubview(taskView)
                 
                 taskView.frame = container.bounds
@@ -113,7 +116,7 @@ class ProgrammeDetailViewController: BaseViewController {
         swipeView.delegate = self
         self.vwDailyTask.addSubview(swipeView)
 //        swipeView.bufferSize = self.programme.tasks.count
-        self.swipeView.addCards(self.programme.availableTasks, onTop: false)
+        self.swipeView.addCards(self.programme.tasks, onTop: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {

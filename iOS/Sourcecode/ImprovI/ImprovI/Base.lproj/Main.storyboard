@@ -95,7 +95,7 @@
                                     <segue destination="CyA-a6-Jv0" kind="show" id="Hnk-Wn-tXP"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROGRAMME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NAa-ur-FLV" customClass="SpringLabel" customModule="Spring">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROGRAMMES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NAa-ur-FLV" customClass="SpringLabel" customModule="Spring">
                                 <rect key="frame" x="46" y="282" width="120" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="vjP-bd-7WB"/>
@@ -178,7 +178,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2017 improvI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mNQ-Jb-Ssk" customClass="SpringLabel" customModule="Spring">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2017 improvi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mNQ-Jb-Ssk" customClass="SpringLabel" customModule="Spring">
                                         <rect key="frame" x="0.0" y="40" width="375" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="QeS-bk-wR6"/>
@@ -411,7 +411,6 @@
                                         <connections>
                                             <outlet property="lblName" destination="bMh-h8-Su3" id="5CD-nG-dZi"/>
                                             <outlet property="vwInnerView" destination="Ut9-Kj-IAR" id="cab-MQ-seO"/>
-                                            <segue destination="r0p-ip-4zt" kind="show" identifier="sid_programme_detail" id="zsU-x9-eol"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -439,6 +438,7 @@
                         <outlet property="btnBack" destination="hxV-WO-7n1" id="Smd-1v-ZaG"/>
                         <outlet property="tblProgrammes" destination="ext-1e-NvN" id="hAZ-YD-5xk"/>
                         <outlet property="titleView" destination="NVR-QH-jHu" id="mLT-FB-9Bd"/>
+                        <segue destination="r0p-ip-4zt" kind="show" identifier="sid_programme_detail" id="eOZ-NO-JeK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FAf-HP-rn9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -639,7 +639,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SbT-AW-5xZ" customClass="SpringView" customModule="Spring">
                                 <rect key="frame" x="6" y="108" width="363" height="126"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Week: 9" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJ1-YM-gPB">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Week: 9" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJ1-YM-gPB">
                                         <rect key="frame" x="8" y="8" width="347" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="tNN-A1-BBh"/>
@@ -2348,7 +2348,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ZQ-Oo-xwS">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TBD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLW-K5-wSl" customClass="SpringLabel" customModule="Spring">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MY SUMMARI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLW-K5-wSl" customClass="SpringLabel" customModule="Spring">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="32"/>
                                         <color key="textColor" red="1" green="1" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2712,7 +2712,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="morphingEnabled" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2017 ImprovI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gae-iy-fnr" customClass="SpringLabel" customModule="Spring">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2017 improvi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gae-iy-fnr" customClass="SpringLabel" customModule="Spring">
                                 <rect key="frame" x="8" y="638" width="359" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="bbn-MY-nlz"/>
@@ -3136,7 +3136,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2017 ImprovI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJN-Yy-ED2" customClass="SpringLabel" customModule="Spring">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2017 improvi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJN-Yy-ED2" customClass="SpringLabel" customModule="Spring">
                                 <rect key="frame" x="8" y="638" width="359" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="ffN-ZU-nXE"/>
@@ -3420,11 +3420,11 @@
         <image name="user_placeholder" width="132" height="130"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="C6V-yb-6hl"/>
-        <segue reference="3MT-dG-N0u"/>
+        <segue reference="kFR-jh-jo9"/>
+        <segue reference="JUJ-sI-1N1"/>
+        <segue reference="Hnk-Wn-tXP"/>
         <segue reference="vOj-82-3CF"/>
-        <segue reference="ark-nV-HcC"/>
-        <segue reference="x86-NS-Fwn"/>
+        <segue reference="VVo-Mu-7Xw"/>
         <segue reference="cDq-1h-cJh"/>
     </inferredMetricsTieBreakers>
 </document>

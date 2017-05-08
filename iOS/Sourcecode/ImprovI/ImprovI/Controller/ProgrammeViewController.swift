@@ -109,7 +109,9 @@ extension ProgrammeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        if indexPath.section == SectionType.inProgress.rawValue {
+            self.performSegue(withIdentifier: "sid_programme_detail", sender: indexPath)
+        }
     }
 }
 
@@ -194,9 +196,10 @@ extension ProgrammeViewController: TableViewDraggerDataSource, TableViewDraggerD
 
 extension ProgrammeViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let programmeCell = sender as? ProgrammeTableViewCell {
+        if let indexPath = sender as? IndexPath {
+            let programme = Manager.sharedInstance.currentUser.programmes[indexPath.row]
             if let controller = segue.destination as? ProgrammeDetailViewController {
-                controller.programme = programmeCell.programme
+                controller.programme = programme
             }
         }
     }

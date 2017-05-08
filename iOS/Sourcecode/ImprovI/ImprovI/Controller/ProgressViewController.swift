@@ -41,12 +41,13 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
         header.setCollapsed(collapsed: programmes[section].collapsed)
         header.section = section
         header.delegate = self
+        header.clipsToBounds = true
         
         return header
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 130
+        return 84 //130
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
