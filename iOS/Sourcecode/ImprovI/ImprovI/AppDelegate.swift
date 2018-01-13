@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         initSettings()
         initUI()
-
+        PurchaseManager.shared.completeIAPTransactions()
         return true
     }
     
@@ -34,7 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().enable = true
         
         LJNotificationScheduler.requestAuthrization()
-        UNUserNotificationCenter.current().delegate = NotificationManager.sharedInstance
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().delegate = NotificationManager.sharedInstance
+        } else {
+            // Fallback on earlier versions
+        }
     }
 
     func initUI() {
@@ -45,11 +49,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let password = standard.string(forKey: "password") ?? ""
             if username != nil || email != nil {
                 SVProgressHUD.show(withStatus: Constant.Keyword.loading)
-                APIManager.login(with: username, email: email, password: password, completion: { (user, programmes) in
+                APIManager.login(with: username, email: email, password: password, completion: { (user) in
                     SVProgressHUD.dismiss()
                     if user != nil {
                         Manager.sharedInstance.currentUser = user
-                        Manager.sharedInstance.approachProgrammes(programmes: programmes)
+//                        Manager.sharedInstance.approachProgrammes(programmes: programmes)
                         UIManager.shared.showMain()
                     }
                     else {

@@ -10,7 +10,6 @@ import UIKit
 import SpriteKit
 import LTMorphingLabel
 import Spring
-import ScrollableGraphView
 import SVProgressHUD
 
 class TBDViewController: BaseViewController {
@@ -143,4 +142,16 @@ class TBDViewController: BaseViewController {
         }
     }
 
+    @IBAction func onPurchase(_ sender: Any) {
+        let alert = UIAlertController(title: "Warnning", message: "Are you going to purchase 250 iXP with $0.99 USD?", preferredStyle: .alert)
+        let btnYes = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            Manager.sharedInstance.purchaseIXP(completion: { (result) in
+                self.lblTotalIXP.text = "\(Manager.sharedInstance.currentUser.totalIXP)"
+            })
+        })
+        let btnNo = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        alert.addAction(btnYes)
+        alert.addAction(btnNo)
+        self.present(alert, animated: true, completion: nil)
+    }
 }

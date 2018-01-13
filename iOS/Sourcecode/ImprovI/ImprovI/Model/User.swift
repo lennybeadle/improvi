@@ -15,10 +15,7 @@ class User: ImprovIObject {
     var password: String!
     var dateJoined: Date!
     var imageLink: String!
-    
-    var programmes: [Programme]! = [Programme]()
-    var tasksCompleted: Int!
-    var programmesCompleted: Int!
+    var feathers: Int!
     
     var traitPoints = [TraitPoint]()
     var totalIXP: Int = -1
@@ -55,41 +52,5 @@ class User: ImprovIObject {
             value += trait.value
         }
         return Int(value)
-    }
-    
-    func programmeRequireNewTask() -> Programme? {
-        for programme in self.programmes {
-            if programme.newTasksAvailable {
-                return programme
-            }
-        }
-        return nil
-    }
-    
-    func hasProgramme(_ programme: Programme) -> Bool{
-        for prgm in self.programmes {
-            if prgm.id == programme.id {
-                return true
-            }
-        }
-        return false
-    }
-    
-    func addProgramme(_ programme: Programme) {
-        for programmeObj in self.programmes {
-            if programme.id == programmeObj.id {
-                return
-            }
-        }
-        self.programmes.append(programme)
-    }
-    
-    func programme(with programmeId: String) -> Programme? {
-        for programme in self.programmes {
-            if programme.id == programmeId {
-                return programme
-            }
-        }
-        return nil
     }
 }

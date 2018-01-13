@@ -63,9 +63,6 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
                 if identifier == "GENERAL" {
                     Manager.sharedInstance.showProgrammeList()
                 }
-                else {
-                    Manager.sharedInstance.loadNewTasks(for: identifier)
-                }
             }
             // Do something
             completionHandler()

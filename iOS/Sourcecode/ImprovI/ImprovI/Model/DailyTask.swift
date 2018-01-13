@@ -18,10 +18,13 @@ class DailyTask: ImprovIObject {
     var dependency: Bool!
     var traitPoints = [TraitPoint]()
     var boostPoint: Int!
+    var startedAt: Date!
     var status: Status = .normal
+    var unlocked: Bool = false
     
     static func from(dict: [String: Any]) -> DailyTask {
         let task = DailyTask()
+        task.data = dict
         
         if dict["id"] != nil {
             task.id = "\(dict["id"]!)"
@@ -36,7 +39,7 @@ class DailyTask: ImprovIObject {
         }
         
         if dict["advice"] != nil {
-            task.advice = "\(dict["advice"])"
+            task.advice = "\(dict["advice"]!)"
         }
         
         if dict["rate"] != nil {
@@ -50,26 +53,7 @@ class DailyTask: ImprovIObject {
         if dict["ixp"] != nil {
             task.boostPoint = "\(dict["ixp"]!)".intValue
         }
-        
-        if let completion = dict["completed"] as? String, completion.boolValue == true{
-            task.status = .completed
-        }
-        
-        if let status = dict["status"] as? String {
-            if status == "ongoing" {
-                task.status = .ongoing
-            }
-            else if status == "normal" {
-                task.status = .normal
-            }
-            else if status == "completed" {
-                task.status = .completed
-            }
-            else if status == "timeover" {
-                task.status = .timeover
-            }
-        }
-        
+
         if let traits = dict["trait"] as? [Any] {
             task.traitPoints = traits.map{TraitPoint.from(dict: ($0 as! [String: Any]))}
         }

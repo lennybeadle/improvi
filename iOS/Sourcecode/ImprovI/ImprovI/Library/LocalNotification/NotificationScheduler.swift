@@ -2,8 +2,8 @@
 //  DLLocalNotifications.swift
 //  DLLocalNotifications
 //
-//  Created by Li Jin on 2/20/17.
-//  Copyright © 2017 Li Jin. All rights reserved.
+//  Created by Macmini on 2/20/17.
+//  Copyright © 2017 Mac. All rights reserved.
 //
 
 import Foundation

@@ -9,11 +9,12 @@
 import UIKit
 
 class ImprovIObject{
+    var data: [String: Any]!
     var id: String! = ""
     var userData: String!
     
     var collapsed: Bool = false
-    
+
     init(id: String = "0") {
         self.id = id
     }

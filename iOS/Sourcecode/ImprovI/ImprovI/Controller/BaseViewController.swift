@@ -62,7 +62,7 @@ class BaseViewController: UIViewController {
         }
     }
     
-    func onBack(_ sender: Any) {
-        _ = self.navigationController?.popViewController(animated: true)
+    @objc func onBack(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
 }

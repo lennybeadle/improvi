@@ -2,8 +2,8 @@
 //  Extension.swift
 //  Tutor for Mac, iPad, and iPhone
 //
-//  Created by Li Jin on 10/25/16.
-//  Copyright © 2016 Li Jin . All rights reserved.
+//  Created by Macmini on 10/25/16.
+//  Copyright © 2016 Mac . All rights reserved.
 //
 import Foundation
 

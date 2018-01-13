@@ -3,7 +3,7 @@
 //  https://github.com/lexrus/LTMorphingLabel
 //
 //  The MIT License (MIT)
-//  Copyright (c) 2016 Lex Tang, http://lexrus.com
+//  Copyright (c) 2017 Lex Tang, http://lexrus.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a
 //  copy of this software and associated documentation files
@@ -28,7 +28,8 @@
 import UIKit
 
 extension LTMorphingLabel {
-    
+
+    @objc
     func PixelateLoad() {
         
         effectClosures["Pixelate\(LTMorphingPhases.disappear)"] = {
@@ -87,11 +88,9 @@ extension LTMorphingLabel {
                 height: charLimbo.rect.size.height
             )
             String(charLimbo.char).draw(in: rect, withAttributes: [
-                NSFontAttributeName:
-                    self.font,
-                NSForegroundColorAttributeName:
-                    self.textColor.withAlphaComponent(fadeOutAlpha)
-                ])
+                .font: self.font,
+                .foregroundColor: self.textColor.withAlphaComponent(fadeOutAlpha)
+            ])
             let newImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             return newImage!

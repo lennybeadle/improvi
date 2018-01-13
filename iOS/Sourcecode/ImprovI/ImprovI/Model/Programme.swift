@@ -7,22 +7,24 @@
 //
 
 import UIKit
-
 public enum Status: Int {
-    case normal = -1
-    case ongoing = 0
-    case timeover = 1
-    case completed = 2
+    case normal = 0
+    case ongoing = 1
+    case timeover = 2
+    case completed = 3
 }
 
 class Programme: ImprovIObject {
     var name: String!
-    var progress: CGFloat! = 0
+
     var tasks = [DailyTask]()
-    var startTime: Date!
-    var status: Status = .normal
-    var availableTasks = [DailyTask]()
+    var taskIds = [String]()
+
+    var unlocked: Bool = false
+    var needed_feather: Int = 0
     
+    var status: Status = .normal
+
     var type: String {
         if self.name != nil {
             let components = self.name.components(separatedBy: "-")
@@ -37,6 +39,116 @@ class Programme: ImprovIObject {
                 return trait
             }
         }
+        return ""
+    }
+    
+    var countOfTimeOverredTask: Int {
+        var count: Int = 0
+        for task in tasks {
+            if task.status == .timeover {
+                count = count + 1
+            }
+        }
+        return count
+    }
+    
+    var countOfWorkingTasks: Int {
+        var count: Int = 0
+        for task in tasks {
+            if task.status == .ongoing {
+                count = count + 1
+            }
+        }
+        return count
+    }
+    
+    var countOfCompletedTasks: Int {
+        var count: Int = 0
+        for task in tasks {
+            if task.status == .completed {
+                count = count + 1
+            }
+        }
+        return count
+    }
+
+    var progress: CGFloat {
+        if self.tasks.count == 0 {
+            return 0
+        }
+        return CGFloat(self.countOfCompletedTasks) / CGFloat(self.tasks.count) * 100.0
+    }
+    
+    var lastTask: DailyTask? {
+        if tasks.count == 0 {
+            return nil
+        }
+        
+        var retTask: DailyTask? = tasks[0]
+        for task in tasks {
+            if retTask?.startedAt == nil {
+                retTask = task
+                continue
+            }
+            
+            if task.startedAt != nil, task.startedAt > retTask!.startedAt {
+                retTask = task
+            }
+        }
+        if retTask?.startedAt == nil {
+            return nil
+        }
+        
+        return retTask
+    }
+    
+    var timeProgress: CGFloat {
+        if let task = self.lastTask, task.status == .ongoing {
+            let distance = Date.minutesBetween(date1: task.startedAt, date2: Date())
+            if distance >= 1440 {
+                if self.progress >= 100 {
+                    task.status = .completed
+                    return 100
+                }
+                else {
+                    task.status = .timeover
+                    return 200
+                }
+            }
+            else {
+                return CGFloat(distance)/1440.0 * 100.0
+            }
+        }
+        return 0
+    }
+    
+    var timeString: String {
+        if self.progress >= 100 {
+            return "Completed"
+        }
+        
+        if self.countOfTimeOverredTask > 0 {
+            return "Time over"
+        }
+        
+        if let task = self.lastTask, task.status == .ongoing {
+            var distance = Date.minutesBetween(date1: task.startedAt, date2: Date())
+            if distance >= 1440 {
+                if self.progress >= 100 {
+                    task.status = .completed
+                    return "Completed"
+                }
+                else {
+                    task.status = .timeover
+                    return "Time over!"
+                }
+            }
+            else {
+                distance = 1440 - distance
+                return "Time remaining: \(distance/60) hour(s) \(distance%60) min(s)"
+            }
+        }
+        
         return ""
     }
     
@@ -56,85 +168,59 @@ class Programme: ImprovIObject {
         programme.id = "\(dict["id"]!)"
         programme.name = "\(dict["name"]!)"
 
-        if dict["progress"] != nil {
-            programme.progress = "\(dict["progress"]!)".floatValue
+        if dict["needed_feather"] != nil {
+            programme.needed_feather = "\(dict["needed_feather"]!)".intValue
         }
         
-        if let date = dict["start_time"] as? Double {
-            programme.startTime = Date(timeIntervalSince1970: date)// Date.parse(date, format: "yyyy-MM-dd HH:mm:ss")
+        if dict["unlocked"] != nil {
+            programme.unlocked = "\(dict["unlocked"]!)".boolValue
         }
         
-        if let status = dict["status"] as? String {
-            if status == "registered" {
-                programme.status = .ongoing
-            }
-            else if status == "unregistered" {
-                programme.status = .normal
-            }
+        if let tasks = dict["tasks"] as? [String] {
+            programme.taskIds = tasks
         }
-        
-        if let tasks = dict["tasks"] as? [Any] {
-            programme.tasks = tasks.map{DailyTask.from(dict: ($0 as! [String: Any]))}
-        }
-        
-        programme.update()
+
         return programme
     }
     
-    func approachTasks(dailyTasks: [DailyTask]) {
-        for task in dailyTasks {
-            self.approachTask(dailyTask: task)
-        }
-    }
-    
-    func approachTask(dailyTask: DailyTask) {
-        for task in self.tasks{
-            if dailyTask.id == task.id
-            {
-                task.status = dailyTask.status
+    func getPrepared(with tasks: [DailyTask]) {
+        self.tasks = taskIds.map { (taskId) -> DailyTask in
+            for task in tasks {
+                if taskId == task.id {
+                    return task
+                }
             }
+            let dailyTask = DailyTask()
+            dailyTask.id = taskId
+            return dailyTask
         }
     }
     
-    func reset() {
-        self.resetTaskStatus()
-        self.update()
-    }
-    
-    func update() {
-        var totalPoints: CGFloat = 0
-        var currentPoints: CGFloat = 0
+    func resetTaskStatus() {
         for task in self.tasks {
-            totalPoints += task.totalTrait
-            if task.status == .completed {
-                currentPoints += task.totalTrait
+            task.status = Status(rawValue: 0)!
+            task.startedAt = nil
+        }
+    }
+    
+    func updateTaskStatus(taskId: String, status: Int, startedAt: Date?) {
+        for task in self.tasks {
+            if task.id == taskId {
+                task.status = Status(rawValue: status)!
+                task.startedAt = startedAt
+                task.unlocked = true
+                return
             }
         }
-        
-        self.progress = (totalPoints == 0.0 ? 0 : currentPoints / totalPoints * 100)
-        if self.progress == 100 {
-            self.status = .completed
-        }
-        else {
-            if self.startTime != nil {
-                let distance = Date.dateBetween(date1: self.startTime, date2: Date())
-                if distance.day >= 1 {
-                    self.status = .timeover
-                }
-            }
-        }
-        
-        self.availableTasks.removeAll()
-        if self.status == .normal {
-            self.availableTasks.append(contentsOf: self.tasks)
-        }
-        else {
-            for task in self.tasks {
-                if task.status == .normal {
-                    continue
-                }
-                availableTasks.append(task)
-            }
+    }
+    
+    func applyTaskStatus(with taskStatus: [Any]) {
+        self.resetTaskStatus()
+        for taskStatus in taskStatus {
+            let dict = taskStatus as! [String: Any]
+            self.updateTaskStatus(taskId: dict["task_id"] as! String,
+                                  status: (dict["status"] as! String).intValue,
+                                  startedAt: Date.parse(dict["started_at"] as! String, format: "yyyy-MM-dd HH:mm:ss"))
         }
     }
     
@@ -148,61 +234,24 @@ class Programme: ImprovIObject {
         return -1
     }
     
-    func resetTaskStatus() {
-        self.status = .normal
-        self.startTime = nil
+    func programTasks(of status: Status) -> [DailyTask] {
+        var programTasks = [DailyTask]()
         for task in self.tasks {
-            task.status = .normal
+            if task.status == status {
+                programTasks.append(task)
+            }
         }
+        return programTasks
     }
     
-    var timeString: String {
-        if self.startTime == nil {
-            return "Not yet started"
-        }
-        else {
-            var distance = Date.minutesBetween(date1: self.startTime, date2: Date())
-            
-            if distance >= 1440 {
-                if self.progress >= 100 {
-                    return "Completed"
-                }
-                else {
-                    return "Time over!"
-                }
-            }
-            else {
-                distance = 1440 - distance
-                return "Time remaining: \(distance/60) hour(s) \(distance%60) min(s)"
+    func programTasks(except status: Status) -> [DailyTask]{
+        var programTasks = [DailyTask]()
+        for task in self.tasks {
+            if task.status != status {
+                programTasks.append(task)
             }
         }
-    }
-    
-    var timeProgress: CGFloat {
-        if self.startTime == nil {
-            return 0
-        }
-        else {
-            let distance = Date.minutesBetween(date1: self.startTime, date2: Date())
-            if distance >= 1440 {
-                return 100
-            }
-            else {
-                return CGFloat(CGFloat(distance)/1440.0*100.0)
-            }
-        }
-    }
-    
-    var newTasksAvailable: Bool {
-        if self.startTime == nil {
-            return false
-        }
-        
-        let minutes = Date.minutesBetween(date1: self.startTime, date2: Date())
-        if minutes > 1440 {
-            return true
-        }
-        return false
+        return programTasks
     }
 }
  

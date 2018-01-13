@@ -9,7 +9,6 @@
 import UIKit
 import SVProgressHUD
 import Spring
-import ScrollableGraphView
 
 class TraitPointsViewController: BaseViewController {
     @IBOutlet weak var vwContainer: SpringView!

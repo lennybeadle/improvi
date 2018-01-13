@@ -13,6 +13,7 @@ class ProgrammeTableViewCell: UITableViewCell {
     @IBOutlet weak var vwInnerView: SpringView!
     @IBOutlet weak var lblName: SpringLabel!
     weak var programme: Programme!
+    @IBOutlet weak var imgLock: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,6 +31,12 @@ class ProgrammeTableViewCell: UITableViewCell {
     
     func resetWithProgramme(programme: Programme) {
         self.programme = programme
-        self.lblName.text = programme.name        
+        self.lblName.text = programme.name
+        if programme.unlocked {
+            imgLock.isHidden = true
+        }
+        else {
+            imgLock.isHidden = false
+        }
     }
 }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DMSwipeCards
 import SVProgressHUD
 
 class ProgrammeDetailViewController: BaseViewController {
@@ -35,15 +34,26 @@ class ProgrammeDetailViewController: BaseViewController {
         self.vwInfo.layer.shadowRadius = 2
         self.vwInfo.layer.shadowOffset = CGSize(width: 0, height: 2)
 
-        self.resetWithProgramme()
+        self.loadProgramDetail()
+    }
+    
+    func loadProgramDetail() {
+        SVProgressHUD.show()
+        APIManager.getProgramDetail(userId: Manager.sharedInstance.currentUser.id, programmeId: programme.id) { (dict) in
+            SVProgressHUD.dismiss()
+            if let dict = dict, dict.count > 0 {
+                let usertasks = dict["user_tasks"] as! [Any]
+                self.programme.applyTaskStatus(with: usertasks)
+                self.resetWithProgramme()
+            }
+        }
     }
     
     func resetWithProgramme() {
         if self.programme != nil {
-            self.programme.update()
             self.title = programme.name
             progressBar.progressValue = CGFloat(self.programme.progress)
-            self.lblProgress.text = "\(programme.type): \(Int(self.programme.progress!))%"
+            self.lblProgress.text = "\(programme.type): \(Int(self.programme.progress))%"
             
             self.lblTimeRemaining.text = self.programme.timeString
             self.progressTime.progressValue = self.programme.timeProgress
@@ -57,9 +67,6 @@ class ProgrammeDetailViewController: BaseViewController {
             if let taskView = Bundle.main.loadNibNamed("DailyTaskView", owner: nil, options: nil)?.first as? DailyTaskView {
                 taskView.updateWithDailyTask(task: element)
                 taskView.delegate = self
-                if self.programme.startTime != nil {
-                    taskView.updateDate(date: self.programme.startTime)
-                }
                 
                 taskView.updateIndex(index: self.programme.index(of: element), count: self.programme.tasks.count)
                 

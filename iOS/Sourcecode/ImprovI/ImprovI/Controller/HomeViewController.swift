@@ -21,11 +21,21 @@ class HomeViewController: BaseViewController {
     
     func loadProgrammes() {
         SVProgressHUD.show(withStatus: Constant.Keyword.loading)
-        APIManager.getProgramme(userId: Manager.sharedInstance.currentUser.id) { (programmes) in
+        APIManager.getPrograms(userId: Manager.sharedInstance.currentUser.id) { (programmes) in
             SVProgressHUD.dismiss()
-            Manager.sharedInstance.approachProgrammes(programmes: programmes)
+            if let programs = programmes {
+                Manager.sharedInstance.allProgrammes = programs
+            }
         }
     }
     
-    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "sid_programmes" {
+            if Manager.sharedInstance.allProgrammes.count == 0 {
+                self.alert(message: "Loading programmes... Please wait.")
+                return false
+            }
+        }
+        return true
+    }
 }

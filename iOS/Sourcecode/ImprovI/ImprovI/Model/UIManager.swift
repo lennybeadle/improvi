@@ -16,7 +16,7 @@ class UIManager{
     func initSettings() {
         UINavigationBar.appearance().barTintColor = Constant.UI.foreColor
         UINavigationBar.appearance().tintColor = Constant.UI.backColor
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: Constant.UI.backColor]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: Constant.UI.backColor]
         UIApplication.shared.statusBarStyle = .lightContent
     }
 }

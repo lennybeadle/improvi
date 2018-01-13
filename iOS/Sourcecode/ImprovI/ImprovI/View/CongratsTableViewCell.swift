@@ -26,9 +26,9 @@ class CongratsTableViewCell: UITableViewCell {
 
     func reset(with trait: TraitPoint) {
         //self.lblTrait.font
-        let str = NSMutableAttributedString(string: "+ \(Int(trait.value)) ", attributes: [NSFontAttributeName: self.lblTrait.font, NSForegroundColorAttributeName: Constant.UI.foreColor])
-        str.append(NSAttributedString(string: trait.name.uppercased(), attributes: [NSFontAttributeName: self.lblTrait.font, NSForegroundColorAttributeName: Constant.UI.foreColorLight]))
-        str.append(NSAttributedString(string: " Pnts", attributes: [NSFontAttributeName: self.lblTrait.font, NSForegroundColorAttributeName: Constant.UI.foreColor]))
+        let str = NSMutableAttributedString(string: "+ \(Int(trait.value)) ", attributes: [NSAttributedStringKey.font: self.lblTrait.font, NSAttributedStringKey.foregroundColor: Constant.UI.foreColor])
+        str.append(NSAttributedString(string: trait.name.uppercased(), attributes: [NSAttributedStringKey.font: self.lblTrait.font, NSAttributedStringKey.foregroundColor: Constant.UI.foreColorLight]))
+        str.append(NSAttributedString(string: " Pnts", attributes: [NSAttributedStringKey.font: self.lblTrait.font, NSAttributedStringKey.foregroundColor: Constant.UI.foreColor]))
         self.lblTrait.attributedText = str
     }
 }

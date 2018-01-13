@@ -3,7 +3,7 @@
 //  https://github.com/lexrus/LTMorphingLabel
 //
 //  The MIT License (MIT)
-//  Copyright (c) 2016 Lex Tang, http://lexrus.com
+//  Copyright (c) 2017 Lex Tang, http://lexrus.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a
 //  copy of this software and associated documentation files
@@ -50,8 +50,8 @@ extension LTMorphingLabel {
                 height: maskedHeight
             )
             String(charLimbo.char).draw(in: rect, withAttributes: [
-                NSFontAttributeName: self.font,
-                NSForegroundColorAttributeName: self.textColor
+                .font: self.font,
+                .foregroundColor: self.textColor
                 ])
             let newImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
@@ -63,7 +63,8 @@ extension LTMorphingLabel {
             )
         return (newImage!, newRect)
     }
-    
+
+    @objc
     func BurnLoad() {
         
         startClosures["Burn\(LTMorphingPhases.start)"] = {
@@ -115,12 +116,12 @@ extension LTMorphingLabel {
                         )
                         layer.renderMode = kCAEmitterLayerAdditive
                         layer.emitterMode = kCAEmitterLayerOutline
-                        cell.emissionLongitude = CGFloat(M_PI / 2.0)
+                        cell.emissionLongitude = CGFloat(Double.pi / 2)
                         cell.scale = self.font.pointSize / 160.0
                         cell.scaleSpeed = self.font.pointSize / 100.0
                         cell.birthRate = Float(self.font.pointSize)
                         cell.emissionLongitude = CGFloat(arc4random_uniform(30))
-                        cell.emissionRange = CGFloat(M_PI_4)
+                        cell.emissionRange = CGFloat(Double.pi / 4)
                         cell.alphaSpeed = self.morphingDuration * -3.0
                         cell.yAcceleration = 10
                         cell.velocity = CGFloat(10 + Int(arc4random_uniform(3)))
@@ -143,14 +144,14 @@ extension LTMorphingLabel {
                         )
                         layer.renderMode = kCAEmitterLayerAdditive
                         layer.emitterMode = kCAEmitterLayerVolume
-                        cell.emissionLongitude = CGFloat(M_PI / 2.0)
+                        cell.emissionLongitude = CGFloat(Double.pi / 2)
                         cell.scale = self.font.pointSize / 40.0
                         cell.scaleSpeed = self.font.pointSize / 100.0
                         cell.birthRate =
                             Float(self.font.pointSize)
                             / Float(arc4random_uniform(10) + 10)
                         cell.emissionLongitude = 0
-                        cell.emissionRange = CGFloat(M_PI_4)
+                        cell.emissionRange = CGFloat(Double.pi / 4)
                         cell.alphaSpeed = self.morphingDuration * -3
                         cell.yAcceleration = -5
                         cell.velocity = CGFloat(20 + Int(arc4random_uniform(15)))

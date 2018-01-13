@@ -13,6 +13,8 @@ class Manager {
     static let sharedInstance: Manager = Manager()
     
     var allProgrammes = [Programme]()
+    var allTasks = [DailyTask]()
+    
     var currentUser: User! {
         didSet {
             let standard = UserDefaults.standard
@@ -45,15 +47,18 @@ class Manager {
     
     init() {
         UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = Constant.UI.foreColor
+        loadDailyTasks()
     }
     
-    func approachProgrammes(programmes: [Programme]?) {
-        self.allProgrammes.removeAll()
-        if let programmes = programmes {
-            for programme in programmes {
-                self.allProgrammes.append(programme)
-                if programme.status != .normal {
-                    currentUser.addProgramme(programme)
+    func loadDailyTasks() {
+        let standard = UserDefaults.standard
+        if let dailytasks = standard.array(forKey: "dailytasks") {
+            self.allTasks = dailytasks.map {DailyTask.from(dict: $0 as! [String: Any])}
+        }
+        else {
+            APIManager.getDailyTasks { (tasks) in
+                if let tasks = tasks {
+                    self.allTasks = tasks
                 }
             }
         }
@@ -64,21 +69,11 @@ class Manager {
             return programme1.status.rawValue > programme2.status.rawValue
         }
     }
-    
-    func takeProgramme(programme: Programme) {
-        NotificationManager.sharedInstance.setNotification(with: programme.id, name: programme.name, time: Date(), content: "Will you take new tasks in this programme?", isRepeat: true)
-        programme.update()
-    }
-    
-    func untakeProgramme(programme: Programme) {
-        NotificationManager.sharedInstance.removeNotification(with: programme.id)
-        programme.reset()
-    }
 
     func initUISettings() {
         UINavigationBar.appearance().barTintColor = Constant.UI.foreColor
         UINavigationBar.appearance().tintColor = Constant.UI.backColor
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: Constant.UI.backColor]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: Constant.UI.backColor]
         UIApplication.shared.statusBarStyle = .lightContent
     }
 
@@ -105,21 +100,6 @@ class Manager {
         standard.synchronize()
     }
     
-    func loadNewTasks(for programmeId: String) {
-        SVProgressHUD.show()
-        APIManager.getNewTask(userId: self.currentUser.id, programmeId: programmeId) { (newProgramme) in
-            SVProgressHUD.dismiss()
-            if let programme = self.currentUser.programme(with: programmeId), let newProgramme = newProgramme {
-                programme.approachTasks(dailyTasks: newProgramme.tasks)
-                programme.status = newProgramme.status
-                programme.startTime = newProgramme.startTime
-                DispatchQueue.main.async {
-                    self.showProgrammeDetail(programme: programme)
-                }
-            }
-        }
-    }
-    
     func showProgrammeDetail(programme: Programme) {
         if let navigationController = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController {
             if let storyboard = navigationController.storyboard {
@@ -136,6 +116,65 @@ class Manager {
             if let storyboard = navigationController.storyboard {
                 if let listController = storyboard.instantiateViewController(withIdentifier: "sid_programme_list") as? ProgrammeViewController {
                     navigationController.pushViewController(listController, animated: true)
+                }
+            }
+        }
+    }
+    
+    func purchaseIXP(completion: ((Bool)->Void)?) {
+        if let navigationController = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController {
+            SVProgressHUD.show()
+            PurchaseManager.shared.loadProducts { (result) in
+                SVProgressHUD.dismiss()
+                if result {
+                    SVProgressHUD.show()
+                    PurchaseManager.shared.purchaseProduct(product: Products.product_ixp_250.identifier) { (result) in
+                        SVProgressHUD.dismiss()
+                        if result {
+                            //                        Manager.shared.categoryPurchased()
+                            let alert = UIAlertController(title: "Success", message: "Your have purchased 250 iXP points.", preferredStyle: .alert)
+                            let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                            alert.addAction(action)
+                            navigationController.present(alert, animated: true, completion: nil)
+
+                            if let currentUser = Manager.sharedInstance.currentUser {
+                                currentUser.totalIXP = currentUser.totalIXP + 250
+                            }
+                            
+                            SVProgressHUD.show()
+                            APIManager.updateIxp(userId: Manager.sharedInstance.currentUser.id, completion: { (result) in
+                                SVProgressHUD.dismiss()
+                                if result {
+                                    if let completion = completion {
+                                        completion(true)
+                                    }
+                                }
+                                else {
+                                    if let completion = completion {
+                                        completion(false)
+                                    }
+                                }
+                            })
+                        }
+                        else {
+                            let alert = UIAlertController(title: "Failure", message: "Please try again later", preferredStyle: .alert)
+                            let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                            alert.addAction(action)
+                            navigationController.present(alert, animated: true, completion: nil)
+                            if let completion = completion {
+                                completion(false)
+                            }
+                        }
+                    }
+                }
+                else {
+                    let alert = UIAlertController(title: "Failure", message: "Error loading products, please try again later.", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                    alert.addAction(action)
+                    navigationController.present(alert, animated: true, completion: nil)
+                    if let completion = completion {
+                        completion(false)
+                    }
                 }
             }
         }

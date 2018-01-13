@@ -65,7 +65,7 @@ class APIManager: NSObject {
         }
     }
     
-    class func login(with userName: String?, email: String?, password: String, completion: ((User?, [Programme]?)->Void)? = nil) {
+    class func login(with userName: String?, email: String?, password: String, completion: ((User?)->Void)? = nil) {
         var parameters = [String: String]()
         if let name = userName {
             parameters["user_name"] = name
@@ -90,30 +90,55 @@ class APIManager: NSObject {
                     }
                     user.password = dict["password"] as! String
                     user.totalIXP = "\(dict["ixp"]!)".intValue
-                    
-                    if let programmeDict = dict["program_info"] as? [Any] {
-                        let programmes = programmeDict.map {Programme.from(dict: $0 as! [String: Any])}
-                        if let completion = completion {
-                            completion(user, programmes)
-                        }
+                    user.feathers = "\(dict["feather"]!)".intValue
+
+                    if let completion = completion {
+                        completion(user)
                     }
                     return
                 }
             }
             
             if let completion = completion {
-                completion(nil, nil)
+                completion(nil)
             }
             
             print("login failed")
         }
     }
     
-    class func getProgramme(userId: String, completion: (([Programme]?)->Void)?) {
+    class func getDailyTasks(completion: (([DailyTask]?)->Void)?) {
+        let url = SERVER + "action=getDailyTasks"
+        Alamofire.request(url, method: .get).responseJSON { (response) in
+            if response.result.isSuccess {
+                print("JSON: \(response.result.value!)")
+                if let data = self.dataFromResponse(json: response.result.value) as? [Any]{
+                    let standard = UserDefaults.standard
+                    standard.set(data, forKey: "dailytasks")
+                    DispatchQueue.global(qos: .background).async {
+                        standard.synchronize()
+                    }
+                    
+                    if let completion = completion {
+                        let dailyTasks = data.map {DailyTask.from(dict: $0 as! [String: Any])}
+                        completion(dailyTasks)
+                    }
+                    return
+                }
+            }
+            
+            if let completion = completion {
+                completion(nil)
+            }
+            print("get DailyTasks failed")
+        }
+    }
+    
+    class func getPrograms(userId: String, completion: (([Programme]?)->Void)?) {
         var parameters = [String: String]()
         parameters["user_id"] = userId
         
-        let url = SERVER + "action=getProgramList"
+        let url = SERVER + "action=getPrograms"
         Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
             if response.result.isSuccess {
                 print("JSON: \(response.result.value!)")
@@ -133,12 +158,36 @@ class APIManager: NSObject {
         }
     }
     
-    class func addProgramme(userId: String, programmeId: String, completion: ((Programme?)->Void)?) {
+    class func getProgramDetail(userId: String, programmeId: String, completion: (([String:Any]?)->Void)?) {
         var parameters = [String: String]()
         parameters["user_id"] = userId
         parameters["program_id"] = programmeId
         
-        let url = SERVER + "action=takeProgram"
+        let url = SERVER + "action=programDetail"
+        Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
+            if response.result.isSuccess {
+                print("JSON: \(response.result.value!)")
+                if let dict = self.dataFromResponse(json: response.result.value) as? [String:Any] {
+                    if let completion = completion {
+                        completion(dict)
+                    }
+                    return
+                }
+            }
+            
+            if let completion = completion {
+                completion(nil)
+            }
+            print("complete task failed")
+        }
+    }
+    
+    class func unlockProgramme(userId: String, programmeId: String, completion: ((Programme?)->Void)?) {
+        var parameters = [String: String]()
+        parameters["user_id"] = userId
+        parameters["program_id"] = programmeId
+        
+        let url = SERVER + "action=unlockProgram"
         Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
             if response.result.isSuccess {
                 print("JSON: \(response.result.value!)")
@@ -154,40 +203,16 @@ class APIManager: NSObject {
             if let completion = completion {
                 completion(nil)
             }
-            print("add programme failed")
+            print("unlock programme failed")
         }
     }
     
-    class func removeProgramme(userId: String, programmeId: String, completion: ((Bool)->Void)?) {
+    class func startTask(userId: String, programmeId: String, taskId: String, completion: ((Programme?)->Void)?) {
         var parameters = [String: String]()
         parameters["user_id"] = userId
         parameters["program_id"] = programmeId
         
-        let url = SERVER + "action=deleteProgram"
-        Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
-            if response.result.isSuccess {
-                print("JSON: \(response.result.value!)")
-                if let _ = self.dataFromResponse(json: response.result.value){
-                    if let completion = completion {
-                        completion(true)
-                    }
-                    return
-                }
-            }
-            
-            if let completion = completion {
-                completion(false)
-            }
-            print("remove programme failed")
-        }
-    }
-    
-    class func getNewTask(userId: String, programmeId: String, completion: ((Programme?)->Void)?) {
-        var parameters = [String: String]()
-        parameters["user_id"] = userId
-        parameters["program_id"] = programmeId
-        
-        let url = SERVER + "action=takeTaskCyclically"
+        let url = SERVER + "action=startTask"
         Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
             if response.result.isSuccess {
                 print("JSON: \(response.result.value!)")
@@ -229,6 +254,77 @@ class APIManager: NSObject {
                 completion(false)
             }
             print("complete task failed")
+        }
+    }
+    
+    class func getProgress(userId: String, completion: (([String:Any]?)->Void)?) {
+//        {"msg": "Success to get progress", "success": 1, "data" : {"9":[{"task_id":"76","started_at":"0000-00-00 00:00:00","status":"0"},{"task_id":"67","started_at":"2017-12-23 00:27:26","status":"2"},{"task_id":"65","started_at":"0000-00-00 00:00:00","status":"0"}],"7":[]}}
+        var parameters = [String: String]()
+        parameters["user_id"] = userId
+        
+        let url = SERVER + "action=getProgress"
+        Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
+            if response.result.isSuccess {
+                print("JSON: \(response.result.value!)")
+                if let dict = self.dataFromResponse(json: response.result.value) as? [String:Any] {
+                    if let completion = completion {
+                        completion(dict)
+                    }
+                    return
+                }
+            }
+            
+            if let completion = completion {
+                completion(nil)
+            }
+            print("complete task failed")
+        }
+    }
+    
+    class func updateIxp(userId: String, completion: ((Bool)->Void)?) {
+        var parameters = [String: String]()
+        parameters["user_id"] = userId
+        parameters["ixp"] = "250"
+        
+        let url = SERVER + "action=ixpPurchased"
+        Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
+            if response.result.isSuccess {
+                print("JSON: \(response.result.value!)")
+                if let _ = self.dataFromResponse(json: response.result.value){
+                    if let completion = completion {
+                        completion(true)
+                    }
+                    return
+                }
+            }
+            
+            if let completion = completion {
+                completion(false)
+            }
+            print("update to premium failed")
+        }
+    }
+    
+    class func updateToPremium(userId: String, completion: ((Bool)->Void)?) {
+        var parameters = [String: String]()
+        parameters["user_id"] = userId
+        
+        let url = SERVER + "action=updateToPremium"
+        Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
+            if response.result.isSuccess {
+                print("JSON: \(response.result.value!)")
+                if let _ = self.dataFromResponse(json: response.result.value){
+                    if let completion = completion {
+                        completion(true)
+                    }
+                    return
+                }
+            }
+            
+            if let completion = completion {
+                completion(false)
+            }
+            print("update to premium failed")
         }
     }
     

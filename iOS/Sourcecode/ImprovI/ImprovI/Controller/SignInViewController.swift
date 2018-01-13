@@ -38,12 +38,12 @@ class SignInViewController: BaseViewController {
     }
     
     func checkInputData() -> Bool {
-        guard let username = txtUsername.text, username.characters.count > 0 else {
+        guard let username = txtUsername.text, username.count > 0 else {
             self.showError(text: "Please check the username")
             return false
         }
         
-        guard let password = txtPassword.text, password.characters.count > 0 else {
+        guard let password = txtPassword.text, password.count > 0 else {
             self.showError(text: "Please check the password")
             return false
         }
@@ -60,25 +60,25 @@ class SignInViewController: BaseViewController {
         if self.checkInputData() {
             SVProgressHUD.show(withStatus: Constant.Keyword.loading)
             if self.txtUsername.text!.isValidEmail() {
-                APIManager.login(with: nil, email: txtUsername.text, password: txtPassword.text!, completion: { (user, programmes) in
+                APIManager.login(with: nil, email: txtUsername.text, password: txtPassword.text!, completion: { (user) in
                     SVProgressHUD.dismiss()
                     if user == nil {
                         return
                     }
                     Manager.sharedInstance.currentUser = user
-                    Manager.sharedInstance.approachProgrammes(programmes: programmes)
+//                    Manager.sharedInstance.approachProgrammes(programmes: programmes)
                     IQKeyboardManager.sharedManager().resignFirstResponder()
                     self.performSegue(withIdentifier: "sid_home", sender: self)
                 })
             }
             else {
-                APIManager.login(with: txtUsername.text, email: nil, password: txtPassword.text!, completion: { (user, programmes) in
+                APIManager.login(with: txtUsername.text, email: nil, password: txtPassword.text!, completion: { (user) in
                     SVProgressHUD.dismiss()
                     if user == nil {
                         return
                     }
                     Manager.sharedInstance.currentUser = user
-                    Manager.sharedInstance.approachProgrammes(programmes: programmes)
+//                    Manager.sharedInstance.approachProgrammes(programmes: programmes)
                     IQKeyboardManager.sharedManager().resignFirstResponder()
                     self.performSegue(withIdentifier: "sid_home", sender: self)
                 })
