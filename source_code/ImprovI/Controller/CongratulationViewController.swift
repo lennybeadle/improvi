@@ -35,7 +35,7 @@ class CongratulationViewController: UIViewController {
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(CongratulationViewController.disappear)))
     }
     
-    func disappear() {
+    @objc func disappear() {
         self.emitter.particleBirthRate = 0
         UIView.animate(withDuration: 0.5, animations: {
             self.view.alpha = 0.0

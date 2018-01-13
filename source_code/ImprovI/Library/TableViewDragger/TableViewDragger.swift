@@ -247,7 +247,7 @@ open class TableViewDragger: NSObject {
 
 // MARK: - Action Methods
 private extension TableViewDragger {
-    dynamic func displayDidRefresh(_ displayLink: CADisplayLink) {
+    @objc dynamic func displayDidRefresh(_ displayLink: CADisplayLink) {
         guard let tableView = targetTableView, let draggingCell = draggingCell else {
             return
         }
@@ -268,7 +268,7 @@ private extension TableViewDragger {
         draggingCell.location = panGesture.location(in: tableView)
     }
     
-    dynamic func longPressGestureAction(_ gesture: UILongPressGestureRecognizer) {
+    @objc dynamic func longPressGestureAction(_ gesture: UILongPressGestureRecognizer) {
         switch gesture.state {
         case .began:
             targetTableView?.isScrollEnabled = false
@@ -287,7 +287,7 @@ private extension TableViewDragger {
         }
     }
     
-    dynamic func panGestureAction(_ gesture: UIPanGestureRecognizer) {
+    @objc dynamic func panGestureAction(_ gesture: UIPanGestureRecognizer) {
         if targetTableView?.isScrollEnabled == false && gesture.state == .changed {
             
             let offsetY = gesture.translation(in: targetTableView).y

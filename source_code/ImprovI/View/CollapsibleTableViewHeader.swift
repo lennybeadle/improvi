@@ -40,7 +40,7 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func tapHeader(gestureRecognizer: UITapGestureRecognizer) {
+    @objc func tapHeader(gestureRecognizer: UITapGestureRecognizer) {
         guard let cell = gestureRecognizer.view as? CollapsibleTableViewHeader else {
             return
         }

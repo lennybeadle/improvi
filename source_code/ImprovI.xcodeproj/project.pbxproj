@@ -807,7 +807,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "a1966b12-d5f9-4751-a028-9a31b288b374";
 				PROVISIONING_PROFILE_SPECIFIER = "improvi Development Provision";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -827,7 +827,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "f3577102-ca92-4c52-b6ab-99b7dfc9756c";
 				PROVISIONING_PROFILE_SPECIFIER = "improvi Distribution Provision";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;

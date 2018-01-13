@@ -5,7 +5,7 @@ PODS:
   - LTMorphingLabel (0.5.6)
   - Spring (1.0.5)
   - SVProgressHUD (2.2.2)
-  - SwiftyStoreKit (0.11.3)
+  - SwiftyStoreKit (0.12.1)
 
 DEPENDENCIES:
   - Alamofire
@@ -32,7 +32,7 @@ SPEC CHECKSUMS:
   LTMorphingLabel: bdb51d4682e9822da89da6f567bd8aa456fd6650
   Spring: 48aad470f3ead043b2da98b64e0bf0630b7ebc42
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
-  SwiftyStoreKit: 783df8530cd444b3cce886196b11ff6cdc55bc11
+  SwiftyStoreKit: 98742f9d7941ecaca0f248de0f49c5ecf585bc95
 
 PODFILE CHECKSUM: b0f702d982789da70787012f5c420e9a4400a340
 
