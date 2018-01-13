@@ -21,12 +21,12 @@ class SettingsTableViewCell: UITableViewCell {
     var isAccessory: Bool = true {
         didSet {
             if isAccessory {
-                trailingConstraint.constant = 26
+                trailingConstraint.constant = 46
                 imgAccessory.isHidden = false
                 
             }
             else {
-                trailingConstraint.constant = 10
+                trailingConstraint.constant = 30
                 imgAccessory.isHidden = true
             }
         }

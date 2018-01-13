@@ -26,22 +26,18 @@ class TraitPointsViewController: BaseViewController {
     
     func reloadTraits() {
         if let user = Manager.sharedInstance.currentUser {
-            if user.traitPoints.count == 0 {
-                SVProgressHUD.show(withStatus: Constant.Keyword.loading)
-                APIManager.loadTraits(userId: user.id, completion: { (traits, ixpval) in
-                    SVProgressHUD.dismiss()
-                    if let traits = traits {
-                        user.traitPoints.append(contentsOf: traits)
-                    }
-                    user.totalIXP = ixpval
-                    DispatchQueue.main.async {
-                        self.showTraits()
-                    }
-                })
-            }
-            else {
-                self.showTraits()
-            }
+            user.traitPoints.removeAll()
+            SVProgressHUD.show(withStatus: Constant.Keyword.loading)
+            APIManager.loadTraits(userId: user.id, completion: { (traits, ixpval) in
+                SVProgressHUD.dismiss()
+                if let traits = traits {
+                    user.traitPoints.append(contentsOf: traits)
+                }
+                user.totalIXP = ixpval
+                DispatchQueue.main.async {
+                    self.showTraits()
+                }
+            })            
         }
     }
     
@@ -94,13 +90,20 @@ class TraitPointsViewController: BaseViewController {
             views: views
         ))
     }
-    
+
     func showTraits() {
         if let user = Manager.sharedInstance.currentUser {
             if user.traitPoints.count > 0 {
-                let data: [Double] = user.traitPoints.map { return Double($0.value) }
-                let labels = user.traitPoints.map { return $0.name! }
+                var data = [Double]()
+                var labels = [String]()
                 let maxTrait = max(user.maxTraits, 30)
+                for trait in user.traitPoints {
+                    if trait.value == 0 {
+                        continue
+                    }
+                    data.append(Double(trait.value!))
+                    labels.append(trait.name)
+                }
                 vwGraph.rangeMax = Double(maxTrait - (maxTrait % 10) + 20)
                 vwGraph.numberOfIntermediateReferenceLines = min(20, Int(vwGraph.rangeMax)/5 - 1)
                 vwGraph.set(data: data, withLabels: labels)
@@ -108,4 +111,19 @@ class TraitPointsViewController: BaseViewController {
             }
         }
     }
+    
+//    func showTraits() {
+//        if let user = Manager.sharedInstance.currentUser {
+//            if user.traitPoints.count > 0 {
+//
+//                let data: [Double] = user.traitPoints.map { return Double($0.value) }
+//                let labels = user.traitPoints.map { return $0.name! }
+//                let maxTrait = max(user.maxTraits, 30)
+//                vwGraph.rangeMax = Double(maxTrait - (maxTrait % 10) + 20)
+//                vwGraph.numberOfIntermediateReferenceLines = min(20, Int(vwGraph.rangeMax)/5 - 1)
+//                vwGraph.set(data: data, withLabels: labels)
+//                vwGraph.setNeedsLayout()
+//            }
+//        }
+//    }
 }

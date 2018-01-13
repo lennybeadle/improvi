@@ -40,6 +40,9 @@
 		9A37F79B1E3649A000943AF4 /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A37F79A1E3649A000943AF4 /* SummaryViewController.swift */; };
 		9A3BABBE1EE9CA7B00B19713 /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3BABBD1EE9CA7B00B19713 /* PurchaseManager.swift */; };
 		9A3E983D1FF2522C006F796B /* FeathersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3E983C1FF2522C006F796B /* FeathersViewController.swift */; };
+		9A4478DF1FF468BD00A1943F /* DailyTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4478DE1FF468BD00A1943F /* DailyTaskViewController.swift */; };
+		9A4478E11FF4690700A1943F /* Custom.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A4478E01FF4690700A1943F /* Custom.storyboard */; };
+		9A4478E31FF5C1B100A1943F /* FeatherAskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4478E21FF5C1B100A1943F /* FeatherAskViewController.swift */; };
 		9A51A4361E3E9ABF0025F63A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A51A4351E3E9ABF0025F63A /* ProfileViewController.swift */; };
 		9A51A4381E3E9AD00025F63A /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A51A4371E3E9AD00025F63A /* ProgressViewController.swift */; };
 		9A51A43A1E3E9AD90025F63A /* TraitPointsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A51A4391E3E9AD90025F63A /* TraitPointsViewController.swift */; };
@@ -59,8 +62,6 @@
 		9A805F561E3A6FD000E49D2C /* TableViewDragger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F531E3A6FD000E49D2C /* TableViewDragger.swift */; };
 		9A805F571E3A6FD000E49D2C /* TableViewDraggerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F541E3A6FD000E49D2C /* TableViewDraggerCell.swift */; };
 		9A805F581E3A6FD000E49D2C /* UIScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F551E3A6FD000E49D2C /* UIScrollViewExtension.swift */; };
-		9A93C78D1E47EC1200810D3A /* DailyTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A93C78C1E47EC1200810D3A /* DailyTaskView.swift */; };
-		9A93C78F1E47EC1B00810D3A /* DailyTaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A93C78E1E47EC1B00810D3A /* DailyTaskView.xib */; };
 		9A95F3881E46811800F3228F /* privacypolicy.html in Resources */ = {isa = PBXBuildFile; fileRef = 9A95F3871E46811800F3228F /* privacypolicy.html */; };
 		9A95F38B1E46816700F3228F /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A95F38A1E46816700F3228F /* PrivacyPolicyViewController.swift */; };
 		9A95F38D1E4684EE00F3228F /* ContactUSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A95F38C1E4684EE00F3228F /* ContactUSViewController.swift */; };
@@ -117,6 +118,9 @@
 		9A37F79A1E3649A000943AF4 /* SummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
 		9A3BABBD1EE9CA7B00B19713 /* PurchaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
 		9A3E983C1FF2522C006F796B /* FeathersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeathersViewController.swift; sourceTree = "<group>"; };
+		9A4478DE1FF468BD00A1943F /* DailyTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTaskViewController.swift; sourceTree = "<group>"; };
+		9A4478E01FF4690700A1943F /* Custom.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Custom.storyboard; sourceTree = "<group>"; };
+		9A4478E21FF5C1B100A1943F /* FeatherAskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatherAskViewController.swift; sourceTree = "<group>"; };
 		9A51A4351E3E9ABF0025F63A /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		9A51A4371E3E9AD00025F63A /* ProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		9A51A4391E3E9AD90025F63A /* TraitPointsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraitPointsViewController.swift; sourceTree = "<group>"; };
@@ -137,8 +141,6 @@
 		9A805F531E3A6FD000E49D2C /* TableViewDragger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDragger.swift; sourceTree = "<group>"; };
 		9A805F541E3A6FD000E49D2C /* TableViewDraggerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDraggerCell.swift; sourceTree = "<group>"; };
 		9A805F551E3A6FD000E49D2C /* UIScrollViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtension.swift; sourceTree = "<group>"; };
-		9A93C78C1E47EC1200810D3A /* DailyTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyTaskView.swift; sourceTree = "<group>"; };
-		9A93C78E1E47EC1B00810D3A /* DailyTaskView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DailyTaskView.xib; sourceTree = "<group>"; };
 		9A95F3871E46811800F3228F /* privacypolicy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = privacypolicy.html; sourceTree = "<group>"; };
 		9A95F38A1E46816700F3228F /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		9A95F38C1E4684EE00F3228F /* ContactUSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUSViewController.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				9A37F7701E36206300943AF4 /* AppDelegate.swift */,
+				9A4478E01FF4690700A1943F /* Custom.storyboard */,
 				9A37F7741E36206300943AF4 /* Main.storyboard */,
 				9A37F7771E36206300943AF4 /* Assets.xcassets */,
 				9A37F7791E36206300943AF4 /* LaunchScreen.storyboard */,
@@ -300,6 +303,7 @@
 				9A37F7941E36497500943AF4 /* ProgrammeViewController.swift */,
 				9AD5D0791E3BD076000C7AF9 /* ProgrammeDetailViewController.swift */,
 				9A3E983C1FF2522C006F796B /* FeathersViewController.swift */,
+				9A4478E21FF5C1B100A1943F /* FeatherAskViewController.swift */,
 				9A37F7961E36498200943AF4 /* AnalyticsViewController.swift */,
 				9A37F7981E36498B00943AF4 /* TBDViewController.swift */,
 				9A37F79A1E3649A000943AF4 /* SummaryViewController.swift */,
@@ -402,8 +406,7 @@
 		9A93C78B1E47EBF100810D3A /* DailyTaskView */ = {
 			isa = PBXGroup;
 			children = (
-				9A93C78C1E47EC1200810D3A /* DailyTaskView.swift */,
-				9A93C78E1E47EC1B00810D3A /* DailyTaskView.xib */,
+				9A4478DE1FF468BD00A1943F /* DailyTaskViewController.swift */,
 			);
 			name = DailyTaskView;
 			sourceTree = "<group>";
@@ -516,7 +519,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A37F77B1E36206300943AF4 /* LaunchScreen.storyboard in Resources */,
-				9A93C78F1E47EC1B00810D3A /* DailyTaskView.xib in Resources */,
+				9A4478E11FF4690700A1943F /* Custom.storyboard in Resources */,
 				9AAEA7E41E637D9C00628B0D /* intro1.png in Resources */,
 				9A2E18011FEF9BB8002BD071 /* .gitkeep in Resources */,
 				9A36AD411E413DE500B949A0 /* starParticle.sks in Resources */,
@@ -623,7 +626,6 @@
 				9A51A43E1E3EB5B50025F63A /* SettingsTableViewCell.swift in Sources */,
 				9A35B3381E450657001BEDA1 /* TextInputViewController.swift in Sources */,
 				9A37F7711E36206300943AF4 /* AppDelegate.swift in Sources */,
-				9A93C78D1E47EC1200810D3A /* DailyTaskView.swift in Sources */,
 				9A95F38D1E4684EE00F3228F /* ContactUSViewController.swift in Sources */,
 				9A37F7971E36498200943AF4 /* AnalyticsViewController.swift in Sources */,
 				9A3061921E3FF0BD0027FD28 /* Range.swift in Sources */,
@@ -640,6 +642,8 @@
 				9A3E983D1FF2522C006F796B /* FeathersViewController.swift in Sources */,
 				9A37F78F1E363C5000943AF4 /* Manager.swift in Sources */,
 				9A51A43C1E3E9AE00025F63A /* SettingsViewController.swift in Sources */,
+				9A4478E31FF5C1B100A1943F /* FeatherAskViewController.swift in Sources */,
+				9A4478DF1FF468BD00A1943F /* DailyTaskViewController.swift in Sources */,
 				9A51A4361E3E9ABF0025F63A /* ProfileViewController.swift in Sources */,
 				9A37F78D1E36363500943AF4 /* HomeViewController.swift in Sources */,
 				9A37F7911E363C5900943AF4 /* Constant.swift in Sources */,
@@ -794,15 +798,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = U87CQY25JC;
 				INFOPLIST_FILE = ImprovI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lenny.improvi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f3577102-ca92-4c52-b6ab-99b7dfc9756c";
-				PROVISIONING_PROFILE_SPECIFIER = "improvi Distribution Provision";
+				PROVISIONING_PROFILE = "a1966b12-d5f9-4751-a028-9a31b288b374";
+				PROVISIONING_PROFILE_SPECIFIER = "improvi Development Provision";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
 			};

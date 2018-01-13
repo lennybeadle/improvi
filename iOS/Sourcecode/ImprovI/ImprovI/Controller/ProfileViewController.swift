@@ -103,6 +103,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
 extension ProfileViewController: ChangePasswordViewDelegate {
     func passwordChangedTo(value: String) {
         Manager.sharedInstance.currentUser.password = value
+        Manager.sharedInstance.storeUserInfo()
         self.reload()
     }
 }
@@ -132,6 +133,10 @@ extension ProfileViewController: TextInputViewControllerDelegate {
             textInputController.defaultValue = Manager.sharedInstance.currentUser.emailAddress
             textInputController.placeHolder = "Type your email address here, please"
             textInputController.textType = "Email"
+        }
+        else if segue.identifier == "sid_changepassword" {
+            let passwordController = segue.destination as! ChangePasswordViewController
+            passwordController.delegate = self
         }
     }
 }

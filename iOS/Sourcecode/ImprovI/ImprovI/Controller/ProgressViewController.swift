@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class ProgressViewController: BaseViewController {
     @IBOutlet weak var tblProgress: UITableView!
@@ -20,6 +21,39 @@ class ProgressViewController: BaseViewController {
         
         tblProgress.estimatedRowHeight = 70
         tblProgress.rowHeight = UITableViewAutomaticDimension
+        
+        self.loadProgress()
+    }
+    
+    func program(for id: String) -> Programme? {
+        if self.programmes == nil {
+            return nil
+        }
+        
+        for programme in self.programmes {
+            if programme.id == id {
+                return programme
+            }
+        }
+        return nil
+    }
+    
+    func loadProgress() {
+        SVProgressHUD.show(withStatus: Constant.Keyword.loading)
+        APIManager.getProgress(userId: Manager.sharedInstance.currentUser.id) { (progressDict) in
+            SVProgressHUD.dismiss()
+            if let dict = progressDict {
+                for (id, value) in dict {
+                    if let programme = self.program(for: id) {
+                        let valueDict = value as! [String: Any]
+                        let tasks = valueDict["tasks"] as! [Any]
+                        programme.getPrepared(with: Manager.sharedInstance.allTasks)
+                        programme.applyTaskStatus(with: tasks)                        
+                    }
+                }
+                self.tblProgress.reloadData()
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

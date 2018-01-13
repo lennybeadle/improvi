@@ -14,6 +14,8 @@ class ProgrammeTableViewCell: UITableViewCell {
     @IBOutlet weak var lblName: SpringLabel!
     weak var programme: Programme!
     @IBOutlet weak var imgLock: UIImageView!
+    @IBOutlet weak var lblNeededFeather: UILabel!
+    @IBOutlet weak var imgFeather: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,9 +36,14 @@ class ProgrammeTableViewCell: UITableViewCell {
         self.lblName.text = programme.name
         if programme.unlocked {
             imgLock.isHidden = true
+            imgFeather.isHidden = true
+            lblNeededFeather.isHidden = true
         }
         else {
             imgLock.isHidden = false
+            imgFeather.isHidden = false
+            lblNeededFeather.isHidden = false
+            lblNeededFeather.text = "\(programme.needed_feather)"
         }
     }
 }

@@ -22,6 +22,8 @@ class ProgrammeDetailViewController: BaseViewController {
     @IBOutlet weak var lblTimeRemaining: UILabel!
 
     weak var selectedTask: DailyTask! = nil
+    var pageController: UIPageViewController!
+    var currentTaskViewController: DailyTaskViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +36,10 @@ class ProgrammeDetailViewController: BaseViewController {
         self.vwInfo.layer.shadowRadius = 2
         self.vwInfo.layer.shadowOffset = CGSize(width: 0, height: 2)
 
+        self.vwDailyTask.layer.shadowColor = UIColor.gray.cgColor
+        self.vwDailyTask.layer.shadowOpacity = 0.3
+        self.vwDailyTask.layer.shadowRadius = 5
+        self.vwDailyTask.layer.shadowOffset = CGSize(width: 1, height: 4)
         self.loadProgramDetail()
     }
     
@@ -54,81 +60,25 @@ class ProgrammeDetailViewController: BaseViewController {
             self.title = programme.name
             progressBar.progressValue = CGFloat(self.programme.progress)
             self.lblProgress.text = "\(programme.type): \(Int(self.programme.progress))%"
-            
-            self.lblTimeRemaining.text = self.programme.timeString
-            self.progressTime.progressValue = self.programme.timeProgress
         }
+        self.resetPageController()
     }
     
-    func initSwipeView() {
-        let viewGenerator: (DailyTask, CGRect) -> (UIView) = { (element: DailyTask, frame: CGRect) -> (UIView) in
-            let container = UIView(frame: CGRect(x: 20, y: 10, width: frame.width - 40, height: frame.height - 20))
-            
-            if let taskView = Bundle.main.loadNibNamed("DailyTaskView", owner: nil, options: nil)?.first as? DailyTaskView {
-                taskView.updateWithDailyTask(task: element)
-                taskView.delegate = self
-                
-                taskView.updateIndex(index: self.programme.index(of: element), count: self.programme.tasks.count)
-                
-                container.addSubview(taskView)
-                
-                taskView.frame = container.bounds
-                taskView.backgroundColor = Constant.UI.backColor
-                taskView.clipsToBounds = true
-                taskView.layer.cornerRadius = 16
-
-                let views = [
-                    "taskView" : taskView
-                ]
-                
-                container.addConstraints(NSLayoutConstraint.constraints(
-                    withVisualFormat: "H:|-[taskView]-|",
-                    options: [],
-                    metrics: nil,
-                    views: views
-                ))
-                
-                container.addConstraints(NSLayoutConstraint.constraints(
-                    withVisualFormat: "V:|-[taskView]-|",
-                    options: [],
-                    metrics: nil,
-                    views: views
-                ))
-            }
-            
-            container.layer.shadowRadius = 4
-            container.layer.shadowOpacity = 1.0
-            container.layer.shadowColor = UIColor(white: 0.9, alpha: 1.0).cgColor
-            container.layer.shadowOffset = CGSize(width: 0, height: 0)
-            container.layer.shouldRasterize = true
-            container.layer.rasterizationScale = UIScreen.main.scale
-            
-            return container
-        }
+    func resetPageController() {
+        self.pageController = UIPageViewController()
+        self.pageController.dataSource = self
+        self.pageController.delegate = self
+        currentTaskViewController = self.dailyTaskViewController(at: 0)
+        self.pageController.setViewControllers([currentTaskViewController], direction: .forward, animated: false, completion: nil)
         
-        let overlayGenerator: (SwipeMode, CGRect) -> (UIView) = { (mode: SwipeMode, frame: CGRect) -> (UIView) in
-            let effectView = UIVisualEffectView()
-            effectView.frame = CGRect(x: 20, y: 10, width: frame.width - 40, height: frame.height - 20)
-            effectView.layer.cornerRadius = 16
-            effectView.backgroundColor = Constant.UI.foreColorLight.withAlphaComponent(0.5)
-            effectView.layer.masksToBounds = true
-            effectView.effect = UIBlurEffect(style: UIBlurEffectStyle.regular)
-            return effectView
-        }
-        
-        let frame = CGRect(x: 0, y: 0, width: self.vwDailyTask.frame.width, height: self.vwDailyTask.frame.height)
-        swipeView = DMSwipeCardsView<DailyTask>(frame: frame,
-                                                viewGenerator: viewGenerator,
-                                                overlayGenerator: overlayGenerator)
-        swipeView.delegate = self
-        self.vwDailyTask.addSubview(swipeView)
-//        swipeView.bufferSize = self.programme.tasks.count
-        self.swipeView.addCards(self.programme.tasks, onTop: false)
+        self.pageController.view.frame = self.vwDailyTask.bounds
+        self.addChildViewController(self.pageController)
+        self.vwDailyTask.addSubview(self.pageController.view)
+        self.pageController.didMove(toParentViewController: self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        initSwipeView()
     }
     
     func showCongratulation() {
@@ -161,30 +111,61 @@ extension ProgrammeDetailViewController: DailyTaskViewDelegate {
                 self.selectedTask = task
                 Manager.sharedInstance.currentUser.totalIXP += task.boostPoint
                 self.showCongratulation()
-                self.resetWithProgramme()
+                
+                self.lblTimeRemaining.text = task.timeString
+                self.progressTime.progressValue = task.progress
+            })
+        }
+        else if task.status == .ongoing {
+            SVProgressHUD.show(withStatus: Constant.Keyword.loading)
+            APIManager.startTask(userId: Manager.sharedInstance.currentUser.id, programmeId: self.programme.id, taskId: task.id, completion: { (programme) in
+                SVProgressHUD.dismiss()
+                task.startedAt = Date()
+                self.lblTimeRemaining.text = task.timeString
+                self.progressTime.progressValue = task.progress
             })
         }
     }
 }
 
-extension ProgrammeDetailViewController: DMSwipeCardsViewDelegate {
-    func swipedLeft(_ object: Any) {
-        print("Swiped left: \(object)")
+extension ProgrammeDetailViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    func dailyTaskViewController(at index: Int) -> DailyTaskViewController {
+        let controller = UIStoryboard(name: "Custom", bundle: nil).instantiateViewController(withIdentifier: "DailyTaskViewController") as! DailyTaskViewController
+        controller.updateWithDailyTask(task: self.programme.tasks[index])
+        controller.pageIndex = index
+        controller.count = self.programme.tasks.count
+        controller.delegate = self
+        self.currentTaskViewController = controller
+        
+        self.lblTimeRemaining.text = self.programme.tasks[index].timeString
+        self.progressTime.progressValue = self.programme.tasks[index].progress
+
+        return controller
     }
     
-    func swipedRight(_ object: Any) {
-        print("Swiped right: \(object)")
-    }
-    
-    func cardTapped(_ object: Any) {
-        print("Tapped on: \(object)")
-    }
-    
-    func reachedEndOfStack() {
-        self.callAfter(second: 0.5, inBackground: false) {
-            self.swipeView.addCards(self.programme.tasks, onTop: false)
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        let index = (viewController as! DailyTaskViewController).pageIndex
+        if index == 0 {
+            return nil
         }
-        print("Reached end of stack")
+        return self.dailyTaskViewController(at: index-1)
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        let index = (viewController as! DailyTaskViewController).pageIndex
+        if index >= self.programme.tasks.count-1{
+            return nil
+        }
+        return self.dailyTaskViewController(at: index+1)
+    }
+    
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
+        return self.programme.tasks.count
+    }
+    
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+        return 0
     }
 }
+
 

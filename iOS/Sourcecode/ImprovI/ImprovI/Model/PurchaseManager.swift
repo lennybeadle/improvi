@@ -11,15 +11,41 @@ import SwiftyStoreKit
 import StoreKit
 
 enum Products: Int{
-    case product_ixp_250 = 0
+    case product_10_feathers = 0
+    case product_25_feathers = 1
+    case product_50_feathers = 2
+    case product_100_feathers = 3
 
     var identifier: String {
         return Products.productIdentifiers[self.rawValue]
     }
     
-    static let productIdentifiers = ["product_ixp_250"]
+    var feathers: Int {
+        return Products.productFeathers[self.rawValue]
+    }
     
-    static let productIdentifiersSet: Set<String> = ["product_ixp_250"]
+    var price: CGFloat {
+        return Products.productPrices[self.rawValue]
+    }
+    
+    var priceString: String {
+        return String(format: "$%.2f", self.price)
+    }
+    
+    static let productFeathers = [10, 25, 50, 100]
+    static let productPrices: [CGFloat] = [0.99, 1.99, 2.99, 4.99]
+    static let productIdentifiers = ["product_10_feathers", "product_25_feathers", "product_50_feathers", "product_100_feathers"]
+    static let productIdentifiersSet: Set<String> = ["product_10_feathers", "product_25_feathers", "product_50_feathers", "product_100_feathers"]
+}
+
+extension SKProduct {
+    func priceString () -> String? {
+        let priceFormatter = NumberFormatter()
+        priceFormatter.formatterBehavior = .behavior10_4
+        priceFormatter.numberStyle = .currency
+        priceFormatter.locale = self.priceLocale
+        return priceFormatter.string(from: self.price)
+    }
 }
 
 class PurchaseManager: NSObject {

@@ -42,6 +42,33 @@ class AnalyticsViewController: BaseViewController {
             })
         }
     }
+    
+    @IBAction func onSubmit(_ sender: Any) {
+        guard Manager.sharedInstance.quizSelected() else {
+            self.alert(message: "You have not selected all answers yet. Please check again", title: "")
+            return
+        }
+        
+        if Manager.sharedInstance.analysisSubmitted == false {
+            SVProgressHUD.show()
+            APIManager.featherPurchased(userId: Manager.sharedInstance.currentUser.id, feathers: 10, completion: { (result) in
+                SVProgressHUD.dismiss()
+                if result {
+                    Manager.sharedInstance.analysisSubmitted = true
+                    Manager.sharedInstance.currentUser.feathers = Manager.sharedInstance.currentUser.feathers + 10
+                    self.alert(message: "You have gained 10 Feathers by submitting your answer.", title: "Congratulations", options: "Ok", completion: { (buttonIndex) in
+                        self.performSegue(withIdentifier: "sid_feathers", sender: self)
+                    })
+                }
+                else {
+                    self.alert(message: "Network is busy now, try again, please.", title: "Sorry...")
+                }
+            })
+        }
+        else {
+            self.alert(message: "You have already submitted your answer.", title: "Hmm...")
+        }
+    }
 }
 
 extension AnalyticsViewController: UITableViewDataSource, UITableViewDelegate {

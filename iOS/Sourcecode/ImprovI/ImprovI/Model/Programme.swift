@@ -216,11 +216,12 @@ class Programme: ImprovIObject {
     
     func applyTaskStatus(with taskStatus: [Any]) {
         self.resetTaskStatus()
-        for taskStatus in taskStatus {
-            let dict = taskStatus as! [String: Any]
+        for status in taskStatus {
+            let dict = status as! [String: Any]
+            let startedAt = Date(timeIntervalSince1970: dict["started_at"] as! TimeInterval)
             self.updateTaskStatus(taskId: dict["task_id"] as! String,
                                   status: (dict["status"] as! String).intValue,
-                                  startedAt: Date.parse(dict["started_at"] as! String, format: "yyyy-MM-dd HH:mm:ss"))
+                                  startedAt: startedAt)
         }
     }
     

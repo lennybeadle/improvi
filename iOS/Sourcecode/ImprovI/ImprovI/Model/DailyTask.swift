@@ -22,6 +22,47 @@ class DailyTask: ImprovIObject {
     var status: Status = .normal
     var unlocked: Bool = false
     
+    var progress: CGFloat {
+        if self.status == .ongoing {
+            if let startDate = self.startedAt {
+                var distance = Date.minutesBetween(date1: Date(), date2: startDate.plus(days: 1))
+                if distance < 0 {
+                    self.status = .timeover
+                    return 0
+                }
+                else {
+                    distance = 1440 - distance
+                    return CGFloat(distance)/1440.0 * 100.0
+                }
+            }
+        }
+        else if self.status == .completed {
+            return 100
+        }
+        return 0
+    }
+    
+    var timeString: String! {
+        if self.status == .ongoing {
+            if let startDate = self.startedAt {
+                let distance = Date.minutesBetween(date1: Date(), date2: startDate.plus(days: 1))
+                if distance < 0 {
+                    return "Time over!"
+                }
+                else {
+                    return "Time remaining: \(distance/60) hour(s) \(distance%60) min(s)"
+                }
+            }
+        }
+        else if self.status == .completed {
+            return "Completed"
+        }
+        else if self.status == .timeover {
+            return "Time over"
+        }
+        return "Not yet started"
+    }
+    
     static func from(dict: [String: Any]) -> DailyTask {
         let task = DailyTask()
         task.data = dict

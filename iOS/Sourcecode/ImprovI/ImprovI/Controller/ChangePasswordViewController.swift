@@ -8,6 +8,7 @@
 
 import UIKit
 import Spring
+import SVProgressHUD
 
 protocol ChangePasswordViewDelegate {
     func passwordChangedTo(value: String)
@@ -31,6 +32,16 @@ class ChangePasswordViewController: BaseViewController {
     }
     
     @IBAction func onDone(_ sender: Any) {
+        guard txtNewPassword.text != nil && txtNewPassword.text!.length > 0 else {
+            showError(text: "Please type your New password again.")
+            return
+        }
+        
+        guard txtConfirmPassword.text != nil && txtConfirmPassword.text!.length > 0 else {
+            showError(text: "Please type your Confirm password again.")
+            return
+        }
+        
         guard txtOldPassword.text! == Manager.sharedInstance.currentUser.password else {
             showError(text: "Please type your old password again.")
             return
@@ -41,9 +52,23 @@ class ChangePasswordViewController: BaseViewController {
             return
         }
         
-        if delegate != nil {
-            self.delegate.passwordChangedTo(value: txtNewPassword.text!)
+        SVProgressHUD.show(withStatus: Constant.Keyword.loading)
+        APIManager.changePassword(userId: Manager.sharedInstance.currentUser.id, password: txtNewPassword.text!, oldPassword: txtOldPassword.text!) { (result) in
+            SVProgressHUD.dismiss()
+            if (result) {
+                self.txtOldPassword.text = nil
+                self.txtNewPassword.text = nil
+                self.txtConfirmPassword.text = nil
+                
+                self.alert(message: "Password successfully changed to " + self.txtNewPassword.text!)
+                if self.delegate != nil {
+                    self.delegate.passwordChangedTo(value: self.txtNewPassword.text!)
+                }
+                self.onBack(sender)
+            }
+            else {
+                self.showError(text: "Please check the typed password again.")
+            }
         }
-        self.onBack(sender)
     }
 }

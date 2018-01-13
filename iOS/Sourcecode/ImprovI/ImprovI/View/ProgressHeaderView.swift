@@ -96,7 +96,7 @@ class ProgressHeaderView: UITableViewHeaderFooterView {
         self.titleLabel.text = programme.name
         self.arrowLabel.text = ">"
 
-        if programme.status == .normal {
+        if programme.countOfWorkingTasks + programme.countOfCompletedTasks + programme.countOfTimeOverredTask == 0 {
             contentView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
         }
         else {

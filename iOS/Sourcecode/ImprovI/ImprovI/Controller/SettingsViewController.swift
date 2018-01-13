@@ -84,6 +84,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             iRate.sharedInstance().promptForRating()
         }
         else if indexPath.row == 4 {
+            Manager.sharedInstance.logOut()
             let _ = self.navigationController?.popToRootViewController(animated: true)
         }
     }

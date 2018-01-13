@@ -36,7 +36,8 @@ class WelcomeViewController: BaseViewController {
         for i in 0..<4 {
             if let image = images[i] {
                 let imgView = UIImageView(image: image)
-                imgView.frame = CGRect(x: CGFloat(i)*self.scrollView.bounds.width, y: 0, width: self.scrollView.bounds.width, height: self.scrollView.bounds.height)
+                imgView.contentMode = .scaleAspectFit
+                imgView.frame = CGRect(x: CGFloat(i)*self.scrollView.bounds.width, y: 10, width: self.scrollView.bounds.width, height: self.scrollView.bounds.height-10)
                 scrollView.addSubview(imgView)
             }
         }
@@ -50,6 +51,6 @@ class WelcomeViewController: BaseViewController {
 
 extension WelcomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) { // any offset changes
-        
+        pageControl.currentPage = Int(scrollView.contentOffset.x / self.scrollView.bounds.width)
     }
 }

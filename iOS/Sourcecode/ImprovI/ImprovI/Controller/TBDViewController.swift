@@ -57,7 +57,8 @@ class TBDViewController: BaseViewController {
     
     func reloadTraits() {
         if let user = Manager.sharedInstance.currentUser {
-            if user.traitPoints.count == 0 {
+//            if user.traitPoints.count == 0 {
+                user.traitPoints.removeAll()
                 SVProgressHUD.show(withStatus: Constant.Keyword.loading)
                 APIManager.loadTraits(userId: user.id, completion: { (traits, ixpval) in
                     SVProgressHUD.dismiss()
@@ -69,10 +70,10 @@ class TBDViewController: BaseViewController {
                         self.showTraits()
                     }
                 })
-            }
-            else {
-                self.showTraits()
-            }
+//            }
+//            else {
+//                self.showTraits()
+//            }
         }
     }
     
@@ -143,15 +144,15 @@ class TBDViewController: BaseViewController {
     }
 
     @IBAction func onPurchase(_ sender: Any) {
-        let alert = UIAlertController(title: "Warnning", message: "Are you going to purchase 250 iXP with $0.99 USD?", preferredStyle: .alert)
-        let btnYes = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-            Manager.sharedInstance.purchaseIXP(completion: { (result) in
-                self.lblTotalIXP.text = "\(Manager.sharedInstance.currentUser.totalIXP)"
-            })
-        })
-        let btnNo = UIAlertAction(title: "No", style: .cancel, handler: nil)
-        alert.addAction(btnYes)
-        alert.addAction(btnNo)
-        self.present(alert, animated: true, completion: nil)
+//        let alert = UIAlertController(title: "Warnning", message: "Are you going to purchase 250 iXP with $0.99 USD?", preferredStyle: .alert)
+//        let btnYes = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+//            Manager.sharedInstance.purchaseIXP(completion: { (result) in
+//                self.lblTotalIXP.text = "\(Manager.sharedInstance.currentUser.totalIXP)"
+//            })
+//        })
+//        let btnNo = UIAlertAction(title: "No", style: .cancel, handler: nil)
+//        alert.addAction(btnYes)
+//        alert.addAction(btnNo)
+//        self.present(alert, animated: true, completion: nil)
     }
 }

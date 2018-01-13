@@ -17,16 +17,18 @@ class Manager {
     
     var currentUser: User! {
         didSet {
+            self.storeUserInfo()
+        }
+    }
+    
+    var analysisSubmitted: Bool {
+        get {
             let standard = UserDefaults.standard
-            if currentUser.userName != nil {
-                standard.set(currentUser.userName, forKey: "username")
-            }
-            if currentUser.emailAddress != nil {
-                standard.set(currentUser.emailAddress, forKey: "email")
-            }
-            if currentUser.password != nil {
-                standard.set(currentUser.password, forKey: "password")
-            }
+            return standard.bool(forKey: "analysisSubmitted")
+        }
+        set {
+            let standard = UserDefaults.standard
+            standard.set(newValue, forKey: "analysisSubmitted")
             standard.synchronize()
         }
     }
@@ -48,6 +50,28 @@ class Manager {
     init() {
         UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = Constant.UI.foreColor
         loadDailyTasks()
+    }
+    
+    func storeUserInfo() {
+        let standard = UserDefaults.standard
+        if currentUser.userName != nil {
+            standard.set(currentUser.userName, forKey: "username")
+        }
+        if currentUser.emailAddress != nil {
+            standard.set(currentUser.emailAddress, forKey: "email")
+        }
+        if currentUser.password != nil {
+            standard.set(currentUser.password, forKey: "password")
+        }
+        standard.synchronize()
+    }
+    
+    func logOut() {
+        let standard = UserDefaults.standard
+        standard.set(nil, forKey: "username")
+        standard.set(nil, forKey: "email")
+        standard.set(nil, forKey: "password")
+        standard.synchronize()
     }
     
     func loadDailyTasks() {
@@ -100,6 +124,15 @@ class Manager {
         standard.synchronize()
     }
     
+    func quizSelected() -> Bool {
+        for question in self.questions {
+            if question.selectedAnswerIndex == -1 {
+                return false
+            }
+        }
+        return true
+    }
+    
     func showProgrammeDetail(programme: Programme) {
         if let navigationController = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController {
             if let storyboard = navigationController.storyboard {
@@ -121,28 +154,27 @@ class Manager {
         }
     }
     
-    func purchaseIXP(completion: ((Bool)->Void)?) {
+    func purchaseFeathers(product: Products,  completion: ((Bool)->Void)?) {
         if let navigationController = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController {
             SVProgressHUD.show()
             PurchaseManager.shared.loadProducts { (result) in
                 SVProgressHUD.dismiss()
                 if result {
                     SVProgressHUD.show()
-                    PurchaseManager.shared.purchaseProduct(product: Products.product_ixp_250.identifier) { (result) in
+                    PurchaseManager.shared.purchaseProduct(product: product.identifier) { (result) in
                         SVProgressHUD.dismiss()
                         if result {
-                            //                        Manager.shared.categoryPurchased()
-                            let alert = UIAlertController(title: "Success", message: "Your have purchased 250 iXP points.", preferredStyle: .alert)
+                            let alert = UIAlertController(title: "Success", message: "Your have purchased \(product.feathers) feathers.", preferredStyle: .alert)
                             let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
                             alert.addAction(action)
                             navigationController.present(alert, animated: true, completion: nil)
-
+                            
                             if let currentUser = Manager.sharedInstance.currentUser {
-                                currentUser.totalIXP = currentUser.totalIXP + 250
+                                currentUser.feathers = currentUser.feathers + product.feathers
                             }
                             
                             SVProgressHUD.show()
-                            APIManager.updateIxp(userId: Manager.sharedInstance.currentUser.id, completion: { (result) in
+                            APIManager.featherPurchased(userId: Manager.sharedInstance.currentUser.id, feathers: product.feathers, completion: { (result) in
                                 SVProgressHUD.dismiss()
                                 if result {
                                     if let completion = completion {

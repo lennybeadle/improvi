@@ -3,45 +3,24 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "HomeViewController.loadProgrammes() -&gt; ():HomeViewController.swift">
+         contextName = "ChangePasswordViewController.onDone(_:):ChangePasswordViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "Manager.sharedInstance">
+               value = "Manager.sharedInstance.currentUser.password">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "TraitPointsViewController.(showTraits() -&gt; ()).(closure #2):TraitPointsViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "user">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "DailyTaskViewController.updateWithDailyTask(task:):DailyTaskViewController.swift">
       </ContextState>
       <ContextState
-         contextName = "TraitPointsViewController.showTraits() -&gt; ():TraitPointsViewController.swift">
+         contextName = "closure #1 in ProgressViewController.loadProgress():ProgressViewController.swift">
       </ContextState>
       <ContextState
-         contextName = "static APIManager.(login(with : String?, email : String?, password : String, completion : (User?, [Programme]?) -&gt; ()?) -&gt; ()).(closure #1):APIManager.swift">
+         contextName = "DailyTask.timeString.getter:DailyTask.swift">
          <PersistentStrings>
             <PersistentString
-               value = "response.result.value">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "SignInViewController.viewDidLoad() -&gt; ():SignInViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "btnSelected.isSelected">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "TBDViewController.(reloadTraits() -&gt; ()).(closure #1):TBDViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "Manager.sharedInstance">
+               value = "Date()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

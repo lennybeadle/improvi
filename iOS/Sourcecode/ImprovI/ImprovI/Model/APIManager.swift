@@ -20,6 +20,7 @@ class APIManager: NSObject {
                     if let data = json["data"] {
                         return data
                     }
+                    return true
                 }
                 else {
                     if let msg = json["msg"] as? String {
@@ -182,7 +183,7 @@ class APIManager: NSObject {
         }
     }
     
-    class func unlockProgramme(userId: String, programmeId: String, completion: ((Programme?)->Void)?) {
+    class func unlockProgramme(userId: String, programmeId: String, completion: ((Bool)->Void)?) {
         var parameters = [String: String]()
         parameters["user_id"] = userId
         parameters["program_id"] = programmeId
@@ -191,42 +192,41 @@ class APIManager: NSObject {
         Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
             if response.result.isSuccess {
                 print("JSON: \(response.result.value!)")
-                if let data = self.dataFromResponse(json: response.result.value) as? [String: Any]{
+                if let data = self.dataFromResponse(json: response.result.value){
                     if let completion = completion {
-                        let programme = Programme.from(dict: data)
-                        completion(programme)
+                        completion(true)
                     }
                     return
                 }
             }
             
             if let completion = completion {
-                completion(nil)
+                completion(false)
             }
             print("unlock programme failed")
         }
     }
     
-    class func startTask(userId: String, programmeId: String, taskId: String, completion: ((Programme?)->Void)?) {
+    class func startTask(userId: String, programmeId: String, taskId: String, completion: ((Bool)->Void)?) {
         var parameters = [String: String]()
         parameters["user_id"] = userId
         parameters["program_id"] = programmeId
+        parameters["task_id"] = taskId
         
         let url = SERVER + "action=startTask"
         Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
             if response.result.isSuccess {
                 print("JSON: \(response.result.value!)")
-                if let data = self.dataFromResponse(json: response.result.value) as? [String: Any]{
+                if let data = self.dataFromResponse(json: response.result.value) {
                     if let completion = completion {
-                        let programme = Programme.from(dict: data)
-                        completion(programme)
+                        completion(true)
                     }
                     return
                 }
             }
             
             if let completion = completion {
-                completion(nil)
+                completion(false)
             }
             print("get new tasks failed")
         }
@@ -281,10 +281,34 @@ class APIManager: NSObject {
         }
     }
     
+    class func featherPurchased(userId: String, feathers: Int, completion: ((Bool)->Void)?) {
+        var parameters = [String: String]()
+        parameters["user_id"] = userId
+        parameters["feather"] = "\(feathers)"
+        
+        let url = SERVER + "action=featherPurchased"
+        Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
+            if response.result.isSuccess {
+                print("JSON: \(response.result.value!)")
+                if let _ = self.dataFromResponse(json: response.result.value){
+                    if let completion = completion {
+                        completion(true)
+                    }
+                    return
+                }
+            }
+            
+            if let completion = completion {
+                completion(false)
+            }
+            print("Feather purchased migrated to Server successfully")
+        }
+    }
+    
     class func updateIxp(userId: String, completion: ((Bool)->Void)?) {
         var parameters = [String: String]()
         parameters["user_id"] = userId
-        parameters["ixp"] = "250"
+        parameters["ixp"] = "50"
         
         let url = SERVER + "action=ixpPurchased"
         Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
@@ -348,6 +372,30 @@ class APIManager: NSObject {
         }
     }
     
+    class func changePassword(userId: String, password: String, oldPassword: String, completion: ((Bool)->Void)?) {
+        var parameters = [String: String]()
+        parameters["user_id"] = userId
+        parameters["oldPassword"] = oldPassword
+        parameters["password"] = password
+        
+        let url = SERVER + "action=changePassword"
+        Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
+            if response.result.isSuccess {
+                if let _ = self.dataFromResponse(json: response.result.value){
+                    if let completion = completion {
+                        completion(true)
+                    }
+                    return
+                }
+            }
+            
+            if let completion = completion {
+                completion(false)
+            }
+            print("update profile success")
+        }
+    }
+    
     class func updateProfile(userId: String, userName: String!, fullName: String!, email: String!, password: String!, photo: UIImage!, completion: ((Bool)->Void)?) {
         var parameters = [String: String]()
         parameters["user_id"] = userId
@@ -386,7 +434,7 @@ class APIManager: NSObject {
         var parameters = [String: String]()
         parameters["user_id"] = userId
         
-        let url = SERVER + "action=userActivityInfo"
+        let url = SERVER + "action=userTraits"
         Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
             if response.result.isSuccess {
                 print("JSON: \(response.result.value!)")

@@ -13,7 +13,8 @@ class BaseViewController: UIViewController {
     @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var titleView: UIView!
     var isAnimated: Bool = false
-
+    var featherCompletion: ((Int)->Void)? = nil
+    
     override var title: String? {
         didSet {
             if self.titleView.subviews.count > 1{
@@ -63,6 +64,57 @@ class BaseViewController: UIViewController {
     }
     
     @objc func onBack(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        if let controller =  self.presentingViewController {
+            controller.dismiss(animated: true, completion: nil)
+        }
+        else {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    func askPurchaseFeather(feathers: Int, completion: ((Int)->Void)?) {
+        let controller = UIStoryboard(name: "Custom", bundle: nil).instantiateViewController(withIdentifier: "FeatherAskController") as! FeatherAskViewController
+        controller.delegate = self
+        controller.feathers = feathers
+        controller.modalPresentationStyle = .overFullScreen
+        controller.text = "Are you going to purchase \(feathers) feathers?"
+        featherCompletion = completion
+        self.present(controller, animated: false, completion: nil)
+    }
+    
+    func askPurchaseFeather(completion: ((Int)->Void)?) {
+        let controller = UIStoryboard(name: "Custom", bundle: nil).instantiateViewController(withIdentifier: "FeatherAskController") as! FeatherAskViewController
+        controller.delegate = self
+        controller.modalPresentationStyle = .overFullScreen
+        controller.text = "No enough Feathers, Are you going to purchase feathers?"
+        featherCompletion = completion
+        self.present(controller, animated: false, completion: nil)
+    }
+    
+    func askPurchaseFeather(text: String, completion: ((Int)->Void)?) {
+        let controller = UIStoryboard(name: "Custom", bundle: nil).instantiateViewController(withIdentifier: "FeatherAskController") as! FeatherAskViewController
+        controller.delegate = self
+        controller.modalPresentationStyle = .overFullScreen
+        controller.text = text
+        featherCompletion = completion
+        self.present(controller, animated: false, completion: nil)
+    }
+    
+    func askUnlockWithFeather(feathers: Int, completion: ((Int)->Void)?) {
+        let controller = UIStoryboard(name: "Custom", bundle: nil).instantiateViewController(withIdentifier: "FeatherAskController") as! FeatherAskViewController
+        controller.delegate = self
+        controller.feathers = feathers
+        controller.modalPresentationStyle = .overFullScreen
+        controller.text = "Are you going to unlock this section with \(feathers) feathers?"
+        featherCompletion = completion
+        self.present(controller, animated: false, completion: nil)
+    }
+}
+
+extension BaseViewController: FeatherAskDelegate {
+    func featherPurchaseRequired(feathers: Int) {
+        if let completion = featherCompletion {
+            completion(feathers)
+        }
     }
 }

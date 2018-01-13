@@ -36,10 +36,8 @@ extension ProgrammeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let programme = Manager.sharedInstance.allProgrammes[indexPath.row]
         if !programme.unlocked {
-            self.alert(message: "This programme is locked. Are you going to unlock with \(programme.needed_feather) feathers?", title: "", options: "Yes", "No", completion: { (index) in
-                if index == 0 { //means Yes button
-                    self.unlockProgramme(programme: programme)
-                }
+            self.askUnlockWithFeather(feathers: programme.needed_feather, completion: { (feathers) in
+                self.unlockProgramme(programme: programme)
             })
         }
         else {
@@ -56,16 +54,29 @@ extension ProgrammeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func unlockProgramme(programme: Programme) {
         if let availableFeathers = Manager.sharedInstance.currentUser.feathers, availableFeathers < programme.needed_feather {
-            self.alert(message: "No enough feathers. Would you purchase featheres?", title: "", options: "Yes", "No", completion: { (index) in
-                if index == 0 { //means Yes button
-                    self.showPurchase()
+            self.askPurchaseFeather(completion: { (feathers) in
+                self.showPurchase()
+            })
+        }
+        else {
+            SVProgressHUD.show(withStatus: Constant.Keyword.loading)
+            APIManager.unlockProgramme(userId: Manager.sharedInstance.currentUser.id, programmeId: programme.id, completion: { (result) in
+                SVProgressHUD.dismiss()
+                if result {
+                    self.showMessage(title: "You have successfully unlocked the programme", text: "")
+                    Manager.sharedInstance.currentUser.feathers = Manager.sharedInstance.currentUser.feathers - programme.needed_feather
+                    programme.unlocked = true
+                    self.tblProgrammes.reloadData()
+                }
+                else {
+                    self.showMessage(title: "Failed to unlock the programme", text: "")
                 }
             })
         }
     }
     
     func showPurchase() {
-        
+        self.performSegue(withIdentifier: "sid_feather", sender: self)
     }
 }
 
