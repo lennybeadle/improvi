@@ -8,6 +8,7 @@
 
 import UIKit
 public enum Status: Int {
+    case locked = -1
     case normal = 0
     case ongoing = 1
     case timeover = 2
@@ -187,6 +188,7 @@ class Programme: ImprovIObject {
         self.tasks = taskIds.map { (taskId) -> DailyTask in
             for task in tasks {
                 if taskId == task.id {
+                    task.status = .locked
                     return task
                 }
             }
@@ -198,7 +200,7 @@ class Programme: ImprovIObject {
     
     func resetTaskStatus() {
         for task in self.tasks {
-            task.status = Status(rawValue: 0)!
+            task.status = .locked
             task.startedAt = nil
         }
     }

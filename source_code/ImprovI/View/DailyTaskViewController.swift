@@ -9,15 +9,19 @@
 import UIKit
 
 protocol DailyTaskViewDelegate {
-    func taskStatusChanged(_ task: DailyTask);
+    func taskStatusChanged(_ task: DailyTask, to: Status, completion: ((Bool)->Void)?)
+    func unlockTask(_ task: DailyTask, completion: ((Bool)->Void)?)
 }
 
-class DailyTaskViewController: UIViewController {
+class DailyTaskViewController: BaseViewController {
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblDescription: UILabel!
     @IBOutlet weak var btnStatus: UIButton!
     @IBOutlet weak var txtContainer: UIView!
+    @IBOutlet weak var imgLocked: UIImageView!
+    
+    var isShowingDescription: Bool = true
     
     weak var dailyTask: DailyTask!
     var delegate: DailyTaskViewDelegate!
@@ -31,10 +35,14 @@ class DailyTaskViewController: UIViewController {
         self.lblTitle.layer.cornerRadius = self.lblTitle.frame.height/2
         
         txtContainer.layer.cornerRadius = 10
+        txtContainer.isUserInteractionEnabled = true
         self.txtContainer.layer.shadowColor = UIColor.gray.cgColor
         self.txtContainer.layer.shadowOpacity = 0.3
         self.txtContainer.layer.shadowRadius = 5
         self.txtContainer.layer.shadowOffset = CGSize(width: 1, height: 4)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(DailyTaskViewController.tapOnContainer(_:)))
+        txtContainer.addGestureRecognizer(tapGesture)
 
         self.lblTitle.text = "      " + (self.dailyTask.name ?? "") + "          "
         self.lblTitle.sizeToFit()
@@ -56,7 +64,16 @@ class DailyTaskViewController: UIViewController {
     }
     
     func updateWithStatus() {
-        if self.dailyTask.status == .ongoing {
+        self.lblDescription.isHidden = false
+        self.imgLocked.isHidden = true
+        if self.dailyTask.status == .locked {
+            self.btnStatus.isEnabled = true
+            self.btnStatus.setTitleColor(Constant.UI.foreColorLight, for: .normal)
+            self.btnStatus.setTitle("Unlock", for: .normal)
+            self.lblDescription.isHidden = true
+            self.imgLocked.isHidden = false
+        }
+        else if self.dailyTask.status == .ongoing {
             self.btnStatus.isEnabled = true
             self.btnStatus.setTitleColor(Constant.UI.foreColorLight, for: .normal)
             self.btnStatus.setTitle("Complete", for: .normal)
@@ -79,7 +96,12 @@ class DailyTaskViewController: UIViewController {
     }
     
     @IBAction func onComplete(_ sender: UIButton) {
-        if self.dailyTask.status == .ongoing {
+        if self.dailyTask.status == .locked {
+            self.askUnlockWithFeather(feathers: 1, completion: { (feathers) in
+                self.unlockTask(task: self.dailyTask)
+            })
+        }
+        else if self.dailyTask.status == .ongoing {
             self.alert(message: "Are you going to complete the task now?", title: "", options: "Yes", "No", completion: { (option) in
                 if option == 0 {// Yes
                     self.setDailyTaskStatus(status: .completed)
@@ -107,11 +129,38 @@ class DailyTaskViewController: UIViewController {
             return
         }
         
-        self.dailyTask.startedAt = Date()
-        self.dailyTask.status = status
-        self.updateWithStatus()
         if self.delegate != nil {
-            self.delegate.taskStatusChanged(self.dailyTask)
+            self.delegate.taskStatusChanged(self.dailyTask, to: status, completion: { (result) in
+                self.updateWithStatus()
+            })
+        }
+    }
+ 
+    @objc func tapOnContainer (_ sender: UITapGestureRecognizer) {
+        if (self.dailyTask.status == .locked) {
+            self.askUnlockWithFeather(feathers: 1, completion: { (feathers) in
+                self.unlockTask(task: self.dailyTask)
+            })
+        }
+        else {
+            self.txtContainer.flip(with: 0.3, repeatCount: 1, autoReverse: false)
+            isShowingDescription = !isShowingDescription
+            if (isShowingDescription) {
+                self.lblDescription.text = self.dailyTask.longDescription
+            }
+            else {
+                self.lblDescription.text = self.dailyTask.advice
+            }
+        }
+    }
+    
+    func unlockTask(task: DailyTask) {
+        if self.delegate != nil {
+            self.delegate.unlockTask(self.dailyTask, completion: { (result) in
+                if (result) {
+                    self.updateWithStatus()
+                }
+            })
         }
     }
 }

@@ -105,7 +105,7 @@ class BaseViewController: UIViewController {
         controller.delegate = self
         controller.feathers = feathers
         controller.modalPresentationStyle = .overFullScreen
-        controller.text = "Are you going to unlock this section with \(feathers) feathers?"
+        controller.text = "Are you going to unlock this with \(feathers) feather(s)?"
         featherCompletion = completion
         self.present(controller, animated: false, completion: nil)
     }

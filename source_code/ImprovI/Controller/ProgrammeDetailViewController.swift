@@ -103,27 +103,63 @@ class ProgrammeDetailViewController: BaseViewController {
 }
 
 extension ProgrammeDetailViewController: DailyTaskViewDelegate {
-    func taskStatusChanged(_ task: DailyTask) {
-        if task.status == .completed {
+    func taskStatusChanged(_ task: DailyTask, to: Status, completion: ((Bool)->Void)?) {
+        if to == .completed {
             SVProgressHUD.show(withStatus: Constant.Keyword.loading)
             APIManager.completeTask(userId: Manager.sharedInstance.currentUser.id, programmeId: self.programme.id, taskId: task.id, completion: { (result) in
                 SVProgressHUD.dismiss()
-                self.selectedTask = task
-                Manager.sharedInstance.currentUser.totalIXP += task.boostPoint
-                self.showCongratulation()
-                
-                self.lblTimeRemaining.text = task.timeString
-                self.progressTime.progressValue = task.progress
+
+                if (result) {
+                    task.status = to
+                    self.selectedTask = task
+                    Manager.sharedInstance.currentUser.totalIXP += task.boostPoint
+                    self.showCongratulation()
+                    
+                    self.lblTimeRemaining.text = task.timeString
+                    self.progressTime.progressValue = task.progress
+                }
+                if let completion = completion {
+                    completion(result)
+                }
             })
         }
-        else if task.status == .ongoing {
+        else if to == .ongoing {
             SVProgressHUD.show(withStatus: Constant.Keyword.loading)
-            APIManager.startTask(userId: Manager.sharedInstance.currentUser.id, programmeId: self.programme.id, taskId: task.id, completion: { (programme) in
+            APIManager.startTask(userId: Manager.sharedInstance.currentUser.id, programmeId: self.programme.id, taskId: task.id, completion: { (result) in
                 SVProgressHUD.dismiss()
-                task.startedAt = Date()
+                if (result) {
+                    task.startedAt = Date()
+                    task.status = to;
+                    self.lblTimeRemaining.text = task.timeString
+                    self.progressTime.progressValue = task.progress
+                }
+                
+                if let completion = completion {
+                    completion(result)
+                }
+            })
+        }
+    }
+    
+    func unlockTask(_ task: DailyTask, completion: ((Bool)->Void)?) {
+        if task.status == .locked {
+            SVProgressHUD.show(withStatus: Constant.Keyword.loading)
+            APIManager.unlockTask(userId: Manager.sharedInstance.currentUser.id, programmeId: self.programme.id, taskId: task.id, completion: { (result) in
+                SVProgressHUD.dismiss()
+                task.status = .normal
                 self.lblTimeRemaining.text = task.timeString
                 self.progressTime.progressValue = task.progress
+                
+                if let completion = completion {
+                    completion(true)
+                }
             })
+        }
+        else {
+            self.alert(message: "Daily Task is already unlocked.")
+            if let completion = completion {
+                completion(false)
+            }
         }
     }
 }

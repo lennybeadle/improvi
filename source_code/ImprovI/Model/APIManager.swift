@@ -192,7 +192,7 @@ class APIManager: NSObject {
         Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
             if response.result.isSuccess {
                 print("JSON: \(response.result.value!)")
-                if let data = self.dataFromResponse(json: response.result.value){
+                if let _ = self.dataFromResponse(json: response.result.value){
                     if let completion = completion {
                         completion(true)
                     }
@@ -207,6 +207,31 @@ class APIManager: NSObject {
         }
     }
     
+    class func unlockTask(userId: String, programmeId: String, taskId: String, completion: ((Bool)->Void)?) {
+        var parameters = [String: String]()
+        parameters["user_id"] = userId
+        parameters["program_id"] = programmeId
+        parameters["task_id"] = taskId
+        
+        let url = SERVER + "action=unlockTask"
+        Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
+            if response.result.isSuccess {
+                print("JSON: \(response.result.value!)")
+                if let _ = self.dataFromResponse(json: response.result.value) {
+                    if let completion = completion {
+                        completion(true)
+                    }
+                    return
+                }
+            }
+            
+            if let completion = completion {
+                completion(false)
+            }
+            print("unlock tasks failed")
+        }
+    }
+    
     class func startTask(userId: String, programmeId: String, taskId: String, completion: ((Bool)->Void)?) {
         var parameters = [String: String]()
         parameters["user_id"] = userId
@@ -217,7 +242,7 @@ class APIManager: NSObject {
         Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
             if response.result.isSuccess {
                 print("JSON: \(response.result.value!)")
-                if let data = self.dataFromResponse(json: response.result.value) {
+                if let _ = self.dataFromResponse(json: response.result.value) {
                     if let completion = completion {
                         completion(true)
                     }

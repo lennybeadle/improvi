@@ -63,4 +63,17 @@ extension UIView {
             layer.render(in: rendererContext.cgContext)
         }
     }
+    
+    func flip(with duration: Double, repeatCount: Float, autoReverse: Bool) {
+        let transition = CATransition()
+        transition.startProgress = 0.0
+        transition.endProgress = 1.0
+        transition.type = "flip"
+        transition.subtype = "fromLeft"
+        transition.duration = duration
+        transition.repeatCount = repeatCount
+        transition.autoreverses = autoReverse
+        
+        self.layer.add( transition, forKey:  "spin");
+    }
 }
