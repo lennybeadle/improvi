@@ -29,6 +29,7 @@ class Question: ImprovIObject {
     var question: String!
     var answers:[Answer]!
     var selectedAnswerIndex = -1
+    var userAnswerId: String!
     
     override init(id: String) {
         super.init(id: id)
@@ -43,11 +44,38 @@ class Question: ImprovIObject {
         
         question.id = "\(dict["id"]!)"
         question.question = "\(dict["name"]!)"
+        if let userAnswer = dict["user_answer_id"], !(userAnswer is NSNull) {
+            question.userAnswerId = "\(dict["user_answer_id"]!)"
+        }
         question.collapsed = false
 
         if let answers = dict["answer"] as? [Any] {
             question.answers = answers.map{Answer.from(dict: ($0 as! [String: Any]))}
         }
         return question
+    }
+    
+    func userAnswer() -> Answer? {
+        if let userAnswerId = self.userAnswerId {
+            for answer in self.answers {
+                if answer.id == userAnswerId {
+                    return answer
+                }
+            }
+        }
+        return nil
+    }
+    
+    func userAnswerIndex() -> Int {
+        guard let userAnswer = userAnswerId else {
+            return -1
+        }
+        
+        for i in 0..<self.answers.count {
+            if answers[i].id == userAnswer {
+                return i
+            }
+        }
+        return -1
     }
 }

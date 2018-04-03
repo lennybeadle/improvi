@@ -10,7 +10,26 @@ import UIKit
 import UserNotifications
 
 class NotificationManager: NSObject {
-    static let sharedInstance = NotificationManager()
+    static let shared = NotificationManager()
+    var taskTimeReminder: Int {
+        get {
+            let standard = UserDefaults.standard
+            return standard.integer(forKey: "TASK_TIME_REMINDER")
+        }
+        set {
+            let standard = UserDefaults.standard
+            standard.set(newValue, forKey: "TASK_TIME_REMINDER")
+        }
+    }
+    
+    func setNotification(for task: DailyTask) {
+        guard task.name != nil, task.id != nil, task.startedAt != nil else { return }
+        
+        removeNotification(with: task.id)
+        
+        let date = task.startedAt.minus(minutes: UInt(self.taskTimeReminder))
+        setNotification(with: task.id, name: task.name, time: date, content: "Your task - \(task.name!) is almost time out. \(taskTimeReminder) mins are remainning.", isRepeat: false)
+    }
     
     func setNotification(with identifier: String, name: String, time: Date, content: String, isRepeat: Bool) {
         self.removeNotification(with: identifier)
@@ -25,7 +44,6 @@ class NotificationManager: NSObject {
     
     func removeNotification(with identifier: String) {
         LJNotificationScheduler.sharedInstance.cancelNotification(with: identifier)
-        
     }
     
     func getNotificationInfo(with identifier: String, completion: ((Date?, _ title: String, _ content: String)->Void)?){

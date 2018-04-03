@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         LJNotificationScheduler.requestAuthrization()
         if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().delegate = NotificationManager.sharedInstance
+            UNUserNotificationCenter.current().delegate = NotificationManager.shared
         } else {
             // Fallback on earlier versions
         }

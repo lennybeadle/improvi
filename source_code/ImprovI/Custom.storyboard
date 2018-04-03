@@ -68,7 +68,7 @@
                                             <constraint firstItem="ttR-Ig-0RJ" firstAttribute="top" secondItem="mES-5X-Ajh" secondAttribute="top" constant="57" id="vY0-lK-csb"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe left and right to see all tasks, Tap to see advice!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVJ-wQ-nZf">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe left and right to see all tasks. Tap to see advice!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVJ-wQ-nZf">
                                         <rect key="frame" x="39" y="607" width="297" height="40"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -96,8 +96,8 @@
                                         <rect key="frame" x="10" y="200" width="355" height="267"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description of daily task, may contain up to 40 words." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tTX-eb-3W2">
-                                                <rect key="frame" x="88" y="114" width="257" height="38.5"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                <rect key="frame" x="88" y="117" width="257" height="33.5"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                 <color key="textColor" red="1" green="1" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>

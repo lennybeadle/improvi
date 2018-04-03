@@ -10,7 +10,7 @@ import UIKit
 
 class SummaryViewController: BaseViewController {
     @IBOutlet weak var tblList: UITableView!
-    let titles = ["Profile", "Progress", "TBD", "Feather"]
+    let titles = ["Profile", "Progress", "My Summari", "Feathers & iXP"]
     let imageNames = ["icon_profile", "icon_progress", "icon_traitpoints", "icon_feather_white"]
     let itemCount = 4
     

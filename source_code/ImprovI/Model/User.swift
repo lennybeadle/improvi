@@ -18,7 +18,7 @@ class User: ImprovIObject {
     var feathers: Int!
     
     var traitPoints = [TraitPoint]()
-    var totalIXP: Int = -1
+    var totalIXP: Int = 0
     
 //Working Properties
     var image: UIImage! {

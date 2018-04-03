@@ -8,7 +8,11 @@
 
 import UIKit
 
-class ImprovIObject{
+class ImprovIObject: Equatable{
+    static func == (lhs: ImprovIObject, rhs: ImprovIObject) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     var data: [String: Any]!
     var id: String! = ""
     var userData: String!

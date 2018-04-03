@@ -211,6 +211,9 @@ class Programme: ImprovIObject {
                 task.status = Status(rawValue: status)!
                 task.startedAt = startedAt
                 task.unlocked = true
+                if task.status == .ongoing {
+                    NotificationManager.shared.setNotification(for: task)
+                }
                 return
             }
         }

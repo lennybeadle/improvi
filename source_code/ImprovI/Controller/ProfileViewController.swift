@@ -49,12 +49,15 @@ class ProfileViewController: BaseViewController {
         items.append(SettingItem(title: "Full name", detail: Manager.sharedInstance.currentUser.fullName, isAccessary: true))
         items.append(SettingItem(title: "Email Address", detail: Manager.sharedInstance.currentUser.emailAddress, isAccessary: true))
         items.append(SettingItem(title: "Change Password", detail: "", isAccessary: true))
-        items.append(SettingItem(title: "Date joined", detail: Manager.sharedInstance.currentUser.dateJoined.dateString, isAccessary: false))
+        items.append(SettingItem(title: "Date Joined", detail: Manager.sharedInstance.currentUser.dateJoined.dateString, isAccessary: false))
         var ixp = Manager.sharedInstance.currentUser.totalIXP
         if ixp == -1 {
             ixp = 0
         }
         items.append(SettingItem(title: "Total IXP", detail: "\(ixp)", isAccessary: false))
+        if let feathers = Manager.sharedInstance.currentUser.feathers {
+            items.append(SettingItem(title: "Total Feathers", detail: "\(feathers)", isAccessary: false))
+        }
         items.append(SettingItem(title: "Sign Out", detail: "", isAccessary: false))
         self.tblContents.reloadData()
     }

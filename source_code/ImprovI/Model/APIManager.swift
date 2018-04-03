@@ -306,6 +306,33 @@ class APIManager: NSObject {
         }
     }
     
+    class func numberOfOnGoingTasks(userId: String, completion: ((String?)->Void)?) {
+        var parameters = [String: String]()
+        parameters["user_id"] = userId
+        
+        let url = SERVER + "action=onGoingTasks"
+        Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
+            if response.result.isSuccess {
+                print("JSON: \(response.result.value!)")
+                if let dict = self.dataFromResponse(json: response.result.value) as? [String: Any] {
+                    if let numOnGoing = dict["on_going_tasks"] {
+                        if let completion = completion {
+                            completion("\(numOnGoing)")
+                        }
+                    }
+                    return
+                }
+            }
+            
+            if let completion = completion {
+                completion(nil)
+            }
+            print("get ongoing tasks failed")
+        }
+    }
+    
+    
+    
     class func featherPurchased(userId: String, feathers: Int, completion: ((Bool)->Void)?) {
         var parameters = [String: String]()
         parameters["user_id"] = userId
@@ -377,14 +404,20 @@ class APIManager: NSObject {
         }
     }
     
-    class func loadQuestion(completion: (([Question]?)->Void)?) {
+    class func loadQuestion(userId: String, completion: (([Question]?)->Void)?) {
         let url = SERVER + "action=questionAnswers"
-        Alamofire.request(url, method: .post).responseJSON { (response) in
+        var parameters = [String: String]()
+        parameters["user_id"] = userId
+        
+        Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
             if response.result.isSuccess {
                 if let data = self.dataFromResponse(json: response.result.value) as? [Any]{
                     if let completion = completion {
                         let questions = data.map {Question.from(dict: $0 as! [String: Any])}
-                        completion(questions)
+                        let unAnswered = questions.filter({ (question) -> Bool in
+                            return question.userAnswerId == nil
+                        })
+                        completion(unAnswered)
                     }
                     return
                 }
@@ -394,6 +427,32 @@ class APIManager: NSObject {
                 completion(nil)
             }
             print("complete task failed")
+        }
+    }
+    
+    class func submitAnswer(userId: String, questionId: String, answerId: String, completion: ((String?)->Void)?) {
+        var parameters = [String: String]()
+        parameters["user_id"] = userId
+        parameters["question_id"] = questionId
+        parameters["answer_id"] = answerId
+        
+        let url = SERVER + "action=submitAnswer"
+        Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
+            if response.result.isSuccess {
+                if let data = self.dataFromResponse(json: response.result.value) as? [String: Any]{
+                    if let ixp = data["ixp"] {
+                        if let completion = completion {
+                            completion("\(ixp)")
+                        }
+                        return
+                    }
+                }
+            }
+            
+            if let completion = completion {
+                completion(nil)
+            }
+            print("submit answer success")
         }
     }
     
@@ -464,7 +523,7 @@ class APIManager: NSObject {
             if response.result.isSuccess {
                 print("JSON: \(response.result.value!)")
                 if let data = self.dataFromResponse(json: response.result.value) as? [String: Any]{
-                    var ixp = -1
+                    var ixp = 0
                     if let ixpVal = data["ixp"] as? Int{
                         ixp = ixpVal
                     }

@@ -27,7 +27,13 @@ class AnswerTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func resetWithAnswer(answer: Answer, selected: Bool) {
+    func resetWithAnswer(answer: Answer, selected: Bool, editable: Bool = true) {
+        if editable {
+            checkBox.containerColor = Constant.UI.foreColor
+        }
+        else {
+            checkBox.containerColor = Constant.UI.foreColorHighlight
+        }
         lblAnswer.text = answer.content
         checkBox.on = selected
     }

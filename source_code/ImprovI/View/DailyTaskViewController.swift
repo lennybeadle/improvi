@@ -75,7 +75,7 @@ class DailyTaskViewController: BaseViewController {
         }
         else if self.dailyTask.status == .ongoing {
             self.btnStatus.isEnabled = true
-            self.btnStatus.setTitleColor(Constant.UI.foreColorLight, for: .normal)
+            self.btnStatus.setTitleColor(Constant.UI.foreColorHighlight, for: .normal)
             self.btnStatus.setTitle("Complete", for: .normal)
         }
         else if self.dailyTask.status == .normal{

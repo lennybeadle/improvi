@@ -132,6 +132,7 @@ extension ProgrammeDetailViewController: DailyTaskViewDelegate {
                     task.status = to;
                     self.lblTimeRemaining.text = task.timeString
                     self.progressTime.progressValue = task.progress
+                    NotificationManager.shared.setNotification(for: task)
                 }
                 
                 if let completion = completion {
@@ -146,12 +147,19 @@ extension ProgrammeDetailViewController: DailyTaskViewDelegate {
             SVProgressHUD.show(withStatus: Constant.Keyword.loading)
             APIManager.unlockTask(userId: Manager.sharedInstance.currentUser.id, programmeId: self.programme.id, taskId: task.id, completion: { (result) in
                 SVProgressHUD.dismiss()
-                task.status = .normal
-                self.lblTimeRemaining.text = task.timeString
-                self.progressTime.progressValue = task.progress
-                
-                if let completion = completion {
-                    completion(true)
+                if (result) {
+                    task.status = .normal
+                    self.lblTimeRemaining.text = task.timeString
+                    self.progressTime.progressValue = task.progress
+                    
+                    if let completion = completion {
+                        completion(true)
+                    }
+                }
+                else {
+                    if let completion = completion {
+                        completion(false)
+                    }
                 }
             })
         }

@@ -27,7 +27,7 @@ class SettingsViewController: BaseViewController {
     }
     
     func reload() {
-        NotificationManager.sharedInstance.getNotificationInfo(with: "GENERAL") { (date, title, body) in
+        NotificationManager.shared.getNotificationInfo(with: "GENERAL") { (date, title, body) in
             self.items.removeAll()
             var reminderContent = ""
             if let date = date {

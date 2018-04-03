@@ -21,18 +21,6 @@ class Manager {
         }
     }
     
-    var analysisSubmitted: Bool {
-        get {
-            let standard = UserDefaults.standard
-            return standard.bool(forKey: "analysisSubmitted")
-        }
-        set {
-            let standard = UserDefaults.standard
-            standard.set(newValue, forKey: "analysisSubmitted")
-            standard.synchronize()
-        }
-    }
-    
     var keepUserSignedIn: Bool {
         get {
             let standard = UserDefaults.standard
@@ -99,38 +87,6 @@ class Manager {
         UINavigationBar.appearance().tintColor = Constant.UI.backColor
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: Constant.UI.backColor]
         UIApplication.shared.statusBarStyle = .lightContent
-    }
-
-    func loadQuizState() {
-        let standard = UserDefaults.standard
-        if let state = standard.dictionary(forKey: "quiz_state") {
-            for question in self.questions {
-                if let selectedIndex = state[question.id!] as? Int {
-                    question.selectedAnswerIndex = selectedIndex
-                }
-            }
-        }
-    }
-    
-    func saveQuizState() {
-        let standard = UserDefaults.standard
-        var state = standard.dictionary(forKey: "quiz_state") ?? [String: Int]()
-        for question in self.questions {
-            if question.selectedAnswerIndex != -1 {
-                state[question.id!] = question.selectedAnswerIndex
-            }
-        }
-        standard.set(state, forKey: "quiz_state")
-        standard.synchronize()
-    }
-    
-    func quizSelected() -> Bool {
-        for question in self.questions {
-            if question.selectedAnswerIndex == -1 {
-                return false
-            }
-        }
-        return true
     }
     
     func showProgrammeDetail(programme: Programme) {

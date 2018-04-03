@@ -131,8 +131,17 @@ class TBDViewController: BaseViewController {
         if let user = Manager.sharedInstance.currentUser {
             self.lblTotalIXP.text = "\(user.totalIXP)"
             if user.traitPoints.count > 0 {
-                let data: [Double] = user.traitPoints.map { return Double($0.value) }
-                let labels = user.traitPoints.map { return $0.name! }
+                var data = [Double]()
+                var labels = [String]()
+                for trait in user.traitPoints {
+                    if trait.name.contains("Trait_"), trait.value <= 0 {
+                        continue
+                    }
+                    data.append(Double(trait.value!))
+                    labels.append(trait.name)
+                }
+//                let data: [Double] = user.traitPoints.map { return Double(max($0.value, 0)) }
+//                let labels = user.traitPoints.map { return $0.name! }
                 let maxTrait = max(user.maxTraits, 30)
                 vwGraph.rangeMax = Double(maxTrait - (maxTrait % 10) + 20)
                 vwGraph.numberOfIntermediateReferenceLines = min(20, Int(vwGraph.rangeMax)/5 - 1)

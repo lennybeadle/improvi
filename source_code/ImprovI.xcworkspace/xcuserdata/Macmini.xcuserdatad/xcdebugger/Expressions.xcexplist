@@ -3,6 +3,22 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "DailyTask.timeString.getter:DailyTask.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Date()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in static APIManager.startTask(userId:programmeId:taskId:completion:):APIManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "parameters">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ChangePasswordViewController.onDone(_:):ChangePasswordViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -11,16 +27,24 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DailyTaskViewController.updateWithDailyTask(task:):DailyTaskViewController.swift">
+         contextName = "closure #1 in static APIManager.loadQuestion(completion:):APIManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.result.value">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "closure #1 in ProgressViewController.loadProgress():ProgressViewController.swift">
       </ContextState>
       <ContextState
-         contextName = "DailyTask.timeString.getter:DailyTask.swift">
+         contextName = "DailyTaskViewController.updateWithDailyTask(task:):DailyTaskViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in static APIManager.submitAnswer(userId:questionId:answerId:completion:):APIManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "Date()">
+               value = "response.result.value">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

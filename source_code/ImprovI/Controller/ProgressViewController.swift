@@ -89,7 +89,7 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
             return 0
         }
         else {
-            return self.programmes[section].programTasks(except: .normal).count
+            return self.programmes[section].programTasks(except: .locked).count
         }
     }
     
@@ -98,7 +98,7 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
         
         if let customCell = cell as? ProgressTableViewCell {
             let programme = programmes[indexPath.section]
-            customCell.resetWithDailyTask(task: programme.programTasks(except: .normal)[indexPath.row])
+            customCell.resetWithDailyTask(task: programme.programTasks(except: .locked)[indexPath.row])
             
             if isAnimated == false {
 //                customCell.vwInnerView.delay = 0.05*CGFloat(indexPath.row)
@@ -111,7 +111,7 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tblProgress.beginUpdates()
-        for i in 0 ..< programmes[indexPath.section].programTasks(except: .normal).count {
+        for i in 0 ..< programmes[indexPath.section].programTasks(except: .locked).count {
             tblProgress.reloadRows(at: [IndexPath(row: i, section: indexPath.section)], with: .automatic)
         }
         tblProgress.endUpdates()

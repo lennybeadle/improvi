@@ -19,19 +19,14 @@ class AnalyticsViewController: BaseViewController {
         self.loadQuestions()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     func loadQuestions() {
         if questions.count == 0 {
             SVProgressHUD.show(withStatus: Constant.Keyword.loading)
-            APIManager.loadQuestion(completion: { (questions) in
+            APIManager.loadQuestion(userId: Manager.sharedInstance.currentUser.id, completion: { (questions) in
                 SVProgressHUD.dismiss()
                 if let newquiz = questions {
                     Manager.sharedInstance.questions.removeAll()
                     Manager.sharedInstance.questions.append(contentsOf: newquiz)
-                    Manager.sharedInstance.loadQuizState()
                     self.questions = Manager.sharedInstance.questions
                     self.isAnimated = false
                     self.tblQuestions.reloadData()
@@ -43,30 +38,18 @@ class AnalyticsViewController: BaseViewController {
         }
     }
     
-    @IBAction func onSubmit(_ sender: Any) {
-        guard Manager.sharedInstance.quizSelected() else {
-            self.alert(message: "You have not selected all answers yet. Please check again", title: "")
-            return
-        }
-        
-        if Manager.sharedInstance.analysisSubmitted == false {
-            SVProgressHUD.show()
-            APIManager.featherPurchased(userId: Manager.sharedInstance.currentUser.id, feathers: 10, completion: { (result) in
-                SVProgressHUD.dismiss()
-                if result {
-                    Manager.sharedInstance.analysisSubmitted = true
-                    Manager.sharedInstance.currentUser.feathers = Manager.sharedInstance.currentUser.feathers + 10
-                    self.alert(message: "You have gained 10 Feathers by submitting your answer.", title: "Congratulations", options: "Ok", completion: { (buttonIndex) in
-                        self.performSegue(withIdentifier: "sid_feathers", sender: self)
-                    })
+    func submitAnswer(question: Question, answer: Answer) {
+        SVProgressHUD.show()
+        APIManager.submitAnswer(userId: Manager.sharedInstance.currentUser.id, questionId: question.id, answerId: answer.id) { (result) in
+            SVProgressHUD.dismiss()
+            if let result = result {
+                Manager.sharedInstance.questions.removeObject(obj: question)
+                self.questions = Manager.sharedInstance.questions
+                self.tblQuestions.reloadData()
+                if result.intValue > 0 {
+                    self.alert(message: "You have gained \(result) iXP by submitting your answer.", title: "Congratulations")
                 }
-                else {
-                    self.alert(message: "Network is busy now, try again, please.", title: "Sorry...")
-                }
-            })
-        }
-        else {
-            self.alert(message: "You have already submitted your answer.", title: "Hmm...")
+            }
         }
     }
 }
@@ -125,13 +108,14 @@ extension AnalyticsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let question = questions[indexPath.section]
         question.selectedAnswerIndex = indexPath.row
-        Manager.sharedInstance.saveQuizState()
         
         tblQuestions.beginUpdates()
         for i in 0 ..< questions[indexPath.section].answers.count {
             tblQuestions.reloadRows(at: [IndexPath(row: i, section: indexPath.section)], with: .automatic)
         }
         tblQuestions.endUpdates()
+        
+        self.submitAnswer(question: question, answer: question.answers[indexPath.row])
     }
 }
 
