@@ -16,8 +16,8 @@ class ProgressViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        Manager.sharedInstance.sortProgrammes()
-        self.programmes = Manager.sharedInstance.allProgrammes
+        Manager.shared.sortProgrammes()
+        self.programmes = Manager.shared.allProgrammes
         
         tblProgress.estimatedRowHeight = 70
         tblProgress.rowHeight = UITableViewAutomaticDimension
@@ -40,14 +40,14 @@ class ProgressViewController: BaseViewController {
     
     func loadProgress() {
         SVProgressHUD.show(withStatus: Constant.Keyword.loading)
-        APIManager.getProgress(userId: Manager.sharedInstance.currentUser.id) { (progressDict) in
+        APIManager.getProgress(userId: Manager.shared.currentUser.id) { (progressDict) in
             SVProgressHUD.dismiss()
             if let dict = progressDict {
                 for (id, value) in dict {
                     if let programme = self.program(for: id) {
                         let valueDict = value as! [String: Any]
                         let tasks = valueDict["tasks"] as! [Any]
-                        programme.getPrepared(with: Manager.sharedInstance.allTasks)
+                        programme.getPrepared(with: Manager.shared.allTasks)
                         programme.applyTaskStatus(with: tasks)                        
                     }
                 }

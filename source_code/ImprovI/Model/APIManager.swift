@@ -114,11 +114,11 @@ class APIManager: NSObject {
             if response.result.isSuccess {
                 print("JSON: \(response.result.value!)")
                 if let data = self.dataFromResponse(json: response.result.value) as? [Any]{
-                    let standard = UserDefaults.standard
-                    standard.set(data, forKey: "dailytasks")
-                    DispatchQueue.global(qos: .background).async {
-                        standard.synchronize()
-                    }
+//                    let standard = UserDefaults.standard
+//                    standard.set(data, forKey: "dailytasks")
+//                    DispatchQueue.global(qos: .background).async {
+//                        standard.synchronize()
+//                    }
                     
                     if let completion = completion {
                         let dailyTasks = data.map {DailyTask.from(dict: $0 as! [String: Any])}
@@ -357,6 +357,54 @@ class APIManager: NSObject {
         }
     }
     
+    class func ixpPurchased(userId: String, ixp: Int, completion: ((Bool)->Void)?) {
+        var parameters = [String: String]()
+        parameters["user_id"] = userId
+        parameters["ixp"] = "\(ixp)"
+        
+        let url = SERVER + "action=ixpPurchased"
+        Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
+            if response.result.isSuccess {
+                print("JSON: \(response.result.value!)")
+                if let _ = self.dataFromResponse(json: response.result.value){
+                    if let completion = completion {
+                        completion(true)
+                    }
+                    return
+                }
+            }
+            
+            if let completion = completion {
+                completion(false)
+            }
+            print("iXP purchased migratd to server successfully")
+        }
+    }
+    
+    class func convertIXPToFeathers(userId: String, feathers: Int, completion: ((Bool)->Void)?) {
+        var parameters = [String: String]()
+        parameters["user_id"] = userId
+        parameters["feathers"] = "\(feathers)"
+        
+        let url = SERVER + "action=convertIXPToFeather"
+        Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
+            if response.result.isSuccess {
+                print("JSON: \(response.result.value!)")
+                if let _ = self.dataFromResponse(json: response.result.value){
+                    if let completion = completion {
+                        completion(true)
+                    }
+                    return
+                }
+            }
+            
+            if let completion = completion {
+                completion(false)
+            }
+            print("Feathers purchased successfully")
+        }
+    }
+    
     class func updateIxp(userId: String, completion: ((Bool)->Void)?) {
         var parameters = [String: String]()
         parameters["user_id"] = userId
@@ -524,8 +572,8 @@ class APIManager: NSObject {
                 print("JSON: \(response.result.value!)")
                 if let data = self.dataFromResponse(json: response.result.value) as? [String: Any]{
                     var ixp = 0
-                    if let ixpVal = data["ixp"] as? Int{
-                        ixp = ixpVal
+                    if let ixpVal = data["ixp"]{
+                        ixp = "\(ixpVal)".intValue
                     }
                     
                     if let traitData = data["trait"] as? [Any]{

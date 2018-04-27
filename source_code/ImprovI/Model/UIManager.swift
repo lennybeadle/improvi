@@ -18,6 +18,8 @@ class UIManager{
         UINavigationBar.appearance().tintColor = Constant.UI.backColor
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: Constant.UI.backColor]
         UIApplication.shared.statusBarStyle = .lightContent
+        
+        SVProgressHUD.setDefaultMaskType(.clear)
     }
 }
 
@@ -47,5 +49,9 @@ extension UIManager {
         let viewController = ViewController.Main.viewController
         viewController.navigationController?.isNavigationBarHidden = true
         (appDelegate.window?.rootViewController as? UINavigationController)?.pushViewController(viewController, animated: animated)
+    }
+    
+    func isiPad() -> Bool {
+        return UIDevice.current.userInterfaceIdiom == .pad
     }
 }

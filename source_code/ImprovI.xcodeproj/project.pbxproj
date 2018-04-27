@@ -62,6 +62,7 @@
 		9A805F561E3A6FD000E49D2C /* TableViewDragger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F531E3A6FD000E49D2C /* TableViewDragger.swift */; };
 		9A805F571E3A6FD000E49D2C /* TableViewDraggerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F541E3A6FD000E49D2C /* TableViewDraggerCell.swift */; };
 		9A805F581E3A6FD000E49D2C /* UIScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A805F551E3A6FD000E49D2C /* UIScrollViewExtension.swift */; };
+		9A9348F1207B284A00EAA54C /* FeatherConvertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9348F0207B284A00EAA54C /* FeatherConvertViewController.swift */; };
 		9A95F3881E46811800F3228F /* privacypolicy.html in Resources */ = {isa = PBXBuildFile; fileRef = 9A95F3871E46811800F3228F /* privacypolicy.html */; };
 		9A95F38B1E46816700F3228F /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A95F38A1E46816700F3228F /* PrivacyPolicyViewController.swift */; };
 		9A95F38D1E4684EE00F3228F /* ContactUSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A95F38C1E4684EE00F3228F /* ContactUSViewController.swift */; };
@@ -70,12 +71,13 @@
 		9A981A6E1E546F7900E097D5 /* congratulation.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9A981A6D1E546F7900E097D5 /* congratulation.sks */; };
 		9A981A701E54711F00E097D5 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A981A6F1E54711F00E097D5 /* CongratulationViewController.swift */; };
 		9A9B553A1F10E0AA00C4E583 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A9B55391F10E0AA00C4E583 /* StoreKit.framework */; };
+		9AA1F270207B74CD001D4FBF /* intro1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AAEA7E01E637D9C00628B0D /* intro1.png */; };
 		9AAEA7DC1E6365C100628B0D /* UIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAEA7DB1E6365C100628B0D /* UIManager.swift */; };
 		9AAEA7DE1E63775000628B0D /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAEA7DD1E63775000628B0D /* WelcomeViewController.swift */; };
-		9AAEA7E41E637D9C00628B0D /* intro1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AAEA7E01E637D9C00628B0D /* intro1.png */; };
 		9AAEA7E51E637D9C00628B0D /* intro2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AAEA7E11E637D9C00628B0D /* intro2.png */; };
 		9AAEA7E61E637D9C00628B0D /* intro3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AAEA7E21E637D9C00628B0D /* intro3.png */; };
 		9AAEA7E71E637D9C00628B0D /* intro4.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AAEA7E31E637D9C00628B0D /* intro4.png */; };
+		9AD4D6B0207EBBA100261B79 /* TimeMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD4D6AF207EBBA100261B79 /* TimeMachine.swift */; };
 		9AD5D07A1E3BD076000C7AF9 /* ProgrammeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5D0791E3BD076000C7AF9 /* ProgrammeDetailViewController.swift */; };
 		9AD5D07D1E3BD46F000C7AF9 /* LinearProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5D07C1E3BD46F000C7AF9 /* LinearProgressView.swift */; };
 		9AD5D07F1E3BECD7000C7AF9 /* SummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5D07E1E3BECD7000C7AF9 /* SummaryTableViewCell.swift */; };
@@ -141,6 +143,7 @@
 		9A805F531E3A6FD000E49D2C /* TableViewDragger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDragger.swift; sourceTree = "<group>"; };
 		9A805F541E3A6FD000E49D2C /* TableViewDraggerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDraggerCell.swift; sourceTree = "<group>"; };
 		9A805F551E3A6FD000E49D2C /* UIScrollViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtension.swift; sourceTree = "<group>"; };
+		9A9348F0207B284A00EAA54C /* FeatherConvertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatherConvertViewController.swift; sourceTree = "<group>"; };
 		9A95F3871E46811800F3228F /* privacypolicy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = privacypolicy.html; sourceTree = "<group>"; };
 		9A95F38A1E46816700F3228F /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		9A95F38C1E4684EE00F3228F /* ContactUSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUSViewController.swift; sourceTree = "<group>"; };
@@ -151,10 +154,11 @@
 		9A9B55391F10E0AA00C4E583 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		9AAEA7DB1E6365C100628B0D /* UIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIManager.swift; sourceTree = "<group>"; };
 		9AAEA7DD1E63775000628B0D /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		9AAEA7E01E637D9C00628B0D /* intro1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro1.png; sourceTree = "<group>"; };
-		9AAEA7E11E637D9C00628B0D /* intro2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro2.png; sourceTree = "<group>"; };
-		9AAEA7E21E637D9C00628B0D /* intro3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro3.png; sourceTree = "<group>"; };
-		9AAEA7E31E637D9C00628B0D /* intro4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro4.png; sourceTree = "<group>"; };
+		9AAEA7E01E637D9C00628B0D /* intro1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = intro1.png; path = ImprovI/Resource/intro/intro1.png; sourceTree = SOURCE_ROOT; };
+		9AAEA7E11E637D9C00628B0D /* intro2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = intro2.png; path = ImprovI/Resource/intro/intro2.png; sourceTree = SOURCE_ROOT; };
+		9AAEA7E21E637D9C00628B0D /* intro3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = intro3.png; path = ImprovI/Resource/intro/intro3.png; sourceTree = SOURCE_ROOT; };
+		9AAEA7E31E637D9C00628B0D /* intro4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = intro4.png; path = ImprovI/Resource/intro/intro4.png; sourceTree = SOURCE_ROOT; };
+		9AD4D6AF207EBBA100261B79 /* TimeMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeMachine.swift; sourceTree = "<group>"; };
 		9AD5D0791E3BD076000C7AF9 /* ProgrammeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgrammeDetailViewController.swift; sourceTree = "<group>"; };
 		9AD5D07C1E3BD46F000C7AF9 /* LinearProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinearProgressView.swift; sourceTree = "<group>"; };
 		9AD5D07E1E3BECD7000C7AF9 /* SummaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryTableViewCell.swift; sourceTree = "<group>"; };
@@ -304,6 +308,7 @@
 				9AD5D0791E3BD076000C7AF9 /* ProgrammeDetailViewController.swift */,
 				9A3E983C1FF2522C006F796B /* FeathersViewController.swift */,
 				9A4478E21FF5C1B100A1943F /* FeatherAskViewController.swift */,
+				9A9348F0207B284A00EAA54C /* FeatherConvertViewController.swift */,
 				9A37F7961E36498200943AF4 /* AnalyticsViewController.swift */,
 				9A37F7981E36498B00943AF4 /* TBDViewController.swift */,
 				9A37F79A1E3649A000943AF4 /* SummaryViewController.swift */,
@@ -354,6 +359,7 @@
 			children = (
 				9AAEA7DB1E6365C100628B0D /* UIManager.swift */,
 				9A37F78E1E363C5000943AF4 /* Manager.swift */,
+				9AD4D6AF207EBBA100261B79 /* TimeMachine.swift */,
 				9A805F461E3A58E600E49D2C /* APIManager.swift */,
 				9A95F3901E468CDA00F3228F /* NotificationManager.swift */,
 				9A3BABBD1EE9CA7B00B19713 /* PurchaseManager.swift */,
@@ -479,7 +485,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Mac;
 				TargetAttributes = {
 					9A37F76C1E36206300943AF4 = {
@@ -520,7 +526,7 @@
 			files = (
 				9A37F77B1E36206300943AF4 /* LaunchScreen.storyboard in Resources */,
 				9A4478E11FF4690700A1943F /* Custom.storyboard in Resources */,
-				9AAEA7E41E637D9C00628B0D /* intro1.png in Resources */,
+				9AA1F270207B74CD001D4FBF /* intro1.png in Resources */,
 				9A2E18011FEF9BB8002BD071 /* .gitkeep in Resources */,
 				9A36AD411E413DE500B949A0 /* starParticle.sks in Resources */,
 				9AAEA7E61E637D9C00628B0D /* intro3.png in Resources */,
@@ -638,6 +644,7 @@
 				9A805F571E3A6FD000E49D2C /* TableViewDraggerCell.swift in Sources */,
 				9A95F3911E468CDB00F3228F /* NotificationManager.swift in Sources */,
 				9A805F451E3A4E4F00E49D2C /* User.swift in Sources */,
+				9A9348F1207B284A00EAA54C /* FeatherConvertViewController.swift in Sources */,
 				9A579DF71E41A29600385EAF /* ProgressHeaderView.swift in Sources */,
 				9A3E983D1FF2522C006F796B /* FeathersViewController.swift in Sources */,
 				9A37F78F1E363C5000943AF4 /* Manager.swift in Sources */,
@@ -661,6 +668,7 @@
 				9AAEA7DC1E6365C100628B0D /* UIManager.swift in Sources */,
 				9A981A701E54711F00E097D5 /* CongratulationViewController.swift in Sources */,
 				9A2E18031FEF9BB8002BD071 /* DMSwipeCardsView.swift in Sources */,
+				9AD4D6B0207EBBA100261B79 /* TimeMachine.swift in Sources */,
 				9A37F79B1E3649A000943AF4 /* SummaryViewController.swift in Sources */,
 				9AD5D07F1E3BECD7000C7AF9 /* SummaryTableViewCell.swift in Sources */,
 				9A805F581E3A6FD000E49D2C /* UIScrollViewExtension.swift in Sources */,
@@ -702,6 +710,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -709,6 +718,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -757,6 +767,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -764,6 +775,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -809,6 +821,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "improvi Development Provision";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -829,6 +842,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "improvi Distribution Provision";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

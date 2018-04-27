@@ -34,7 +34,26 @@ class TBDViewController: BaseViewController {
         super.viewDidAppear(animated)
         setupEmitter()
     }
+    
+    func shareFB() {
 
+    }
+    
+    func shareTW() {
+
+    }
+    
+    @IBAction func onShare(_ sender: Any) {
+        self.alert(message: "", title: "Share", options: "Facebook", "Twitter", "Cancel") { (buttonIndex) in
+            if buttonIndex == 0 {
+                self.shareFB()
+            }
+            else if buttonIndex == 1 {
+                self.shareTW()
+            }
+        }
+    }
+    
     func setupEmitter() {
         vwEmitter = SKView(frame: self.view.bounds)
         vwEmitter.allowsTransparency = true
@@ -56,7 +75,7 @@ class TBDViewController: BaseViewController {
     }
     
     func reloadTraits() {
-        if let user = Manager.sharedInstance.currentUser {
+        if let user = Manager.shared.currentUser {
 //            if user.traitPoints.count == 0 {
                 user.traitPoints.removeAll()
                 SVProgressHUD.show(withStatus: Constant.Keyword.loading)
@@ -128,7 +147,7 @@ class TBDViewController: BaseViewController {
     }
     
     func showTraits() {
-        if let user = Manager.sharedInstance.currentUser {
+        if let user = Manager.shared.currentUser {
             self.lblTotalIXP.text = "\(user.totalIXP)"
             if user.traitPoints.count > 0 {
                 var data = [Double]()
@@ -137,7 +156,12 @@ class TBDViewController: BaseViewController {
                     if trait.name.contains("Trait_"), trait.value <= 0 {
                         continue
                     }
-                    data.append(Double(trait.value!))
+                    if trait.value <= 0 {
+                        data.append(0.0)
+                    }
+                    else {
+                        data.append(Double(trait.value!))
+                    }
                     labels.append(trait.name)
                 }
 //                let data: [Double] = user.traitPoints.map { return Double(max($0.value, 0)) }

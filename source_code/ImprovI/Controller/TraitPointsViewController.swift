@@ -25,7 +25,7 @@ class TraitPointsViewController: BaseViewController {
     }
     
     func reloadTraits() {
-        if let user = Manager.sharedInstance.currentUser {
+        if let user = Manager.shared.currentUser {
             user.traitPoints.removeAll()
             SVProgressHUD.show(withStatus: Constant.Keyword.loading)
             APIManager.loadTraits(userId: user.id, completion: { (traits, ixpval) in
@@ -92,7 +92,7 @@ class TraitPointsViewController: BaseViewController {
     }
 
     func showTraits() {
-        if let user = Manager.sharedInstance.currentUser {
+        if let user = Manager.shared.currentUser {
             if user.traitPoints.count > 0 {
                 var data = [Double]()
                 var labels = [String]()

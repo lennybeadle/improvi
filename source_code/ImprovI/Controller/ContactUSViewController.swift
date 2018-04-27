@@ -36,6 +36,17 @@ class ContactUSViewController: BaseViewController {
         }
         UIApplication.shared.open(number, options: [:], completionHandler: nil)
     }
+    
+    @IBAction func onWebsite(_ sender: Any) {
+        guard let url = URL(string: "https://www.improv-i.com") else {
+            showError(text: "The website is not launchable now.")
+            return
+        }
+        
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
 }
 
 extension ContactUSViewController: MFMailComposeViewControllerDelegate {

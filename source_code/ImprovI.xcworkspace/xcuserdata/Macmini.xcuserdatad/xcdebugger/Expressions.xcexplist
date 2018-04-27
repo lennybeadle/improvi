@@ -38,7 +38,23 @@
          contextName = "closure #1 in ProgressViewController.loadProgress():ProgressViewController.swift">
       </ContextState>
       <ContextState
-         contextName = "DailyTaskViewController.updateWithDailyTask(task:):DailyTaskViewController.swift">
+         contextName = "DailyTaskViewController.updateWithStatus():DailyTaskViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.dailyTask">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TBDViewController.reloadTraits():TBDViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in static APIManager.loadTraits(userId:completion:):APIManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "type(of: data[&quot;ixp&quot;])">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "closure #1 in static APIManager.submitAnswer(userId:questionId:answerId:completion:):APIManager.swift">
@@ -47,6 +63,9 @@
                value = "response.result.value">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DailyTaskViewController.updateWithDailyTask(task:):DailyTaskViewController.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

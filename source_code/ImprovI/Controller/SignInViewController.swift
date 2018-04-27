@@ -24,9 +24,9 @@ class SignInViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        btnSelected.isSelected = Manager.sharedInstance.keepUserSignedIn
+        btnSelected.isSelected = Manager.shared.keepUserSignedIn
         print("Selected - \(btnSelected.isSelected)")
-        if Manager.sharedInstance.keepUserSignedIn {
+        if Manager.shared.keepUserSignedIn {
             let standard = UserDefaults.standard
             let username = standard.string(forKey: "username")
             let email = standard.string(forKey: "email")
@@ -52,7 +52,7 @@ class SignInViewController: BaseViewController {
     
     @IBAction func onKeepMeSignedIn(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        Manager.sharedInstance.keepUserSignedIn = sender.isSelected
+        Manager.shared.keepUserSignedIn = sender.isSelected
     }
     
     @IBAction func onSignIn(_ sender: Any) {
@@ -65,7 +65,7 @@ class SignInViewController: BaseViewController {
                     if user == nil {
                         return
                     }
-                    Manager.sharedInstance.currentUser = user
+                    Manager.shared.currentUser = user
 //                    Manager.sharedInstance.approachProgrammes(programmes: programmes)
                     IQKeyboardManager.sharedManager().resignFirstResponder()
                     self.performSegue(withIdentifier: "sid_home", sender: self)
@@ -77,7 +77,7 @@ class SignInViewController: BaseViewController {
                     if user == nil {
                         return
                     }
-                    Manager.sharedInstance.currentUser = user
+                    Manager.shared.currentUser = user
 //                    Manager.sharedInstance.approachProgrammes(programmes: programmes)
                     IQKeyboardManager.sharedManager().resignFirstResponder()
                     self.performSegue(withIdentifier: "sid_home", sender: self)

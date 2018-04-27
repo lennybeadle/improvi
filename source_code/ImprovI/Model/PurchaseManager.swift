@@ -10,18 +10,19 @@ import UIKit
 import SwiftyStoreKit
 import StoreKit
 
-enum Products: Int{
-    case product_10_feathers = 0
-    case product_25_feathers = 1
-    case product_50_feathers = 2
-    case product_100_feathers = 3
-
+enum Products: Int {
+    case product_90_ixp = 0
+    case product_200_ixp = 1
+    case product_520_ixp = 2
+    case product_5_feathers = 3
+    case product_12_feathers = 4
+    
     var identifier: String {
         return Products.productIdentifiers[self.rawValue]
     }
     
-    var feathers: Int {
-        return Products.productFeathers[self.rawValue]
+    var content: String {
+        return Products.productContents[self.rawValue]
     }
     
     var price: CGFloat {
@@ -32,10 +33,34 @@ enum Products: Int{
         return String(format: "$%.2f", self.price)
     }
     
-    static let productFeathers = [10, 25, 50, 100]
-    static let productPrices: [CGFloat] = [0.99, 1.99, 2.99, 4.99]
-    static let productIdentifiers = ["product_10_feathers", "product_25_feathers", "product_50_feathers", "product_100_feathers"]
-    static let productIdentifiersSet: Set<String> = ["product_10_feathers", "product_25_feathers", "product_50_feathers", "product_100_feathers"]
+    var isFeather: Bool {
+        if self.rawValue < 3 {
+            return false
+        }
+        return true
+    }
+    
+    var value: Int {
+        switch self {
+        case .product_90_ixp:
+            return 90
+        case .product_200_ixp:
+            return 200
+        case .product_520_ixp:
+            return 520
+        case .product_5_feathers:
+            return 5
+        case .product_12_feathers:
+            return 12
+        default:
+            return 0
+        }
+    }
+    
+    static let productContents = ["90 iXP", "200 iXP", "520 iXP", "Pack of 5 Feathers", "A Dozen(12 Feathers)"]
+    static let productPrices: [CGFloat] = [0.99, 1.99, 4.99, 9.99, 19.99]
+    static let productIdentifiers = ["product_90_ixp", "product_200_ixp", "product_520_ixp", "product_5_feathers", "product_12_feathers"]
+    static let productIdentifiersSet: Set<String> = ["product_90_ixp", "product_200_ixp", "product_520_ixp", "product_5_feathers", "product_12_feathers"]
 }
 
 extension SKProduct {

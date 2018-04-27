@@ -20,7 +20,7 @@ class Programme: ImprovIObject {
 
     var tasks = [DailyTask]()
     var taskIds = [String]()
-
+    
     var unlocked: Bool = false
     var needed_feather: Int = 0
     
@@ -66,7 +66,7 @@ class Programme: ImprovIObject {
     var countOfCompletedTasks: Int {
         var count: Int = 0
         for task in tasks {
-            if task.status == .completed {
+            if task.completedCount > 0 {
                 count = count + 1
             }
         }
@@ -205,12 +205,14 @@ class Programme: ImprovIObject {
         }
     }
     
-    func updateTaskStatus(taskId: String, status: Int, startedAt: Date?) {
+    func updateTaskStatus(taskId: String, status: Int, startedAt: Date?, endedAt: Date?, completedCount: Int = 0) {
         for task in self.tasks {
             if task.id == taskId {
                 task.status = Status(rawValue: status)!
                 task.startedAt = startedAt
+                task.endedAt = endedAt
                 task.unlocked = true
+                task.completedCount = completedCount
                 if task.status == .ongoing {
                     NotificationManager.shared.setNotification(for: task)
                 }
@@ -224,9 +226,12 @@ class Programme: ImprovIObject {
         for status in taskStatus {
             let dict = status as! [String: Any]
             let startedAt = Date(timeIntervalSince1970: dict["started_at"] as! TimeInterval)
+            let endedAt = Date(timeIntervalSince1970: dict["ended_at"] as! TimeInterval)
             self.updateTaskStatus(taskId: dict["task_id"] as! String,
                                   status: (dict["status"] as! String).intValue,
-                                  startedAt: startedAt)
+                                  startedAt: startedAt,
+                                  endedAt: endedAt,
+                                  completedCount: (dict["completed_count"] as! String).intValue)
         }
     }
     

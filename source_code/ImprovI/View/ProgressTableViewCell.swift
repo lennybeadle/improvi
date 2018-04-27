@@ -33,9 +33,23 @@ class ProgressTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func timeStr(_ times: Int) -> String {
+        switch times {
+        case 0:
+            return "Never"
+        case 1:
+            return "Once"
+        case 2:
+            return "Twice"
+        default:
+            return "\(times) times"
+        }
+    }
+    
     func resetWithDailyTask(task: DailyTask) {
         self.lblTitle.text = task.name
-        self.lblDescription.text = task.longDescription
+        self.lblDescription.text = "Completed: " + timeStr(task.completedCount)
+//        self.lblDescription.text = task.longDescription
         
         if task.status == .ongoing {
             self.lblTitle.textColor = Constant.UI.foreColor

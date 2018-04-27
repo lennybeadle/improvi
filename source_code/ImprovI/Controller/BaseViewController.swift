@@ -86,7 +86,7 @@ class BaseViewController: UIViewController {
         let controller = UIStoryboard(name: "Custom", bundle: nil).instantiateViewController(withIdentifier: "FeatherAskController") as! FeatherAskViewController
         controller.delegate = self
         controller.modalPresentationStyle = .overFullScreen
-        controller.text = "No enough Feathers, Are you going to purchase feathers?"
+        controller.text = "Not enough Feathers. Do you want to purchase more?"
         featherCompletion = completion
         self.present(controller, animated: false, completion: nil)
     }

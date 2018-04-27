@@ -28,7 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func initSettings() {
         UIManager.shared.appDelegate = self
         UIManager.shared.initSettings()
-        iRate.sharedInstance().appStoreID = 10289384
+        iRate.sharedInstance().applicationName = "improv-i"
+        iRate.sharedInstance().appStoreID = 1246427949
         iRate.sharedInstance().onlyPromptIfLatestVersion = true
         
         IQKeyboardManager.sharedManager().enable = true
@@ -42,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func initUI() {
-        if Manager.sharedInstance.keepUserSignedIn {
+        if Manager.shared.keepUserSignedIn {
             let standard = UserDefaults.standard
             let username = standard.string(forKey: "username")
             let email = standard.string(forKey: "email")
@@ -52,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 APIManager.login(with: username, email: email, password: password, completion: { (user) in
                     SVProgressHUD.dismiss()
                     if user != nil {
-                        Manager.sharedInstance.currentUser = user
+                        Manager.shared.currentUser = user
 //                        Manager.sharedInstance.approachProgrammes(programmes: programmes)
                         UIManager.shared.showMain()
                     }

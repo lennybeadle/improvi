@@ -21,9 +21,9 @@ class SettingsViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if isAnimated {
+//        if isAnimated {
            self.reload()
-        }
+//        }
     }
     
     func reload() {
@@ -37,7 +37,7 @@ class SettingsViewController: BaseViewController {
             self.items.append(SettingItem(title: "Reminder", detail: reminderContent, isAccessary: true))
             self.items.append(SettingItem(title: "Privacy Policy", detail: "", isAccessary: true))
             self.items.append(SettingItem(title: "Contact Us", detail: "", isAccessary: true))
-            self.items.append(SettingItem(title: "Rate improvi", detail: "", isAccessary: true))
+            self.items.append(SettingItem(title: "Rate improv-i", detail: "", isAccessary: true))
             self.items.append(SettingItem(title: "Sign Out", detail: "", isAccessary: false))
             
             DispatchQueue.main.async {
@@ -84,7 +84,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             iRate.sharedInstance().promptForRating()
         }
         else if indexPath.row == 4 {
-            Manager.sharedInstance.logOut()
+            Manager.shared.logOut()
             let _ = self.navigationController?.popToRootViewController(animated: true)
         }
     }

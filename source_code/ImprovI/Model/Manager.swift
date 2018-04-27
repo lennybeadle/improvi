@@ -10,7 +10,7 @@ import UIKit
 import SVProgressHUD
 
 class Manager {
-    static let sharedInstance: Manager = Manager()
+    static let shared: Manager = Manager()
     
     var allProgrammes = [Programme]()
     var allTasks = [DailyTask]()
@@ -63,17 +63,17 @@ class Manager {
     }
     
     func loadDailyTasks() {
-        let standard = UserDefaults.standard
-        if let dailytasks = standard.array(forKey: "dailytasks") {
-            self.allTasks = dailytasks.map {DailyTask.from(dict: $0 as! [String: Any])}
-        }
-        else {
+//        let standard = UserDefaults.standard
+//        if let dailytasks = standard.array(forKey: "dailytasks") {
+//            self.allTasks = dailytasks.map {DailyTask.from(dict: $0 as! [String: Any])}
+//        }
+//        else {
             APIManager.getDailyTasks { (tasks) in
                 if let tasks = tasks {
                     self.allTasks = tasks
                 }
             }
-        }
+//        }
     }
     
     func sortProgrammes() {
@@ -120,29 +120,50 @@ class Manager {
                     PurchaseManager.shared.purchaseProduct(product: product.identifier) { (result) in
                         SVProgressHUD.dismiss()
                         if result {
-                            let alert = UIAlertController(title: "Success", message: "Your have purchased \(product.feathers) feathers.", preferredStyle: .alert)
+                            let alert = UIAlertController(title: "Success", message: "Your have purchased \(product.content).", preferredStyle: .alert)
                             let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
                             alert.addAction(action)
                             navigationController.present(alert, animated: true, completion: nil)
                             
-                            if let currentUser = Manager.sharedInstance.currentUser {
-                                currentUser.feathers = currentUser.feathers + product.feathers
+                            if product.isFeather {
+                                if let currentUser = Manager.shared.currentUser {
+                                    currentUser.feathers = currentUser.feathers + product.value
+                                }
+                                SVProgressHUD.show()
+                                APIManager.featherPurchased(userId: Manager.shared.currentUser.id, feathers: product.value, completion: { (result) in
+                                    SVProgressHUD.dismiss()
+                                    if result {
+                                        if let completion = completion {
+                                            completion(true)
+                                        }
+                                    }
+                                    else {
+                                        if let completion = completion {
+                                            completion(false)
+                                        }
+                                    }
+                                })
                             }
-                            
-                            SVProgressHUD.show()
-                            APIManager.featherPurchased(userId: Manager.sharedInstance.currentUser.id, feathers: product.feathers, completion: { (result) in
-                                SVProgressHUD.dismiss()
-                                if result {
-                                    if let completion = completion {
-                                        completion(true)
-                                    }
+                            else {
+                                if let currentUser = Manager.shared.currentUser {
+                                    currentUser.totalIXP = currentUser.totalIXP + product.value
                                 }
-                                else {
-                                    if let completion = completion {
-                                        completion(false)
+                                SVProgressHUD.show()
+                                
+                                APIManager.ixpPurchased(userId: Manager.shared.currentUser.id, ixp: product.value, completion: { (result) in
+                                    SVProgressHUD.dismiss()
+                                    if result {
+                                        if let completion = completion {
+                                            completion(true)
+                                        }
                                     }
-                                }
-                            })
+                                    else {
+                                        if let completion = completion {
+                                            completion(false)
+                                        }
+                                    }
+                                })
+                            }
                         }
                         else {
                             let alert = UIAlertController(title: "Failure", message: "Please try again later", preferredStyle: .alert)

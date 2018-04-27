@@ -23,6 +23,11 @@ class PrivacyPolicyViewController: BaseViewController {
         loadHtml()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        SVProgressHUD.dismiss()
+    }
+    
     func loadHtml() {
         if let path = Bundle.main.path(forResource: "privacypolicy", ofType: "html") {
             let url = URL(fileURLWithPath: path)

@@ -36,8 +36,8 @@ class ProfileViewController: BaseViewController {
         imgUser.layer.borderWidth = 3
         imgUser.layer.masksToBounds = true
         
-        lblUsername.text = Manager.sharedInstance.currentUser.fullName
-        if let image = Manager.sharedInstance.currentUser.image {
+        lblUsername.text = Manager.shared.currentUser.fullName
+        if let image = Manager.shared.currentUser.image {
             self.imgUser.image = image
         }
         
@@ -46,16 +46,16 @@ class ProfileViewController: BaseViewController {
     
     func reload() {
         self.items.removeAll()
-        items.append(SettingItem(title: "Full name", detail: Manager.sharedInstance.currentUser.fullName, isAccessary: true))
-        items.append(SettingItem(title: "Email Address", detail: Manager.sharedInstance.currentUser.emailAddress, isAccessary: true))
+        items.append(SettingItem(title: "Full name", detail: Manager.shared.currentUser.fullName, isAccessary: true))
+        items.append(SettingItem(title: "Email Address", detail: Manager.shared.currentUser.emailAddress, isAccessary: true))
         items.append(SettingItem(title: "Change Password", detail: "", isAccessary: true))
-        items.append(SettingItem(title: "Date Joined", detail: Manager.sharedInstance.currentUser.dateJoined.dateString, isAccessary: false))
-        var ixp = Manager.sharedInstance.currentUser.totalIXP
+        items.append(SettingItem(title: "Date Joined", detail: Manager.shared.currentUser.dateJoined.dateString, isAccessary: false))
+        var ixp = Manager.shared.currentUser.totalIXP
         if ixp == -1 {
             ixp = 0
         }
         items.append(SettingItem(title: "Total IXP", detail: "\(ixp)", isAccessary: false))
-        if let feathers = Manager.sharedInstance.currentUser.feathers {
+        if let feathers = Manager.shared.currentUser.feathers {
             items.append(SettingItem(title: "Total Feathers", detail: "\(feathers)", isAccessary: false))
         }
         items.append(SettingItem(title: "Sign Out", detail: "", isAccessary: false))
@@ -93,7 +93,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let selectedImage = info[UIImagePickerControllerEditedImage] as! UIImage
         self.imgUser.image = selectedImage.resizeImage(newWidth: 200)
-        Manager.sharedInstance.currentUser.image = self.imgUser.image
+        Manager.shared.currentUser.image = self.imgUser.image
         
         dismiss(animated: true, completion: nil)
     }
@@ -105,8 +105,8 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
 
 extension ProfileViewController: ChangePasswordViewDelegate {
     func passwordChangedTo(value: String) {
-        Manager.sharedInstance.currentUser.password = value
-        Manager.sharedInstance.storeUserInfo()
+        Manager.shared.currentUser.password = value
+        Manager.shared.storeUserInfo()
         self.reload()
     }
 }
@@ -114,10 +114,10 @@ extension ProfileViewController: ChangePasswordViewDelegate {
 extension ProfileViewController: TextInputViewControllerDelegate {
     internal func textChangedTo(value: String, from: String, forTextType: String) {
         if forTextType == "Full name" {
-            Manager.sharedInstance.currentUser.fullName = value
+            Manager.shared.currentUser.fullName = value
         }
         else if forTextType == "Email" {
-            Manager.sharedInstance.currentUser.emailAddress = value
+            Manager.shared.currentUser.emailAddress = value
         }
         self.reload()
     }
@@ -126,14 +126,14 @@ extension ProfileViewController: TextInputViewControllerDelegate {
         if segue.identifier == "sid_fullname" {
             let textInputController = segue.destination as! TextInputViewController
             textInputController.delegate = self
-            textInputController.defaultValue = Manager.sharedInstance.currentUser.fullName
+            textInputController.defaultValue = Manager.shared.currentUser.fullName
             textInputController.placeHolder = "Type your new name here, please"
             textInputController.textType = "Full name"
         }
         else if segue.identifier == "sid_email" {
             let textInputController = segue.destination as! TextInputViewController
             textInputController.delegate = self
-            textInputController.defaultValue = Manager.sharedInstance.currentUser.emailAddress
+            textInputController.defaultValue = Manager.shared.currentUser.emailAddress
             textInputController.placeHolder = "Type your email address here, please"
             textInputController.textType = "Email"
         }

@@ -15,19 +15,19 @@ class AnalyticsViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.questions = Manager.sharedInstance.questions
+        self.questions = Manager.shared.questions
         self.loadQuestions()
     }
     
     func loadQuestions() {
         if questions.count == 0 {
             SVProgressHUD.show(withStatus: Constant.Keyword.loading)
-            APIManager.loadQuestion(userId: Manager.sharedInstance.currentUser.id, completion: { (questions) in
+            APIManager.loadQuestion(userId: Manager.shared.currentUser.id, completion: { (questions) in
                 SVProgressHUD.dismiss()
                 if let newquiz = questions {
-                    Manager.sharedInstance.questions.removeAll()
-                    Manager.sharedInstance.questions.append(contentsOf: newquiz)
-                    self.questions = Manager.sharedInstance.questions
+                    Manager.shared.questions.removeAll()
+                    Manager.shared.questions.append(contentsOf: newquiz)
+                    self.questions = Manager.shared.questions
                     self.isAnimated = false
                     self.tblQuestions.reloadData()
                     self.callAfter(second: 2, inBackground: true, execute: {
@@ -40,11 +40,11 @@ class AnalyticsViewController: BaseViewController {
     
     func submitAnswer(question: Question, answer: Answer) {
         SVProgressHUD.show()
-        APIManager.submitAnswer(userId: Manager.sharedInstance.currentUser.id, questionId: question.id, answerId: answer.id) { (result) in
+        APIManager.submitAnswer(userId: Manager.shared.currentUser.id, questionId: question.id, answerId: answer.id) { (result) in
             SVProgressHUD.dismiss()
             if let result = result {
-                Manager.sharedInstance.questions.removeObject(obj: question)
-                self.questions = Manager.sharedInstance.questions
+                Manager.shared.questions.removeObject(obj: question)
+                self.questions = Manager.shared.questions
                 self.tblQuestions.reloadData()
                 if result.intValue > 0 {
                     self.alert(message: "You have gained \(result) iXP by submitting your answer.", title: "Congratulations")

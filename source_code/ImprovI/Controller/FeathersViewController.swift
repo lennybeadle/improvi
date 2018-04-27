@@ -27,7 +27,7 @@ class FeatherTableViewCell: UITableViewCell {
     }
     
     func resetWith(product: Products) {
-        lblFeather.text = "\(product.feathers)"
+        lblFeather.text = product.content
         if let skProduct = PurchaseManager.shared.productForProductIdentifier(identifier: product.identifier) {
             if let priceString = skProduct.priceString() {
                 lblPrice.text = priceString
@@ -67,7 +67,7 @@ class FeathersViewController: BaseViewController {
     }
     
     func updateFeathers () {
-        lblFeathers.text = "\(Manager.sharedInstance.currentUser.feathers!)"
+        lblFeathers.text = "\(Manager.shared.currentUser.feathers!)"
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -89,11 +89,24 @@ class FeathersViewController: BaseViewController {
             self.tblPrice.reloadData()
         }
     }
+    
+    @IBAction func onExchange(_ sender: Any) {
+        let controller = UIStoryboard(name: "Custom", bundle: nil).instantiateViewController(withIdentifier: "FeatherConvertController") as! FeatherConvertViewController
+        controller.delegate = self
+        controller.modalPresentationStyle = .overFullScreen
+        self.present(controller, animated: false, completion: nil)
+    }
+}
+
+extension FeathersViewController: FeatherConvertControllerDelegate {
+    func exchangeCompleted() {
+        lblFeathers.text = "\(Manager.shared.currentUser.feathers!)"
+    }
 }
 
 extension FeathersViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return (self.tblPrice.bounds.height - 160)/4
+        return (self.tblPrice.bounds.height - 160)/5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -114,11 +127,11 @@ extension FeathersViewController: UITableViewDelegate, UITableViewDataSource {
         guard let product = Products(rawValue: indexPath.row) else {
             return
         }
-        
+                
         if let skProduct = PurchaseManager.shared.productForProductIdentifier(identifier: product.identifier) {
             if let priceString = skProduct.priceString() {
-                self.askPurchaseFeather(text: "Are you going to purchase \(product.feathers) feathers with \(priceString)?", completion: { (feathers) in
-                    Manager.sharedInstance.purchaseFeathers(product: product, completion: { (result) in
+                self.askPurchaseFeather(text: "Are you going to purchase \(product.content) with \(priceString)?", completion: { (feathers) in
+                    Manager.shared.purchaseFeathers(product: product, completion: { (result) in
                         self.updateFeathers()
                         self.tblPrice.reloadData()
                     })

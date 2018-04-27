@@ -22,11 +22,78 @@ class NotificationManager: NSObject {
         }
     }
     
+    var generalReminderEnabled: Bool {
+        get {
+            let standard = UserDefaults.standard
+            return standard.bool(forKey: "generalReminderEnabled")
+        }
+        set {
+            if newValue == generalReminderEnabled {
+                return
+            }
+            
+            let standard = UserDefaults.standard
+            standard.set(newValue, forKey: "generalReminderEnabled")
+            if newValue == false {
+                self.removeNotification(with: "GENERAL")
+            }
+            else {
+                self.setNotification(with: "GENERAL", name: "Reminder", time: generalDate, content: generalMessage, isRepeat: true)
+            }
+        }
+    }
+    
+    var taskReminderEnabled: Bool {
+        get {
+            let standard = UserDefaults.standard
+            return standard.bool(forKey: "taskReminderEnabled")
+        }
+        set {
+            if newValue == taskReminderEnabled {
+                return
+            }
+            
+            if newValue == false {
+                self.clearAllTaskNotifications()
+            }
+            let standard = UserDefaults.standard
+            standard.set(newValue, forKey: "taskReminderEnabled")
+        }
+    }
+    
+    var generalMessage: String {
+        get {
+            let standard = UserDefaults.standard
+            return standard.string(forKey: "generalMessage") ?? ""
+        }
+        set {
+            if newValue == generalMessage {
+                return
+            }
+            
+            let standard = UserDefaults.standard
+            standard.set(newValue, forKey: "generalMessage")
+        }
+    }
+    
+    var generalDate: Date {
+        get {
+            let standard = UserDefaults.standard
+            let dateInterval = standard.double(forKey: "generalDate")
+            if dateInterval == 0 {
+                return Date()
+            }
+            return Date(timeIntervalSince1970: dateInterval)
+        }
+        set {
+            let standard = UserDefaults.standard
+            standard.set(newValue.timeIntervalSince1970, forKey: "generalDate")
+        }
+    }
+    
     func setNotification(for task: DailyTask) {
         guard task.name != nil, task.id != nil, task.startedAt != nil else { return }
-        
-        removeNotification(with: task.id)
-        
+
         let date = task.startedAt.minus(minutes: UInt(self.taskTimeReminder))
         setNotification(with: task.id, name: task.name, time: date, content: "Your task - \(task.name!) is almost time out. \(taskTimeReminder) mins are remainning.", isRepeat: false)
     }
@@ -59,6 +126,13 @@ class NotificationManager: NSObject {
             }
         }
     }
+    
+    func clearAllTaskNotifications() {
+        LJNotificationScheduler.sharedInstance.cancelAlllNotifications()
+        if generalReminderEnabled {
+            self.setNotification(with: "GENERAL", name: "Reminder", time: generalDate, content: generalMessage, isRepeat: true)
+        }
+    }
 }
 
 extension NotificationManager: UNUserNotificationCenterDelegate {
@@ -76,10 +150,10 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
             // Do something
             completionHandler()
         case UNNotificationDefaultActionIdentifier: // App was opened from notification
-            if Manager.sharedInstance.currentUser != nil {
+            if Manager.shared.currentUser != nil {
                 let identifier = response.notification.request.identifier
                 if identifier == "GENERAL" {
-                    Manager.sharedInstance.showProgrammeList()
+                    Manager.shared.showProgrammeList()
                 }
             }
             // Do something

@@ -42,7 +42,7 @@ class ChangePasswordViewController: BaseViewController {
             return
         }
         
-        guard txtOldPassword.text! == Manager.sharedInstance.currentUser.password else {
+        guard txtOldPassword.text! == Manager.shared.currentUser.password else {
             showError(text: "Please type your old password again.")
             return
         }
@@ -53,7 +53,7 @@ class ChangePasswordViewController: BaseViewController {
         }
         
         SVProgressHUD.show(withStatus: Constant.Keyword.loading)
-        APIManager.changePassword(userId: Manager.sharedInstance.currentUser.id, password: txtNewPassword.text!, oldPassword: txtOldPassword.text!) { (result) in
+        APIManager.changePassword(userId: Manager.shared.currentUser.id, password: txtNewPassword.text!, oldPassword: txtOldPassword.text!) { (result) in
             SVProgressHUD.dismiss()
             if (result) {
                 self.txtOldPassword.text = nil

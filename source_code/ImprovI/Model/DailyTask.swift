@@ -19,6 +19,8 @@ class DailyTask: ImprovIObject {
     var traitPoints = [TraitPoint]()
     var boostPoint: Int!
     var startedAt: Date!
+    var endedAt: Date!
+    var completedCount: Int = 0
     var status: Status = .normal
     var unlocked: Bool = false
     

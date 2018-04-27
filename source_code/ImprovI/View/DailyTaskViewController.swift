@@ -8,6 +8,8 @@
 
 import UIKit
 
+let waitingHours: UInt = 5
+
 protocol DailyTaskViewDelegate {
     func taskStatusChanged(_ task: DailyTask, to: Status, completion: ((Bool)->Void)?)
     func unlockTask(_ task: DailyTask, completion: ((Bool)->Void)?)
@@ -31,6 +33,13 @@ class DailyTaskViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if UIManager.shared.isiPad() {
+            self.lblDescription.font = UIFont.boldSystemFont(ofSize: 28)
+        }
+        else {
+            self.lblDescription.font = UIFont.boldSystemFont(ofSize: 14)
+        }
+        
         self.lblDate.layer.cornerRadius = self.lblDate.frame.height/2
         self.lblTitle.layer.cornerRadius = self.lblTitle.frame.height/2
         
@@ -51,6 +60,11 @@ class DailyTaskViewController: BaseViewController {
         self.updateIndex(index: pageIndex, count: count)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        TimeMachine.shared.removeObserver(self)
+    }
+    
     func updateDate(date: Date) {
         self.lblDate.text = "    " + date.dateString
     }
@@ -64,6 +78,7 @@ class DailyTaskViewController: BaseViewController {
     }
     
     func updateWithStatus() {
+        TimeMachine.shared.removeObserver(self)
         self.lblDescription.isHidden = false
         self.imgLocked.isHidden = true
         if self.dailyTask.status == .locked {
@@ -79,6 +94,15 @@ class DailyTaskViewController: BaseViewController {
             self.btnStatus.setTitle("Complete", for: .normal)
         }
         else if self.dailyTask.status == .normal{
+            if self.dailyTask.endedAt != nil {
+                if self.dailyTask.endedAt.plus(hours: waitingHours) >= Date() {
+                    TimeMachine.shared.addObserver(self)
+                    self.btnStatus.setTitleColor(Constant.UI.foreColorHighlight, for: .normal)
+                    self.timeUpdated(period: 0)
+                    return
+                }
+            }
+            
             self.btnStatus.isEnabled = true
             self.btnStatus.setTitleColor(Constant.UI.foreColor, for: .normal)
             self.btnStatus.setTitle("Start", for: .normal)
@@ -109,6 +133,10 @@ class DailyTaskViewController: BaseViewController {
             })
         }
         else if self.dailyTask.status == .normal{
+            if let endedAt = self.dailyTask.endedAt, endedAt.plus(hours: waitingHours) > Date() {
+                return
+            }
+            
             self.alert(message: "Are you going to start the task now?", title: "", options: "Yes", "No", completion: { (option) in
                 if option == 0 {// Yes
                     self.setDailyTaskStatus(status: .ongoing)
@@ -161,6 +189,28 @@ class DailyTaskViewController: BaseViewController {
                     self.updateWithStatus()
                 }
             })
+        }
+    }
+}
+
+extension DailyTaskViewController: TimeDelegate {
+    func timeUpdated(period: Double = 1.0) {
+        if let endedAt = self.dailyTask.endedAt {
+            let waitForSecs = endedAt.plus(hours: waitingHours).timeIntervalSince1970 - Date().timeIntervalSince1970
+            if waitForSecs > 0 {
+                let formatter = DateComponentsFormatter()
+                formatter.allowedUnits = [.hour, .minute, .second]
+                formatter.unitsStyle = .abbreviated
+                if let formattedString = formatter.string(from: waitForSecs) {
+                    UIView.performWithoutAnimation {
+                        self.btnStatus.setTitle("Wait for "+formattedString, for: .normal)
+                    }
+                }
+            }
+            else {
+                self.dailyTask.status = .normal
+                self.updateWithStatus()
+            }
         }
     }
 }

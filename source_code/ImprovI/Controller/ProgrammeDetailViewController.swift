@@ -30,11 +30,6 @@ class ProgrammeDetailViewController: BaseViewController {
 
         self.vwInfo.layer.cornerRadius = 10
         self.vwInfo.layer.masksToBounds = false
-        
-        self.vwInfo.layer.shadowColor = UIColor.gray.cgColor
-        self.vwInfo.layer.shadowOpacity = 0.5
-        self.vwInfo.layer.shadowRadius = 2
-        self.vwInfo.layer.shadowOffset = CGSize(width: 0, height: 2)
 
         self.vwDailyTask.layer.shadowColor = UIColor.gray.cgColor
         self.vwDailyTask.layer.shadowOpacity = 0.3
@@ -45,9 +40,13 @@ class ProgrammeDetailViewController: BaseViewController {
     
     func loadProgramDetail() {
         SVProgressHUD.show()
-        APIManager.getProgramDetail(userId: Manager.sharedInstance.currentUser.id, programmeId: programme.id) { (dict) in
+        APIManager.getProgramDetail(userId: Manager.shared.currentUser.id, programmeId: self.programme.id) { (dict) in
             SVProgressHUD.dismiss()
             if let dict = dict, dict.count > 0 {
+                let alltasks = dict["daily_tasks"] as! [Any]
+                let dailyTasks = alltasks.map {DailyTask.from(dict: $0 as! [String: Any])}
+                Manager.shared.allTasks = dailyTasks
+                self.programme.getPrepared(with: dailyTasks)
                 let usertasks = dict["user_tasks"] as! [Any]
                 self.programme.applyTaskStatus(with: usertasks)
                 self.resetWithProgramme()
@@ -106,13 +105,14 @@ extension ProgrammeDetailViewController: DailyTaskViewDelegate {
     func taskStatusChanged(_ task: DailyTask, to: Status, completion: ((Bool)->Void)?) {
         if to == .completed {
             SVProgressHUD.show(withStatus: Constant.Keyword.loading)
-            APIManager.completeTask(userId: Manager.sharedInstance.currentUser.id, programmeId: self.programme.id, taskId: task.id, completion: { (result) in
+            APIManager.completeTask(userId: Manager.shared.currentUser.id, programmeId: self.programme.id, taskId: task.id, completion: { (result) in
                 SVProgressHUD.dismiss()
 
                 if (result) {
-                    task.status = to
+                    task.endedAt = Date()
+                    task.status = .normal
                     self.selectedTask = task
-                    Manager.sharedInstance.currentUser.totalIXP += task.boostPoint
+                    Manager.shared.currentUser.totalIXP += task.boostPoint
                     self.showCongratulation()
                     
                     self.lblTimeRemaining.text = task.timeString
@@ -125,7 +125,7 @@ extension ProgrammeDetailViewController: DailyTaskViewDelegate {
         }
         else if to == .ongoing {
             SVProgressHUD.show(withStatus: Constant.Keyword.loading)
-            APIManager.startTask(userId: Manager.sharedInstance.currentUser.id, programmeId: self.programme.id, taskId: task.id, completion: { (result) in
+            APIManager.startTask(userId: Manager.shared.currentUser.id, programmeId: self.programme.id, taskId: task.id, completion: { (result) in
                 SVProgressHUD.dismiss()
                 if (result) {
                     task.startedAt = Date()
@@ -145,13 +145,13 @@ extension ProgrammeDetailViewController: DailyTaskViewDelegate {
     func unlockTask(_ task: DailyTask, completion: ((Bool)->Void)?) {
         if task.status == .locked {
             SVProgressHUD.show(withStatus: Constant.Keyword.loading)
-            APIManager.unlockTask(userId: Manager.sharedInstance.currentUser.id, programmeId: self.programme.id, taskId: task.id, completion: { (result) in
+            APIManager.unlockTask(userId: Manager.shared.currentUser.id, programmeId: self.programme.id, taskId: task.id, completion: { (result) in
                 SVProgressHUD.dismiss()
                 if (result) {
                     task.status = .normal
                     self.lblTimeRemaining.text = task.timeString
                     self.progressTime.progressValue = task.progress
-                    
+                    self.alert(message: "Awesome! \n You’ve unlocked another task!")
                     if let completion = completion {
                         completion(true)
                     }

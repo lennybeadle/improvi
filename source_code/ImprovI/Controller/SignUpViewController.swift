@@ -56,7 +56,7 @@ class SignUpViewController: BaseViewController {
             APIManager.register(with: txtUsername.text!, fullName: txtUsername.text!, email: txtEmail.text!, password: txtPassword.text!, photo: nil, completion: { (user) in
                 SVProgressHUD.dismiss()
                 if user != nil {
-                    Manager.sharedInstance.currentUser = user
+                    Manager.shared.currentUser = user
                     IQKeyboardManager.sharedManager().resignFirstResponder()
                     self.performSegue(withIdentifier: "sid_home", sender: self)
                 }

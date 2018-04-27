@@ -20,14 +20,14 @@ class HomeViewController: BaseViewController {
         questionsBadge.isHidden = true
         programmeBadge.isHidden = true
         
-        if Manager.sharedInstance.allProgrammes.isEmpty {
+        if Manager.shared.allProgrammes.isEmpty {
             self.loadProgrammes()
         }
         self.loadQuestions()
     }
     
     func loadOnGoingJobs() {
-        APIManager.numberOfOnGoingTasks(userId: Manager.sharedInstance.currentUser.id, completion: { (result) in
+        APIManager.numberOfOnGoingTasks(userId: Manager.shared.currentUser.id, completion: { (result) in
             if let result = result {
                 self.updateProgrammeBadge(jobs: result.intValue)
             }
@@ -35,13 +35,13 @@ class HomeViewController: BaseViewController {
     }
     
     func loadQuestions() {
-        if Manager.sharedInstance.questions.count == 0 {
+        if Manager.shared.questions.count == 0 {
             SVProgressHUD.show(withStatus: Constant.Keyword.loading)
-            APIManager.loadQuestion(userId: Manager.sharedInstance.currentUser.id, completion: { (questions) in
+            APIManager.loadQuestion(userId: Manager.shared.currentUser.id, completion: { (questions) in
                 SVProgressHUD.dismiss()
                 if let newquiz = questions {
-                    Manager.sharedInstance.questions.removeAll()
-                    Manager.sharedInstance.questions.append(contentsOf: newquiz)
+                    Manager.shared.questions.removeAll()
+                    Manager.shared.questions.append(contentsOf: newquiz)
                     self.updateQuestionBadge()
                 }
             })
@@ -59,9 +59,9 @@ class HomeViewController: BaseViewController {
     }
     
     func updateQuestionBadge() {
-        if Manager.sharedInstance.questions.count > 0 {
+        if Manager.shared.questions.count > 0 {
             questionsBadge.isHidden = false
-            questionsBadge.text = "\(Manager.sharedInstance.questions.count)"
+            questionsBadge.text = "\(Manager.shared.questions.count)"
         }
         else {
             questionsBadge.isHidden = true
@@ -76,17 +76,17 @@ class HomeViewController: BaseViewController {
     
     func loadProgrammes() {
         SVProgressHUD.show(withStatus: Constant.Keyword.loading)
-        APIManager.getPrograms(userId: Manager.sharedInstance.currentUser.id) { (programmes) in
+        APIManager.getPrograms(userId: Manager.shared.currentUser.id) { (programmes) in
             SVProgressHUD.dismiss()
             if let programs = programmes {
-                Manager.sharedInstance.allProgrammes = programs
+                Manager.shared.allProgrammes = programs
             }
         }
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "sid_programmes" {
-            if Manager.sharedInstance.allProgrammes.count == 0 {
+            if Manager.shared.allProgrammes.count == 0 {
                 self.alert(message: "Loading programmes... Please wait.")
                 return false
             }
